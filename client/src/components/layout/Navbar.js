@@ -1,13 +1,21 @@
 import React, { Fragment } from "react";
 import { Navdiv, Nav } from "../../stylings";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <Fragment>
       <Nav>
-        <Navdiv>Home</Navdiv>
+        <Navdiv>
+          <Link to="/">Home</Link>
+        </Navdiv>
         <Navdiv style={{ justifyContent: "flex-end" }}>
-          <div>Register</div> <div>Login</div>
+          <div>
+            <Link to="/Register">Register</Link>
+          </div>
+          <div>
+            <Link to="/Login">Login</Link>
+          </div>
         </Navdiv>
       </Nav>
     </Fragment>
