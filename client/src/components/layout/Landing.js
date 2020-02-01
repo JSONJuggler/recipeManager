@@ -1,19 +1,75 @@
 import React, { Fragment } from "react";
-import { Maindiv } from "../../stylings";
+import {
+  Header,
+  Hero,
+  Content,
+  Sidebar,
+  Footer,
+  Flexcon
+} from "../../stylings";
+// import { Maindiv } from "../../stylings";
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import styled from "styled-components";
 
-const pstyle = {
-  fontColor: "black",
-  fontSize: "20px",
-  marginTop: "50px"
-};
+// const pstyle = {
+//   fontColor: "black",
+//   fontSize: "20px",
+//   marginTop: "50px"
+// };
 
 const Landing = () => {
   return (
     <Fragment>
-      <Maindiv>
+      <Header>
+        Header
+        {window.screen.width}
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sumenda</p>
+      </Header>
+      <Hero>
+        Hero
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sumenda
+          potius quam expetenda. Nihil opus est exemplis hoc facere longius.
+        </p>
+      </Hero>
+      <Flexcon>
+        <Content>
+          Content
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sumenda
+            potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sumenda potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sumenda potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sumenda potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sumenda potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.
+          </p>
+        </Content>
+        <Sidebar>
+          Sidebar
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sumenda
+            potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sumenda potius quam expetenda. Nihil opus est exemplis hoc facere
+            longius.
+          </p>
+        </Sidebar>
+      </Flexcon>
+
+      <Footer>
+        Footer
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sumenda
+          potius quam expetenda. Nihil opus est exemplis hoc facere longius.
+        </p>
+      </Footer>
+      {/* <Maindiv>
         <p style={pstyle}>Home/Landing</p>
         <ul>
           <li>
@@ -23,7 +79,7 @@ const Landing = () => {
             <Link to="/Login">Login</Link>
           </li>
         </ul>
-      </Maindiv>
+      </Maindiv> */}
     </Fragment>
   );
 };

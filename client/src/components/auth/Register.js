@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Button from "../elements/button";
-import { Styledinput, Maindiv } from "../../stylings";
+import { Flexiblecontainer, Styledinput } from "../../stylings";
 
 const pstyle = {
   fontColor: "black",
@@ -11,7 +11,7 @@ const pstyle = {
 const Register = () => {
   return (
     <Fragment>
-      <Maindiv>
+      <Flexiblecontainer>
         <p style={pstyle}>
           Register to save your own recipes or browse available recipes!
         </p>
@@ -31,7 +31,7 @@ const Register = () => {
         </form>
         <Button text={"Register"} />
         <Link to="/Login">Already have an account? Login here!</Link>
-      </Maindiv>
+      </Flexiblecontainer>
     </Fragment>
   );
 };
