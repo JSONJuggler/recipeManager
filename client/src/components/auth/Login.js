@@ -1,4 +1,7 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import Button from "../elements/button";
+import { Styledinput, Maindiv } from "../../stylings";
 
 const pstyle = {
   fontColor: "black",
@@ -6,12 +9,24 @@ const pstyle = {
   marginTop: "50px"
 };
 
-const Landing = () => {
+const Login = () => {
   return (
     <Fragment>
-      <p style={pstyle}>Login</p>
+      <Maindiv>
+        <p style={pstyle}>Login to access your personal recipes!</p>
+        <form>
+          <div>
+            <Styledinput type="text" placeholder="Email" />
+          </div>
+          <div>
+            <Styledinput type="text" placeholder="Password" />
+          </div>
+        </form>
+        <Button text={"Login"} />
+        <Link to="/Register">Don't have an account? Register here!</Link>
+      </Maindiv>
     </Fragment>
   );
 };
 
-export default Landing;
+export default Login;

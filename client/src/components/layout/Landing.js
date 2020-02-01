@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Maindiv } from "../../stylings";
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 // import styled from "styled-components";
@@ -12,15 +13,17 @@ const pstyle = {
 const Landing = () => {
   return (
     <Fragment>
-      <p style={pstyle}>Home/Landing</p>
-      <ul>
-        <li>
-          <Link to="/Register">Register</Link>
-        </li>
-        <li>
-          <Link to="/Login">Login</Link>
-        </li>
-      </ul>
+      <Maindiv>
+        <p style={pstyle}>Home/Landing</p>
+        <ul>
+          <li>
+            <Link to="/Register">Register</Link>
+          </li>
+          <li>
+            <Link to="/Login">Login</Link>
+          </li>
+        </ul>
+      </Maindiv>
     </Fragment>
   );
 };
