@@ -24,7 +24,7 @@ const Navdiv = styled.div`
 
 const Maindiv = styled.div`
   min-height: 92%;
-  margin-top: 8vh;
+  margin-top: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
