@@ -1,30 +1,32 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import Button from "../elements/button";
-import { Styledinput, Maindiv } from "../../stylings";
+import { Styledsub, Styledinput, Styledlink, Darkbox } from "../../stylings";
 
-const pstyle = {
-  fontColor: "black",
-  fontSize: "20px",
-  marginTop: "50px"
+const onSubmit = async e => {
+  e.preventDefault();
+
+  console.log("hello");
 };
 
 const Login = () => {
   return (
     <Fragment>
-      <Maindiv>
-        <p style={pstyle}>Login to access your personal recipes!</p>
-        <form>
+      <Darkbox>
+        <h1>Login to access your personal recipes!</h1>
+        <form onSubmit={e => onSubmit(e)}>
           <div>
             <Styledinput type="text" placeholder="Email" />
           </div>
           <div>
             <Styledinput type="text" placeholder="Password" />
           </div>
+          <Styledsub type="submit" value="Login" />
         </form>
-        <Button text={"Login"} />
-        <Link to="/Register">Don't have an account? Register here!</Link>
-      </Maindiv>
+        <div>
+          <Styledlink to="/Register">
+            Don't have an account? Register here!
+          </Styledlink>
+        </div>
+      </Darkbox>
     </Fragment>
   );
 };

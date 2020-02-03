@@ -1,18 +1,36 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Flexiblecontainer = styled.section`
   display: flex;
-  background-color: white;
+  align-items: center;
+  font-size: 16px;
 `;
 
 const Header = styled.header`
-  margin: 0;
-  padding: 20px;
-  border: 1px solid #000000;
+  padding: 10px;
+  border-bottom: 4px solid powderblue;
   color: #ffffff;
-  background: #03a9f4;
+  background: rgb(43, 43, 43);
+  min-height: 60px;
   box-sizing: border-box;
 `;
+
+const Darkbox = styled.section`
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding: 20px;
+  color: #ffffff;
+  background: rgb(43, 43, 43);
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const Hero = styled.section`
   margin: 0;
   padding: 20px;
@@ -21,6 +39,7 @@ const Hero = styled.section`
   background: #d22b1f;
   box-sizing: border-box;
 `;
+
 const Content = styled.section`
   margin: 0;
   padding: 20px;
@@ -30,6 +49,7 @@ const Content = styled.section`
   box-sizing: border-box;
   flex: 1;
 `;
+
 const Sidebar = styled.aside`
   margin: 0;
   padding: 20px;
@@ -39,12 +59,13 @@ const Sidebar = styled.aside`
   box-sizing: border-box;
   flex: 0 1 300px;
 `;
-const Footer = styled.footer`
-  margin: 0;
+
+const Foot = styled.footer`
   padding: 20px;
-  border: 1px solid #000000;
+  border-top: 4px solid powderblue;
   color: #ffffff;
-  background: #616161;
+  background: rgb(43, 43, 43);
+  text-align: center;
   box-sizing: border-box;
 `;
 
@@ -56,43 +77,46 @@ const Flexcon = styled.div`
   max-width: 1200px;
 `;
 
-// const Nav = styled.nav`
-//   background: #d7d1a1;
-//   position: fixed;
-//   top: 0;
-//   right: 0;
-//   left: 0;
-//   display: flex;
-//   font-weight: bold;
-// `;
-
-// const Navdiv = styled.div`
-//   color: black;
-//   margin: 2%;
-//   flex-grow: 1;
-//   display: flex;
-//   line-height: 0.2;
-//   div {
-//     margin-left: 10px;
-//     margin-right: 10px;
-//   }
-// `;
-
-const Maindiv = styled.div`
-  min-height: 92%;
-  margin-top: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Navul = styled.ul`
+  padding: 0;
+  margin: 10px 0 0 0;
 `;
 
-const Styledbutton = styled.button`
-  background: #d7d1a1;
-  border: none;
-  padding: 0.4rem 1.3rem;
-  margin: 0.5rem;
+const Navli = styled.li`
+  display: inline;
+  padding: 0 10px 0 10px;
+`;
+
+const div = {
+  flex: 1,
+  padding: "10px 0 0 10px"
+};
+
+const Styledlink = styled(Link)`
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: yellow;
+  }
+
+  &:active {
+    color: yellow;
+  }
+`;
+
+const Linkbutton = styled(Link)`
+  text-decoration: none;
+  color: black;
+  background: powderblue;
+  padding: 0.4rem 0rem;
+  margin: 1rem 0rem;
   font-size: 1rem;
-  cursor: pointer;
+  border: none;
+
+  &:focus {
+    border: 1px solid black;
+  }
 `;
 
 const Styledinput = styled.input`
@@ -100,6 +124,30 @@ const Styledinput = styled.input`
   padding: 0.4rem 0rem;
   font-size: 1rem;
   width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 4px solid powderblue;
+  outline: none;
+  color: white;
+  &:focus {
+    border: 1px solid powderblue;
+  }
+`;
+
+const Styledsub = styled.input`
+  margin: 0.5rem 0rem;
+  padding: 0.4rem 0rem;
+  font-size: 1rem;
+  width: 100%;
+  background: powderblue;
+  color: black;
+  border: none;
+  &:focus {
+    border: 1px solid black;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export {
@@ -107,10 +155,15 @@ export {
   Hero,
   Content,
   Sidebar,
-  Footer,
+  Foot,
   Flexcon,
   Flexiblecontainer,
-  Styledbutton,
+  Navul,
+  Navli,
+  div,
+  Styledlink,
+  Darkbox,
+  Styledsub,
   Styledinput,
-  Maindiv
+  Linkbutton
 };

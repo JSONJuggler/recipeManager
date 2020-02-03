@@ -1,20 +1,11 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import Button from "../elements/button";
-import { Flexiblecontainer, Styledinput } from "../../stylings";
-
-const pstyle = {
-  fontColor: "black",
-  fontSize: "20px"
-};
+import { Styledlink, Styledinput, Styledsub, Darkbox } from "../../stylings";
 
 const Register = () => {
   return (
     <Fragment>
-      <Flexiblecontainer>
-        <p style={pstyle}>
-          Register to save your own recipes or browse available recipes!
-        </p>
+      <Darkbox>
+        <h1>Register to save your own recipes or browse available recipes!</h1>
         <form>
           <div>
             <Styledinput type="text" placeholder="Name" />
@@ -28,10 +19,13 @@ const Register = () => {
           <div>
             <Styledinput type="text" placeholder="Confirm Password" />
           </div>
+          <Styledsub type="submit" value="Register" />
         </form>
-        <Button text={"Register"} />
-        <Link to="/Login">Already have an account? Login here!</Link>
-      </Flexiblecontainer>
+        {/* <Button text={"Register"} /> */}
+        <Styledlink to="/Login">
+          Already have an account? Login here!
+        </Styledlink>
+      </Darkbox>
     </Fragment>
   );
 };
