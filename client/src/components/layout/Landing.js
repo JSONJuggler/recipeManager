@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Darkbox, Navul, Navli, Linkbutton } from "../../stylings";
+import { Darkbox, Linkbutton } from "../../stylings";
 
 const Landing = () => {
   return (
