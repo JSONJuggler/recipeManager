@@ -21,6 +21,7 @@ export const register = (username, email, password) => async dispatch => {
     // load user after registration
   } catch (err) {
     // handle/show errors
+    console.log(err.response.data.errors);
     dispatch({
       type: REGISTER_FAIL
     });

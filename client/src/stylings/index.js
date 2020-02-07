@@ -132,6 +132,12 @@ const Styledinput = styled.input`
   &:focus {
     border: 1px solid powderblue;
   }
+  /* &:valid {
+    box-shadow: 3px 3px 10px green;
+  }
+  &:invalid {
+    box-shadow: 3px 3px 10px red;
+  } */
 `;
 
 const Styledsub = styled.input`
