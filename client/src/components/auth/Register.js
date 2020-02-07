@@ -1,4 +1,7 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+
+import { register } from "../../actions/auth";
 import { Styledlink, Styledinput, Styledsub, Darkbox } from "../../stylings";
 
 const Register = () => {
