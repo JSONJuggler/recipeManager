@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 const Flexiblecontainer = styled.section`
@@ -132,12 +132,11 @@ const Styledinput = styled.input`
   &:focus {
     border: 1px solid powderblue;
   }
-  /* &:valid {
-    box-shadow: 3px 3px 10px green;
-  }
-  &:invalid {
-    box-shadow: 3px 3px 10px red;
-  } */
+  ${props =>
+    props.validated &&
+    css`
+      box-shadow: ${props => "1px 1px 5px red"};
+    `}
 `;
 
 const Styledsub = styled.input`

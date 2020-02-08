@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
 import { register } from "../../actions/auth";
+import validate from "./registerValidate";
 import { Styledlink, Styledinput, Styledsub, Darkbox } from "../../stylings";
 
 const Register = ({ register, isAuthenticated }) => {
@@ -14,20 +15,34 @@ const Register = ({ register, isAuthenticated }) => {
     password2: ""
   });
 
+  const [errors, setErrors] = useState({});
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { username, email, password, password2 } = formData;
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      setIsSubmitting(false);
+      if (password !== password2) {
+        console.log("passwords do not match");
+      } else {
+        register({ username, email, password });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errors]);
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    isSubmitting && setErrors(validate(formData));
   };
 
   const onSubmit = e => {
-    e.preventDefault();
-
-    if (password !== password2) {
-      // password incorrect
-      console.log("passwords do not match");
-    } else {
-      register({ username, email, password });
+    if (e) {
+      e.preventDefault();
+      setErrors(validate(formData));
+      setIsSubmitting(true);
     }
   };
 
@@ -42,45 +57,90 @@ const Register = ({ register, isAuthenticated }) => {
         <form onSubmit={e => onSubmit(e)}>
           <div>
             <Styledinput
+              validated={errors.username}
               type="text"
               name="username"
               placeholder="Username"
               value={username}
               onChange={e => onChange(e)}
-              required
             />
+            {errors.username && (
+              <p
+                style={{
+                  fontSize: ".7rem",
+                  float: "left",
+                  margin: "0px",
+                  padding: "0px"
+                }}
+              >
+                {errors.username}
+              </p>
+            )}
           </div>
           <div>
             <Styledinput
-              type="email"
+              validated={errors.email}
               name="email"
               placeholder="Email"
               value={email}
               onChange={e => onChange(e)}
-              required
             />
+            {errors.email && (
+              <p
+                style={{
+                  fontSize: ".7rem",
+                  float: "left",
+                  margin: "0px",
+                  padding: "0px"
+                }}
+              >
+                {errors.email}
+              </p>
+            )}
           </div>
           <div>
             <Styledinput
-              type="text"
+              validated={errors.password}
+              type="password"
               name="password"
               placeholder="Password"
               value={password}
               onChange={e => onChange(e)}
-              required
-              minLength="6"
             />
+            {errors.password && (
+              <p
+                style={{
+                  fontSize: ".7rem",
+                  float: "left",
+                  margin: "0px",
+                  padding: "0px"
+                }}
+              >
+                {errors.password}
+              </p>
+            )}
           </div>
           <div>
             <Styledinput
-              type="text"
+              validated={errors.password2}
+              type="password"
               name="password2"
               placeholder="Confirm Password"
               value={password2}
               onChange={e => onChange(e)}
-              required
-              minLength="6"
             />
+            {errors.password2 && (
+              <p
+                style={{
+                  fontSize: ".7rem",
+                  float: "left",
+                  margin: "0px",
+                  padding: "0px"
+                }}
+              >
+                {errors.password2}
+              </p>
+            )}
           </div>
           <Styledsub type="submit" value="Register" />
         </form>

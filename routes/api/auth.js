@@ -53,7 +53,7 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ erros: [{ msg: "Invalid Credentials" }] });
+          .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
       const payload = {
