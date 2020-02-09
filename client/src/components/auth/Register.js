@@ -96,7 +96,8 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
               value={email}
               onChange={e => onChange(e)}
             />
-            {errors.email && (
+
+            {(errors.email && (
               <p
                 style={{
                   fontSize: ".7rem",
@@ -107,6 +108,11 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
               >
                 {errors.email}
               </p>
+            )) || (
+              <small>
+                This site uses Gravatar. Use your gravatar email to use your
+                gravatar avatar!
+              </small>
             )}
           </div>
           <div>
