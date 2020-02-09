@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
 import { register } from "../../actions/auth";
+import { setAlert } from "../../actions/alert";
 import validate from "./registerValidate";
 import { Styledlink, Styledinput, Styledsub, Darkbox } from "../../stylings";
 
-const Register = ({ register, isAuthenticated }) => {
+const Register = ({ register, setAlert, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -26,6 +27,7 @@ const Register = ({ register, isAuthenticated }) => {
       setIsSubmitting(false);
       if (password !== password2) {
         console.log("passwords do not match");
+        setAlert("Password do not match", "fail");
       } else {
         register({ username, email, password });
       }
@@ -33,12 +35,21 @@ const Register = ({ register, isAuthenticated }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
 
+  useEffect(() => {
+    if (isSubmitting) {
+      setIsSubmitting(false);
+      window.scrollTo(0, 0);
+    }
+  }, [isSubmitting]);
+
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     isSubmitting && setErrors(validate(formData));
   };
 
   const onSubmit = e => {
+    e.preventDefault();
+
     if (e) {
       e.preventDefault();
       setErrors(validate(formData));
@@ -153,11 +164,13 @@ const Register = ({ register, isAuthenticated }) => {
 };
 
 Register.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { register, setAlert })(Register);

@@ -14,12 +14,13 @@ const Header = styled.header`
   background: rgb(43, 43, 43);
   min-height: 60px;
   box-sizing: border-box;
+  width: 100%;
 `;
 
 const Darkbox = styled.section`
   margin: auto;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   padding: 20px;
   color: #ffffff;
   background: rgb(43, 43, 43);
@@ -61,12 +62,13 @@ const Sidebar = styled.aside`
 `;
 
 const Foot = styled.footer`
-  padding: 20px;
+  padding-top: 4px;
   border-top: 4px solid powderblue;
   color: #ffffff;
   background: rgb(43, 43, 43);
   text-align: center;
   box-sizing: border-box;
+  width: 100%;
 `;
 
 const Flexcon = styled.div`
@@ -155,6 +157,19 @@ const Styledsub = styled.input`
   }
 `;
 
+const Alertdiv = styled.div`
+  color: black;
+  ${props =>
+    props.type &&
+    css`
+      background-color: ${props => props.theme[props.type]};
+    `};
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0.8;
+`;
+
 export {
   Header,
   Hero,
@@ -170,5 +185,6 @@ export {
   Darkbox,
   Styledsub,
   Styledinput,
-  Linkbutton
+  Linkbutton,
+  Alertdiv
 };

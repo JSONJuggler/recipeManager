@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { REGISTER_SUCCESS, REGISTER_FAIL } from "./types";
+import { setAlert } from "./alert";
 
 export const register = ({ username, email, password }) => async dispatch => {
   const config = {
@@ -18,10 +19,15 @@ export const register = ({ username, email, password }) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
+
     // load user after registration
   } catch (err) {
-    // handle/show errors
-    console.log(err.response.data.errors);
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+    }
+
     dispatch({
       type: REGISTER_FAIL
     });
