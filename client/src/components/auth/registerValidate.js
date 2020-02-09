@@ -1,10 +1,10 @@
 export default function validate(formData) {
   var errors = {};
   if (!formData.username) {
-    errors.username = "Username is required";
+    errors.username = "A username is required";
   }
   if (!formData.email) {
-    errors.email = "Your email is required";
+    errors.email = "Your email is required to register";
   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
     errors.email = "Email address is invalid";
   }

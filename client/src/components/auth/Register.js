@@ -26,8 +26,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       setIsSubmitting(false);
       if (password !== password2) {
-        console.log("passwords do not match");
-        setAlert("Password do not match", "fail");
+        setAlert("Passwords do not match", "fail");
       } else {
         register({ username, email, password });
       }
