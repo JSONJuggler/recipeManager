@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { ThemeProvider } from "styled-components";
 import theme from "../stylings/theme";
@@ -10,6 +11,7 @@ import Landing from "./layout/Landing";
 import Alert from "./layout/Alert";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import { loadUser } from "../actions/auth";
 
 const flex = {
   display: "flex",
@@ -27,7 +29,12 @@ const alerts = {
   flexDirection: "column"
 };
 
-function App() {
+function App({ loadUser }) {
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -52,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { loadUser })(App);

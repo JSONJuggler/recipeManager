@@ -8,9 +8,8 @@ const User = require("../../models/User");
 
 const router = express.Router();
 
-// testing purposes
 // @route GET api/auth
-// @description Test route (get user)
+// @description Get user
 // @access private
 router.get("/", auth, async (req, res) => {
   try {
