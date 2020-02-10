@@ -11,7 +11,9 @@ import Landing from "./layout/Landing";
 import Alert from "./layout/Alert";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import Dashboard from "./dashboard/Dashboard";
 import { loadUser } from "../actions/auth";
+import PrivateRoute from "./routing/PrivateRoute";
 
 const flex = {
   display: "flex",
@@ -49,6 +51,7 @@ function App({ loadUser }) {
               <Switch>
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
             </Flexcon>
             <Footer />
