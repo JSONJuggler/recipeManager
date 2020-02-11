@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 const UserInfo = ({ auth: { user, loading } }) => {
   console.log(user);
   return (
+    user &&
     !loading && (
       <Fragment>
         {/* <h1 style={{ backgroundColor: "yellow" }}>{user.avatar}</h1> */}
