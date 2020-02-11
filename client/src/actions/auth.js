@@ -41,22 +41,14 @@ export const login = ({ email, password }) => async dispatch => {
   const body = JSON.stringify({ email, password });
 
   try {
-    console.log("trying to log in");
-
     const res = await axios.post("/api/auth", body, config);
-    console.log("received response");
-    console.log("dispatching login success");
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    console.log("proceeding to load");
     dispatch(loadUser());
-    console.log("loading done");
   } catch (err) {
-    console.log(err);
-
     const errors = err.response.data.errors;
 
     if (errors) {
