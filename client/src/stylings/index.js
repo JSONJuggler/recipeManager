@@ -13,14 +13,15 @@ const Header = styled.header`
   color: #ffffff;
   background: rgb(43, 43, 43);
   min-height: 60px;
+  @media (min-width: 640px) {
+    min-height: 10vh;
+  }
   box-sizing: border-box;
   width: 100%;
 `;
 
 const Darkbox = styled.section`
   margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
   padding: 20px;
   color: #ffffff;
   background: rgb(43, 43, 43);
@@ -34,32 +35,45 @@ const Darkbox = styled.section`
 
 const Usersec = styled.section`
   margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  @media (min-width: 640px) {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
   padding: 20px;
   color: #ffffff;
   background: rgb(43, 43, 43);
   box-sizing: border-box;
   text-align: center;
-  max-width: 70%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 0 1 200px;
 `;
 
 const Recipesec = styled.section`
   margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  @media (min-width: 640px) {
+    margin-left: 1%;
+    margin-right: 1%;
+    max-height: none;
+  }
   padding: 20px;
   color: #ffffff;
   background: rgb(43, 43, 43);
   box-sizing: border-box;
   text-align: center;
-  max-width: 70%;
-  display: flex;
+  max-width: 90%;
+  max-height: 70vh;
+  overflow: scroll;
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
+  flex: 1;
 `;
 
 const Hero = styled.section`
@@ -92,20 +106,27 @@ const Sidebar = styled.aside`
 `;
 
 const Foot = styled.footer`
-  padding-top: 4px;
+  padding-top: 1vh;
   border-top: 4px solid powderblue;
   color: #ffffff;
   background: rgb(43, 43, 43);
   text-align: center;
   box-sizing: border-box;
   width: 100%;
+  min-height: 10vh;
 `;
 
 const Flexcon = styled.div`
   @media (min-width: 640px) {
     display: flex;
+    justify-content: center;
+    max-height: 80vh;
   }
   margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-height: 160vh;
+  flex: 1;
   max-width: 1200px;
 `;
 

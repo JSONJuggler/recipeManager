@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 // import PropTypes from "prop-types";
 
 import Userinfo from "./UserInfo";
+import Recipe from "./Recipe";
 import { Recipesec, Usersec } from "../../stylings";
 
 const Dashboard = props => {
@@ -10,7 +11,9 @@ const Dashboard = props => {
       <Usersec>
         <Userinfo />
       </Usersec>
-      <Recipesec></Recipesec>
+      <Recipesec>
+        <Recipe />
+      </Recipesec>
     </Fragment>
   );
 };

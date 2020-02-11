@@ -8,10 +8,15 @@ const UserInfo = ({ auth: { user, loading } }) => {
     user &&
     !loading && (
       <Fragment>
-        {/* <h1 style={{ backgroundColor: "yellow" }}>{user.avatar}</h1> */}
-        <h1>{user.username}</h1>
-        {/* <h1>{user.email}</h1> */}
-        <h1>bigbo1992@ya hoo.com</h1>
+        <img style={{ maxWidth: "200px", margin: "auto" }} src={user.avatar} />
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <small>
+          Enter a brief description: "Sed ut perspiciatis unde omnis iste natus
+          error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+          architecto beatae vitae dicta sunt explicabo."
+        </small>
       </Fragment>
     )
   );

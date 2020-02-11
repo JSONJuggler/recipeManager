@@ -16,6 +16,9 @@ function Navbar({ logout, auth: { isAuthenticated, loading } }) {
   const authLinks = (
     <Navul>
       <Navli>
+        <Styledlink to="/browse">Browse Recipes</Styledlink>
+      </Navli>
+      <Navli>
         <Styledlink onClick={logout} to="/">
           Logout
         </Styledlink>
@@ -25,6 +28,9 @@ function Navbar({ logout, auth: { isAuthenticated, loading } }) {
 
   const guestLinks = (
     <Navul>
+      <Navli>
+        <Styledlink to="/browse">Browse Recipes</Styledlink>
+      </Navli>
       <Navli>
         <Styledlink to="/Register">Register</Styledlink>
       </Navli>
