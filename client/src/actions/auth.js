@@ -44,6 +44,8 @@ export const login = ({ email, password }) => async dispatch => {
     console.log("trying to log in");
 
     const res = await axios.post("/api/auth", body, config);
+    console.log("received response");
+    console.log("dispatching login success");
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -53,7 +55,7 @@ export const login = ({ email, password }) => async dispatch => {
     dispatch(loadUser());
     console.log("loading done");
   } catch (err) {
-    console.log("catching errors");
+    console.log(err);
 
     const errors = err.response.data.errors;
 
