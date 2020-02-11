@@ -70,10 +70,14 @@ const Recipesec = styled.section`
   max-width: 90%;
   max-height: 70vh;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  flex: 1;
   /* display: flex;
   flex-direction: column;
   justify-content: center; */
-  flex: 1;
 `;
 
 const Hero = styled.section`
