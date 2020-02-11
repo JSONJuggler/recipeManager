@@ -123,10 +123,7 @@ const Flexcon = styled.div`
     max-height: 80vh;
   }
   margin: auto;
-  margin-top: 0;
-  margin-bottom: 0;
   max-height: 160vh;
-  flex: 1;
   max-width: 1200px;
 `;
 
