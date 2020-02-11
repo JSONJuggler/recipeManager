@@ -1,10 +1,20 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+
+import Userinfo from "./UserInfo";
+import { Recipesec, Usersec } from "../../stylings";
 
 const Dashboard = props => {
-  return <Fragment>HELLO</Fragment>;
+  return (
+    <Fragment>
+      <Usersec>
+        <Userinfo />
+      </Usersec>
+      <Recipesec></Recipesec>
+    </Fragment>
+  );
 };
 
-Dashboard.propTypes = {};
+// Dashboard.propTypes = {};
 
 export default Dashboard;

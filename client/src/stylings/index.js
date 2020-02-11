@@ -32,6 +32,36 @@ const Darkbox = styled.section`
   justify-content: center;
 `;
 
+const Usersec = styled.section`
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 20px;
+  color: #ffffff;
+  background: rgb(43, 43, 43);
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Recipesec = styled.section`
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 20px;
+  color: #ffffff;
+  background: rgb(43, 43, 43);
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const Hero = styled.section`
   margin: 0;
   padding: 20px;
@@ -186,5 +216,7 @@ export {
   Styledsub,
   Styledinput,
   Linkbutton,
-  Alertdiv
+  Alertdiv,
+  Usersec,
+  Recipesec
 };
