@@ -17,10 +17,40 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String
   },
+  description: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  recipe: [
+    {
+      name: {
+        type: String,
+        required: true
+      },
+      type: {
+        type: [String],
+        required: true
+      },
+      season: {
+        type: [String],
+        required: true
+      },
+      link: {
+        type: [String]
+      },
+      description: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
 });
 
 const User = mongoose.model("user", UserSchema);
