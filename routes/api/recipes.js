@@ -10,7 +10,7 @@ const User = require("../../models/User");
 const router = express.Router();
 
 // @route PUT api/recipes
-// @description Put user recipe
+// @description Put user recipe or adds duplicate to favorites
 // @access Private
 router.put(
   "/",
@@ -51,15 +51,16 @@ router.put(
           recipe.description == description
         );
       });
-      console.log(duplicate);
+      // console.log(duplicate);
       if (recipe.length > 0) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Recipe already exists!" }] });
+        return res.status(400).json({
+          duplicate: duplicate[0],
+          errors: [{ msg: "Recipe already exists!" }]
+        });
       }
       user.recipes.unshift(newRecipe);
 
-      // await user.save();
+      await user.save();
       res.json(user);
     } catch (err) {
       console.error(err.message);
@@ -67,5 +68,23 @@ router.put(
     }
   }
 );
+
+// @route Delete api/recipes/:rec_id
+// @description Delete user recipe or remove favorite
+// @access Private
+router.delete("/:rec_id", auth, async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { $pull: { recipes: { _id: req.params.rec_id } } },
+      { new: true }
+    ).select("-password");
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
