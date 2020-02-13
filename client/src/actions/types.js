@@ -7,3 +7,6 @@ export const LOGIN_FAIL = "LOGIN_FAIL;";
 export const LOGOUT = "LOGOUT";
 export const LOAD_USER = "LOAD_USER";
 export const AUTH_ERROR = "AUTH_ERROR";
+export const ADD_RECIPE = "ADD_RECIPE";
+export const DELETE_RECIPE = "DELETE_RECIPE";
+export const RECIPE_FAIL = "DELETE_RECIPE";
