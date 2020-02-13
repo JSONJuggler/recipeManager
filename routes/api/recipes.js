@@ -41,15 +41,25 @@ router.put(
       const user = await User.findById(req.user.id).select("-password");
       const recipe = await User.find({
         recipes: { $elemMatch: { name, type, season, description } }
+      }).select("recipes");
+      const recipes = recipe[0].recipes;
+      const duplicate = recipes.filter(recipe => {
+        return (
+          recipe.name == name &&
+          recipe.type == type &&
+          recipe.season == season &&
+          recipe.description == description
+        );
       });
-
+      console.log(duplicate);
       if (recipe.length > 0) {
         return res
           .status(400)
           .json({ errors: [{ msg: "Recipe already exists!" }] });
       }
       user.recipes.unshift(newRecipe);
-      await user.save();
+
+      // await user.save();
       res.json(user);
     } catch (err) {
       console.error(err.message);
