@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  recipe: [
+  recipes: [
     {
       name: {
         type: String,
@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
         required: true
       },
       link: {
-        type: [String]
+        type: String
       },
       description: {
         type: String,
