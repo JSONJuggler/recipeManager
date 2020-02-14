@@ -1,7 +1,16 @@
 import axios from "axios";
 
-import { ADD_RECIPE, DELETE_RECIPE, RECIPE_FAIL } from "./types";
+import { ADD_RECIPE, DELETE_RECIPE, RECIPE_FAIL, GET_RECIPES } from "./types";
 import { setAlert } from "./alert";
+
+export const getRecipes = () => async dispatch => {
+  const res = await axios.get("/api/recipes");
+
+  dispatch({
+    type: GET_RECIPES,
+    payload: res.data
+  });
+};
 
 export const addRecipe = ({ formData }) => async dispatch => {
   try {

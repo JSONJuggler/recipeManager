@@ -1,4 +1,9 @@
-import { ADD_RECIPE, DELETE_RECIPE, RECIPE_FAIL } from "../actions/types";
+import {
+  ADD_RECIPE,
+  DELETE_RECIPE,
+  RECIPE_FAIL,
+  GET_RECIPES
+} from "../actions/types";
 
 const initialState = {
   recipe: null,
@@ -10,6 +15,8 @@ const initialState = {
 export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case GET_RECIPES:
+      return { ...state, recipes: payload, loading: false };
     case ADD_RECIPE:
       return { ...state, recipe: payload, loading: false };
     case DELETE_RECIPE:
@@ -18,7 +25,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: payload.error,
-        recipe: duplicate,
+        recipe: payload.duplicate,
         loading: false
       };
     default:
