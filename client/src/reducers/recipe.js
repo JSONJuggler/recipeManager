@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
     case ADD_RECIPE:
       return { ...state, recipe: payload, loading: false };
     case DELETE_RECIPE:
-      return { ...state, recipe: payload, loading: false };
+      return { ...state, recipes: payload, loading: false };
     case RECIPE_FAIL:
       return {
         ...state,

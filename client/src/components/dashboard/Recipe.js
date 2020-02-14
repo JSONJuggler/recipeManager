@@ -20,7 +20,7 @@ const Recipe = ({
     <div key={recipe._id}>
       {recipe.name}
       <div>
-        {/* <Styledlink onClick={deleteRecipe(recipe._id)}>Delete</Styledlink> */}
+        <button onClick={deleteRecipe(recipe._id)}>Delete</button>
       </div>
     </div>
   ));
