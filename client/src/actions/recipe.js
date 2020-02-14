@@ -23,7 +23,7 @@ export const addRecipe = ({ formData }) => async dispatch => {
     const body = JSON.stringify(formData);
 
     const res = await axios.put("/api/recipes", body, config);
-
+    console.log(res);
     dispatch({
       type: ADD_RECIPE,
       payload: res.data
@@ -40,7 +40,7 @@ export const addRecipe = ({ formData }) => async dispatch => {
     dispatch({
       type: RECIPE_FAIL,
       payload: {
-        duplicate,
+        // duplicate: res.data.duplicate,
         error: { msg: err.response.statusText, status: err.response.status }
       }
     });
