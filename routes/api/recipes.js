@@ -11,7 +11,6 @@ const router = express.Router();
 router.get("/me", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    console.log(user.recipes);
     if (user.recipes.length === 0) {
       return res.status(400).json({
         errors: [{ msg: "No recipes found!" }]
@@ -28,8 +27,21 @@ router.get("/me", auth, async (req, res) => {
 // @route Get api/recipes
 // @description GET recipes (for browsing)
 // @access Public
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    const user = await User.find().select("recipes");
+    const re = user.map(obj => {
+      return obj.recipes;
+    });
+    recipes = [];
+    re.map(arr => {
+      if (arr.length > 0) {
+        arr.map(ar => {
+          recipes.push(ar);
+        });
+      }
+    });
+    res.send(recipes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
