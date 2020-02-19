@@ -20,7 +20,8 @@ const Recipe = ({
     <div key={recipe._id}>
       {recipe.name}
       <div>
-        <button onClick={deleteRecipe(recipe._id)}>Delete</button>
+        <button onClick={() => deleteRecipe(recipe._id)}>Delete</button>
+        {/* <button onClick={deleteRecipe(recipe._id)}>Delete</button> */}
       </div>
     </div>
   ));
