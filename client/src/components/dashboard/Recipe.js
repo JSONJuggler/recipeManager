@@ -14,9 +14,9 @@ const Recipe = ({
   useEffect(() => {
     getRecipes();
   }, []);
-  const ye = recipes.recipes;
-  console.log(ye);
-  const rec = ye.map(recipe => (
+  const yee = recipes.recipes;
+  console.log(yee);
+  const rec = yee.map(recipe => (
     <div key={recipe._id}>
       {recipe.name}
       <div>
