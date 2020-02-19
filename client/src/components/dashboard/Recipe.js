@@ -15,7 +15,7 @@ const Recipe = ({
     getRecipes();
   }, []);
   const ye = recipes.recipes;
-  // console.log(ye);
+  console.log(ye);
   const rec = ye.map(recipe => (
     <div key={recipe._id}>
       {recipe.name}
@@ -25,8 +25,7 @@ const Recipe = ({
       </div>
     </div>
   ));
-  // console.log(user);
-  // console.log(recipes);
+
   return (
     user &&
     !loading && (

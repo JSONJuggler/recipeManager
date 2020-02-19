@@ -16,8 +16,7 @@ router.get("/me", auth, async (req, res) => {
         errors: [{ msg: "No recipes found!" }]
       });
     }
-    const userrecipes = user.recipes;
-    res.json(userrecipes);
+    res.json(user.recipes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -120,7 +119,7 @@ router.delete("/:rec_id", auth, async (req, res) => {
       { new: true }
     ).select("-password");
     await user.save();
-    res.json(user);
+    res.json(user.recipes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

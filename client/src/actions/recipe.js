@@ -53,7 +53,7 @@ export const deleteRecipe = id => async dispatch => {
       type: DELETE_RECIPE,
       payload: res.data
     });
-
+    console.log("dispatch success");
     dispatch(setAlert("Recipe succesfully deleted!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
