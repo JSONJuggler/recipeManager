@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import theme from "../stylings/theme";
 import { Flexcon } from "../stylings";
+import setAuthToken from "../utils/setAuthToken";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import Landing from "./layout/Landing";
@@ -37,6 +38,10 @@ function App({ loadUser }) {
     loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
 
   return (
     <ThemeProvider theme={theme}>

@@ -4,8 +4,7 @@ import { ADD_RECIPE, DELETE_RECIPE, RECIPE_FAIL, GET_RECIPES } from "./types";
 import { setAlert } from "./alert";
 
 export const getRecipes = () => async dispatch => {
-  const res = await axios.get("/api/recipes");
-
+  const res = await axios.get("/api/recipes/me");
   dispatch({
     type: GET_RECIPES,
     payload: res.data

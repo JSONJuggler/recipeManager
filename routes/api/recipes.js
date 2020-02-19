@@ -16,7 +16,7 @@ router.get("/me", auth, async (req, res) => {
         errors: [{ msg: "No recipes found!" }]
       });
     }
-    const userrecipes = user;
+    const userrecipes = user.recipes;
     res.json(userrecipes);
   } catch (err) {
     console.error(err.message);
