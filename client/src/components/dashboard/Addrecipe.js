@@ -9,6 +9,7 @@
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link, Redirect } from "react-router-dom";
 
 import { addRecipe } from "../../actions/recipe";
 import { setAlert } from "../../actions/alert";
@@ -21,7 +22,12 @@ const textArea = {
   border: "2px solid #ccc"
 };
 
-const Addrecipe = ({ setAlert, addRecipe, auth: { user, loading } }) => {
+const Addrecipe = ({
+  setAlert,
+  addRecipe,
+  auth: { user, loading },
+  newRecipe
+}) => {
   const [dirtyType, setType] = useState([]);
   const [dirtySeason, setSeason] = useState([]);
 
@@ -36,10 +42,6 @@ const Addrecipe = ({ setAlert, addRecipe, auth: { user, loading } }) => {
 
   const [typeCheckBox, setTypeCheckBox] = useState([false, false]);
   const [seasonCheckBox, setSeasonCheckBox] = useState([false, false]);
-
-  const onClick = e => {
-    setAdding(!adding);
-  };
 
   const handleTypeCheck = e => {
     setTypeCheckBox(
@@ -88,13 +90,9 @@ const Addrecipe = ({ setAlert, addRecipe, auth: { user, loading } }) => {
     addRecipe({ name, season, type, link, description });
   };
 
-  const show = e => {
-    // type = type.filter(type => type !== "");
-    // season.filter(season => season !== "");
-    console.log(recipe);
-    // console.log(type);
-    // console.log(nt);
-  };
+  if (newRecipe) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Fragment>
@@ -224,7 +222,7 @@ const Addrecipe = ({ setAlert, addRecipe, auth: { user, loading } }) => {
                 />
               </div>
               <input type="submit" value="Add!" />
-              <input type="checkbox" onChange={e => show(e)} />
+              <Link to="/Dashboard">Back!</Link>
             </form>
           </Fragment>
         )}
@@ -236,11 +234,13 @@ const Addrecipe = ({ setAlert, addRecipe, auth: { user, loading } }) => {
 Addrecipe.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  newRecipe: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  newRecipe: state.recipe.recipe
 });
 
 export default connect(mapStateToProps, { setAlert, addRecipe })(Addrecipe);

@@ -60,7 +60,7 @@ function App({ loadUser }) {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                {/* <PrivateRoute exact path="/Addrecipe" component={Addrecipe} /> */}
+                <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
               </Switch>
             </Flexcon>
             <Footer />

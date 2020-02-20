@@ -43,6 +43,7 @@ export const addRecipe = ({
 
     dispatch({
       type: RECIPE_FAIL
+      // option to star duplicate resturants
       // payload: res.data
     });
   }

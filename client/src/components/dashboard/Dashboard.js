@@ -6,7 +6,7 @@ import Userinfo from "./UserInfo";
 import Recipe from "./Recipe";
 import { Recipesec, Usersec } from "../../stylings";
 
-const Dashboard = props => {
+const Dashboard = () => {
   return (
     <Fragment>
       <Usersec>

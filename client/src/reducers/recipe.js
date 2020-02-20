@@ -19,16 +19,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         recipes: [payload, ...state.recipes],
+        recipe: null,
         loading: false
       };
     case ADD_RECIPE:
       return {
         ...state,
-        recipes: [[payload], ...state.recipes],
+        recipe: payload,
         loading: false
       };
-    // case DELETE_RECIPE:
-    //   return { ...state, recipes: payload, loading: false };
+    case DELETE_RECIPE:
+      return { ...state, recipes: payload, loading: false };
     case RECIPE_FAIL:
       return {
         ...state,
