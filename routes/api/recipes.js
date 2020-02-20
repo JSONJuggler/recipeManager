@@ -118,7 +118,7 @@ router.delete("/:rec_id", auth, async (req, res) => {
       { $pull: { recipes: { _id: req.params.rec_id } } },
       { new: true }
     ).select("-password");
-    await user.save();
+    // await user.save();
     res.json(user.recipes);
   } catch (err) {
     console.error(err.message);

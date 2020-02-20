@@ -32,7 +32,6 @@ export const addRecipe = ({
       type: ADD_RECIPE,
       payload: res.data
     });
-    console.log("add succes");
     dispatch(setAlert("Recipe succesfully added!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;

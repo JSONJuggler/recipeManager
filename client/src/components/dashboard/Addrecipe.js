@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 
 import { addRecipe } from "../../actions/recipe";
-import { setAlert } from "../../actions/alert";
 import { Darkbox } from "../../stylings";
 
 const textArea = {
@@ -22,12 +21,7 @@ const textArea = {
   border: "2px solid #ccc"
 };
 
-const Addrecipe = ({
-  setAlert,
-  addRecipe,
-  auth: { user, loading },
-  newRecipe
-}) => {
+const Addrecipe = ({ addRecipe, auth: { user, loading }, newRecipe }) => {
   const [dirtyType, setType] = useState([]);
   const [dirtySeason, setSeason] = useState([]);
 
@@ -38,7 +32,6 @@ const Addrecipe = ({
   });
 
   const { name, link, description } = recipe;
-  const [adding, setAdding] = useState(false);
 
   const [typeCheckBox, setTypeCheckBox] = useState([false, false]);
   const [seasonCheckBox, setSeasonCheckBox] = useState([false, false]);
@@ -97,7 +90,6 @@ const Addrecipe = ({
   return (
     <Fragment>
       <Darkbox>
-        {/* <button onClick={() => onClick()}>Click here to add a Recipe</button> */}
         {user && !loading && (
           <Fragment>
             <form onSubmit={e => add(e)}>
@@ -233,9 +225,8 @@ const Addrecipe = ({
 
 Addrecipe.propTypes = {
   addRecipe: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  newRecipe: PropTypes.object.isRequired
+  newRecipe: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -243,7 +234,7 @@ const mapStateToProps = state => ({
   newRecipe: state.recipe.recipe
 });
 
-export default connect(mapStateToProps, { setAlert, addRecipe })(Addrecipe);
+export default connect(mapStateToProps, { addRecipe })(Addrecipe);
 
 // const Addrecipe = ({
 //   register,

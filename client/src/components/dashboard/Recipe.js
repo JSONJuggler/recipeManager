@@ -15,18 +15,35 @@ const Recipe = ({
     getRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const ye = recipes.recipes[0];
-  console.log(recipes.recipes);
 
-  console.log(ye);
+  const userRecipes = recipes.recipes[0];
+
   const rec =
-    ye &&
-    ye.map(recipe => (
+    userRecipes &&
+    userRecipes.map(recipe => (
       <div key={recipe._id}>
-        {recipe.name}
+        <div>
+          <small>Name:</small>
+          <small> {recipe.name}</small>
+        </div>
+        <div>
+          <small>Season:</small>
+          <small>{recipe.season}</small>
+        </div>
+        <div>
+          <small>Type:</small>
+          <small>{recipe.type}</small>
+        </div>
+        <div>
+          <small>Link:</small>
+          <small>{recipe.link}</small>
+        </div>
+        <div>
+          <small>Description:</small>
+          <small>{recipe.description}</small>
+        </div>
         <div>
           <button onClick={e => deleteRecipe(recipe._id)}>Delete</button>
-          {/* <button onClick={deleteRecipe(recipe._id)}>Delete</button> */}
         </div>
       </div>
     ));
@@ -36,7 +53,6 @@ const Recipe = ({
     !loading && (
       <Fragment>
         <Link to="/Addrecipe">Click here to add a Recipe</Link>
-
         {rec}
         <p>{user.email}</p>
         <small></small>

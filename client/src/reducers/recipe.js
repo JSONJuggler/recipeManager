@@ -29,7 +29,7 @@ export default function(state = initialState, action) {
         loading: false
       };
     case DELETE_RECIPE:
-      return { ...state, recipes: payload, loading: false };
+      return { ...state, recipe: null, recipes: [payload], loading: false };
     case RECIPE_FAIL:
       return {
         ...state,
