@@ -16,16 +16,23 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_RECIPES:
-      return { ...state, recipes: payload, loading: false };
+      return {
+        ...state,
+        recipes: [payload, ...state.recipes],
+        loading: false
+      };
     case ADD_RECIPE:
-      return { ...state, recipe: payload, loading: false };
-    case DELETE_RECIPE:
-      return { ...state, recipes: payload, loading: false };
+      return {
+        ...state,
+        recipes: [[payload], ...state.recipes],
+        loading: false
+      };
+    // case DELETE_RECIPE:
+    //   return { ...state, recipes: payload, loading: false };
     case RECIPE_FAIL:
       return {
         ...state,
-        error: payload.error,
-        recipe: payload.duplicate,
+        // recipe: payload.duplicate,
         loading: false
       };
     default:

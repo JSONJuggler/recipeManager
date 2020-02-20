@@ -11,14 +11,20 @@ export const getRecipes = () => async dispatch => {
   });
 };
 
-export const addRecipe = ({ formData }) => async dispatch => {
+export const addRecipe = ({
+  name,
+  season,
+  type,
+  link,
+  description
+}) => async dispatch => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json"
       }
     };
-
+    const formData = { name, season, type, link, description };
     const body = JSON.stringify(formData);
 
     const res = await axios.put("/api/recipes", body, config);
@@ -26,21 +32,18 @@ export const addRecipe = ({ formData }) => async dispatch => {
       type: ADD_RECIPE,
       payload: res.data
     });
-
+    console.log("add succes");
     dispatch(setAlert("Recipe succesfully added!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
     }
 
     dispatch({
-      type: RECIPE_FAIL,
-      payload: {
-        // duplicate: res.data.duplicate,
-        error: { msg: err.response.statusText, status: err.response.status }
-      }
+      type: RECIPE_FAIL
+      // payload: res.data
     });
   }
 };
@@ -53,7 +56,6 @@ export const deleteRecipe = id => async dispatch => {
       type: DELETE_RECIPE,
       payload: res.data
     });
-    console.log("dispatch success");
     dispatch(setAlert("Recipe succesfully deleted!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
@@ -63,11 +65,7 @@ export const deleteRecipe = id => async dispatch => {
     }
 
     dispatch({
-      type: RECIPE_FAIL,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
+      type: RECIPE_FAIL
     });
   }
 };

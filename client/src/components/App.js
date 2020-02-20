@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { ThemeProvider } from "styled-components";
+import Addrecipe from "./dashboard/Addrecipe";
 import theme from "../stylings/theme";
 import { Flexcon } from "../stylings";
 import setAuthToken from "../utils/setAuthToken";
@@ -59,6 +60,7 @@ function App({ loadUser }) {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                {/* <PrivateRoute exact path="/Addrecipe" component={Addrecipe} /> */}
               </Switch>
             </Flexcon>
             <Footer />

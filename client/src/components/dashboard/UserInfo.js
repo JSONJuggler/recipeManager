@@ -7,7 +7,11 @@ const UserInfo = ({ auth: { user, loading } }) => {
     user &&
     !loading && (
       <Fragment>
-        <img style={{ maxWidth: "200px", margin: "auto" }} src={user.avatar} />
+        <img
+          style={{ maxWidth: "200px", margin: "auto" }}
+          src={user.avatar}
+          alt=""
+        />
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <small>

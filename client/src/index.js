@@ -12,10 +12,15 @@ const initialState = {};
 
 const middleware = [thunk];
 
+const composeEnhancers = composeWithDevTools({
+  trace: false,
+  traceLimit: 25
+});
+
 const store = createStore(
   rootReducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeEnhancers(applyMiddleware(...middleware))
 );
 
 ReactDOM.render(
