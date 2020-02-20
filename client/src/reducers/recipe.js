@@ -2,7 +2,8 @@ import {
   ADD_RECIPE,
   DELETE_RECIPE,
   RECIPE_FAIL,
-  GET_RECIPES
+  GET_RECIPES,
+  GET_USERRECIPES
 } from "../actions/types";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
 export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case GET_USERRECIPES:
     case GET_RECIPES:
       return {
         ...state,

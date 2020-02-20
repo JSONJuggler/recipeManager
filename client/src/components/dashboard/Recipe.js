@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getRecipes, deleteRecipe } from "../../actions/recipe";
+import { getUserRecipes, deleteRecipe } from "../../actions/recipe";
 
 const Recipe = ({
   auth: { user, loading },
   recipes,
-  getRecipes,
+  getUserRecipes,
   deleteRecipe
 }) => {
   useEffect(() => {
-    getRecipes();
+    getUserRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,7 +63,7 @@ const Recipe = ({
 
 Recipe.propTypes = {
   auth: PropTypes.object.isRequired,
-  getRecipes: PropTypes.func.isRequired,
+  getUserRecipes: PropTypes.func.isRequired,
   recipes: PropTypes.object.isRequired
 };
 
@@ -72,4 +72,6 @@ const mapStateToProps = state => ({
   recipes: state.recipe
 });
 
-export default connect(mapStateToProps, { getRecipes, deleteRecipe })(Recipe);
+export default connect(mapStateToProps, { getUserRecipes, deleteRecipe })(
+  Recipe
+);
