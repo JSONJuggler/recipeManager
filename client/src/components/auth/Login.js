@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+import { Button } from "@material-ui/core";
 import validate from "./loginValidate";
 import { login } from "../../actions/auth";
 import { Styledsub, Styledinput, Styledlink, Darkbox } from "../../stylings";
@@ -55,7 +56,7 @@ const Login = ({ isAuthenticated, login }) => {
     <Fragment>
       <Darkbox>
         <h1>Login to access your personal recipes!</h1>
-        <form onSubmit={e => onSubmit(e)}>
+        <form>
           <div>
             <Styledinput
               validated={errors.email}
@@ -100,8 +101,12 @@ const Login = ({ isAuthenticated, login }) => {
               </p>
             )}
           </div>
-          <Styledsub type="submit" value="Login" />
+
+          {/* <Styledsub type="submit" value="Login" /> */}
         </form>
+        <Button variant="contained" onClick={e => onSubmit(e)}>
+          Login
+        </Button>
         <div>
           <Styledlink to="/Register">
             Don't have an account? Register here!
