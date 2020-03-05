@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import { ThemeProvider } from "styled-components";
 import Addrecipe from "./dashboard/Addrecipe";
-import theme from "../stylings/theme";
 import { Flexcon } from "../stylings";
 import setAuthToken from "../utils/setAuthToken";
 import Navbar from "./layout/Navbar";
@@ -45,29 +44,19 @@ function App({ loadUser }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Fragment>
-          <div style={flex}>
-            <Navbar />
-            <section style={alerts}>
-              <Alert />
-            </section>
-            <Flexcon>
-              <Route exact path="/" component={Landing} />
-              <Switch>
-                <Route exact path="/browse" component={Browse} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
-              </Switch>
-            </Flexcon>
-            <Footer />
-          </div>
-        </Fragment>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <Fragment>
+        <Route exact path="/" component={Landing} />
+        <Switch>
+          <Route exact path="/browse" component={Browse} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
+        </Switch>
+        <Navbar />
+      </Fragment>
+    </Router>
   );
 }
 
