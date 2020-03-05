@@ -1,7 +1,6 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import Checkbox from "@material-ui/core/Checkbox";
@@ -17,9 +16,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import { useTheme } from "@material-ui/core/styles";
 
-import validate from "./loginValidate";
 import { login } from "../../actions/auth";
-import Register from "./Register";
 
 function Copyright() {
   return (
@@ -83,7 +80,6 @@ function Login({ isAuthenticated, login }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -131,9 +127,9 @@ function Login({ isAuthenticated, login }) {
             className={classes.submit}
             onClick={e => onSubmit(e)}
           >
-            Sign In
+            Log In
           </Button>
-          <Grid container>
+          <Grid container justify="flex-end">
             {/* <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
