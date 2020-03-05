@@ -63,40 +63,19 @@ function Login({ isAuthenticated, login }) {
     password: ""
   });
 
-  const [errors, setErrors] = useState({});
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { email, password } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    isSubmitting && setErrors(validate(formData));
   };
 
   const onSubmit = async e => {
     if (e) {
       e.preventDefault();
-      console.log("hi");
-      setErrors(validate(formData));
-      setIsSubmitting(true);
-    }
-  };
-
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-      setIsSubmitting(false);
+      window.scrollTo(0, 0);
       login({ email, password });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [errors]);
-
-  useEffect(() => {
-    if (isSubmitting) {
-      setIsSubmitting(false);
-      window.scrollTo(0, 0);
-    }
-  }, [isSubmitting]);
+  };
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
@@ -128,18 +107,6 @@ function Login({ isAuthenticated, login }) {
             autoFocus
             onChange={e => onChange(e)}
           />
-          {errors.email && (
-            <p
-              style={{
-                fontSize: ".7rem",
-                float: "left",
-                margin: "0px",
-                padding: "0px"
-              }}
-            >
-              {errors.email}
-            </p>
-          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -152,18 +119,6 @@ function Login({ isAuthenticated, login }) {
             autoComplete="current-password"
             onChange={e => onChange(e)}
           />
-          {errors.password && (
-            <p
-              style={{
-                fontSize: ".7rem",
-                float: "left",
-                margin: "0px",
-                padding: "0px"
-              }}
-            >
-              {errors.password}
-            </p>
-          )}
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

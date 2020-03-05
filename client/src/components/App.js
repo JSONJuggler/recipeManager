@@ -46,6 +46,7 @@ function App({ loadUser }) {
   return (
     <Router>
       <Fragment>
+        <Alert />
         <Route exact path="/" component={Landing} />
         <Switch>
           <Route exact path="/browse" component={Browse} />
