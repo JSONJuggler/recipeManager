@@ -1,34 +1,6 @@
-// import React, { Fragment } from "react";
-// import { connect } from "react-redux";
-// import PropTypes from "prop-types";
-
-// import Userinfo from "./UserInfo";
-// import Userrecipes from "../recipes/Userrecipes";
-// import { Recipesec, Usersec } from "../../stylings";
-
-// const Dashboard = ({ auth: { user } }) => {
-//   return (
-//     <Fragment>
-//       <Usersec>
-//         <Userinfo />
-//       </Usersec>
-//       <Recipesec>
-//         <Userrecipes />
-//       </Recipesec>
-//     </Fragment>
-//   );
-// };
-
-// Dashboard.propTypes = {
-//   auth: PropTypes.object.isRequired
-// };
-
-// const mapStateToProps = state => ({
-//   auth: state.auth
-// });
-
-// export default connect(mapStateToProps)(Dashboard);
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -47,10 +19,13 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+
 // import { mainListItems, secondaryListItems } from "./listItems";
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
+import Userinfo from "./UserInfo";
+import Userrecipes from "../recipes/Userrecipes";
 
 function Copyright() {
   return (
@@ -141,12 +116,15 @@ const useStyles = makeStyles(theme => ({
     overflow: "auto",
     flexDirection: "column"
   },
+  centerItem: {
+    alignSelf: "center"
+  },
   fixedHeight: {
-    height: 240
+    height: 260
   }
 }));
 
-export default function Dashboard() {
+const Dashboard = ({ auth: { loading, user } }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -211,26 +189,50 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            Chart
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>{/* <Chart /> */}</Paper>
+        {user && !loading && (
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Typography
+                    component="h1"
+                    variant="caption"
+                    className={classes.centerItem}
+                  >
+                    {user.username}
+                  </Typography>
+                  <img
+                    className={classes.centerItem}
+                    src={user.avatar}
+                    alt=""
+                  />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Userrecipes />
+                </Paper>
+              </Grid>
             </Grid>
-            Recent Deposits
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
-            </Grid>
-            Recent Orders
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </Container>
+        )}
       </main>
     </div>
   );
-}
+};
+
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Dashboard);
