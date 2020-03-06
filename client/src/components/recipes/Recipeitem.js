@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteRecipe } from "../../actions/recipe";
 
-const Recipeitem = ({ auth: { isAuthenticated }, recipe, deleteRecipe }) => {
+const Recipeitem = ({ auth: { user, loading }, recipe, deleteRecipe }) => {
   return (
     <Fragment>
       <div>
@@ -26,7 +26,7 @@ const Recipeitem = ({ auth: { isAuthenticated }, recipe, deleteRecipe }) => {
         <small>Description:</small>
         <small>{recipe.description}</small>
       </div>
-      {isAuthenticated && (
+      {!loading && user && user._id === recipe.userId && (
         <div>
           <button onClick={e => deleteRecipe(recipe._id)}>Delete</button>
         </div>
