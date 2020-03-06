@@ -79,7 +79,7 @@ function Register({ isAuthenticated, registerUser }) {
     password2: ""
   });
 
-  const { username, email, password, password2 } = formData;
+  const { username, email, password } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -87,11 +87,10 @@ function Register({ isAuthenticated, registerUser }) {
 
   const onSubmit = e => {
     window.scrollTo(0, 0);
-    register({ username, email, password });
+    registerUser({ username, email, password });
   };
 
   useEffect(() => {
-    console.log("hi");
     if (errors.username) {
       setUsernameError(errors.username.message);
       setIsUsernameError(true);
