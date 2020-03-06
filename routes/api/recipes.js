@@ -74,8 +74,8 @@ router.put(
     }
 
     try {
-      const { name, type, season, description } = req.body;
-      const newRecipe = { name, type, season, description };
+      const { name, type, season, description, userId } = req.body;
+      const newRecipe = { name, type, season, description, userId };
       const user = await User.findById(req.user.id).select("-password");
       const recipe = await User.find({
         recipes: { $elemMatch: { name, type, season, description } }

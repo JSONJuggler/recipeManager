@@ -32,6 +32,8 @@ const Addrecipe = ({ addRecipe, auth: { user, loading }, newRecipe }) => {
   });
 
   const { name, link, description } = recipe;
+  const { _id } = user;
+  const userId = _id;
 
   const [typeCheckBox, setTypeCheckBox] = useState([false, false]);
   const [seasonCheckBox, setSeasonCheckBox] = useState([false, false]);
@@ -80,7 +82,7 @@ const Addrecipe = ({ addRecipe, auth: { user, loading }, newRecipe }) => {
     e.preventDefault();
     const type = dirtyType.filter(dirtyType => dirtyType !== "");
     const season = dirtySeason.filter(dirtySeason => dirtySeason !== "");
-    addRecipe({ name, season, type, link, description });
+    addRecipe({ name, season, type, link, description, userId });
   };
 
   if (newRecipe) {
