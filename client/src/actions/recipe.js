@@ -29,7 +29,8 @@ export const addRecipe = ({
   season,
   type,
   link,
-  description
+  description,
+  userId
 }) => async dispatch => {
   try {
     const config = {
@@ -37,7 +38,7 @@ export const addRecipe = ({
         "Content-Type": "application/json"
       }
     };
-    const formData = { name, season, type, link, description };
+    const formData = { name, season, type, link, description, userId };
     const body = JSON.stringify(formData);
 
     const res = await axios.put("/api/recipes", body, config);
