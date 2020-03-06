@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -20,11 +20,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-// import { mainListItems, secondaryListItems } from "./listItems";
-// import Chart from "./Chart";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
-import Userinfo from "./UserInfo";
+import { mainListItems, secondaryListItems, guestListItems } from "./listItems";
 import Userrecipes from "../recipes/Userrecipes";
 
 function Copyright() {
@@ -116,7 +112,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "auto",
     flexDirection: "column"
   },
-  centerItem: {
+  centerFlexibleItem: {
     alignSelf: "center"
   },
   fixedHeight: {
@@ -124,7 +120,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = ({ auth: { loading, user } }) => {
+const Dashboard = ({ auth: { isAuthenticated, loading, user } }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -183,9 +179,17 @@ const Dashboard = ({ auth: { loading, user } }) => {
           </IconButton>
         </div>
         <Divider />
-        {/* <List>{mainListItems}</List> */}
-        <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+        {isAuthenticated ? (
+          <Fragment>
+            <List>{mainListItems}</List>
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <List>{guestListItems}</List>
+          </Fragment>
+        )}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -197,12 +201,12 @@ const Dashboard = ({ auth: { loading, user } }) => {
                   <Typography
                     component="h1"
                     variant="caption"
-                    className={classes.centerItem}
+                    className={classes.centerFlexibleItem}
                   >
                     {user.username}
                   </Typography>
                   <img
-                    className={classes.centerItem}
+                    className={classes.centerFlexibleItem}
                     src={user.avatar}
                     alt=""
                   />
