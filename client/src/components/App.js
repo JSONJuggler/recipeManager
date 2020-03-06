@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Addrecipe from "./dashboard/Addrecipe";
+import Addrecipe from "./recipes/Addrecipe";
 import setAuthToken from "../utils/setAuthToken";
 import Navbar from "./layout/Navbar";
 import Landing from "./layout/Landing";
