@@ -84,7 +84,6 @@ function Login({ isAuthenticated, login }) {
   };
 
   useEffect(() => {
-    console.log("error");
     if (errors.email) {
       setEmailError(errors.email.message);
       setIsEmailError(true);
