@@ -19,7 +19,7 @@ function Navbar({ logout, auth: { isAuthenticated, loading } }) {
         <Styledlink to="/browse">Browse Recipes</Styledlink>
       </Navli>
       <Navli>
-        <Styledlink onClick={logout} to="/">
+        <Styledlink onClick={logout} to="/login">
           Logout
         </Styledlink>
       </Navli>
@@ -45,7 +45,7 @@ function Navbar({ logout, auth: { isAuthenticated, loading } }) {
       <Header>
         <Flexiblecontainer>
           <div style={div}>
-            <Styledlink to="/">Home</Styledlink>
+            <Styledlink to="/login">Home</Styledlink>
           </div>
           <nav>
             {!loading && (

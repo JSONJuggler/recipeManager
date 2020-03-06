@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Addrecipe from "./recipes/Addrecipe";
 import setAuthToken from "../utils/setAuthToken";
 import Navbar from "./layout/Navbar";
-import Landing from "./layout/Landing";
 import Alert from "./layout/Alert";
 import Browse from "./layout/Browse";
 import Login from "./auth/Login";
@@ -28,11 +27,10 @@ function App({ loadUser }) {
     <Router>
       <Fragment>
         <Alert />
-        <Route exact path="/" component={Landing} />
+        <Route exact path="/login" component={Login} />
         <Switch>
           <Route exact path="/browse" component={Browse} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
         </Switch>
