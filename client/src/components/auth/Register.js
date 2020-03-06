@@ -240,7 +240,6 @@ function Register({ isAuthenticated, registerUser }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={e => onSubmit(e)}
           >
             Sign Up
           </Button>
