@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -13,7 +14,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect, Link as rrLink } from "react-router-dom";
 
-import { register } from "../../actions/auth";
+import { register as registerUser } from "../../actions/auth";
 
 function Copyright() {
   return (
@@ -48,7 +49,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Register({ isAuthenticated, register }) {
+function Register({ isAuthenticated, registerUser }) {
+  const { register, handleSubmit, errors } = useForm();
+
+  const [usernameError, setUsernameError] = useState("");
+
+  const [isUsernameError, setIsUsernameError] = useState(false);
+
+  const [emailError, setEmailError] = useState(
+    "This site uses Gravatar. Use your gravatar email to use your gravatar avatar!"
+  );
+
+  const [isEmailError, setIsEmailError] = useState(false);
+
+  const [passwordError, setPasswordError] = useState("");
+
+  const [isPasswordError, setIsPasswordError] = useState(false);
+
+  const [password2Error, setPassword2Error] = useState("");
+
+  const [isPassword2Error, setIsPassword2Error] = useState(false);
+
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -65,12 +86,44 @@ function Register({ isAuthenticated, register }) {
   };
 
   const onSubmit = e => {
-    if (e) {
-      e.preventDefault();
-      window.scrollTo(0, 0);
-      register({ username, email, password });
-    }
+    window.scrollTo(0, 0);
+    register({ username, email, password });
   };
+
+  useEffect(() => {
+    console.log("hi");
+    if (errors.username) {
+      setUsernameError(errors.username.message);
+      setIsUsernameError(true);
+    } else {
+      setUsernameError("");
+      setIsUsernameError(false);
+    }
+    if (errors.email) {
+      setEmailError(errors.email.message);
+      setIsEmailError(true);
+    } else {
+      setEmailError(
+        "This site uses Gravatar. Use your gravatar email to use your gravatar avatar!"
+      );
+      setIsEmailError(false);
+    }
+    if (errors.password) {
+      setPasswordError(errors.password.message);
+      setIsPasswordError(true);
+    } else {
+      setPasswordError("");
+      setIsPasswordError(false);
+    }
+    if (errors.password2) {
+      setPassword2Error(errors.password2.message);
+      setIsPassword2Error(true);
+      console.log(errors.password2);
+    } else {
+      setPassword2Error("");
+      setIsPassword2Error(false);
+    }
+  }, [errors.username, errors.email, errors.password, errors.password2]);
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
@@ -88,7 +141,11 @@ function Register({ isAuthenticated, register }) {
         <Typography component="h1" variant="caption">
           Register below to access you recipes!{" "}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -99,6 +156,11 @@ function Register({ isAuthenticated, register }) {
                 label="Username"
                 name="username"
                 autoComplete="username"
+                error={isUsernameError}
+                helperText={usernameError}
+                inputRef={register({
+                  required: { value: true, message: "Username is required" }
+                })}
                 onChange={e => onChange(e)}
               />
             </Grid>
@@ -111,8 +173,18 @@ function Register({ isAuthenticated, register }) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                helperText="This site uses Gravatar. Use your gravatar email to use your
-                gravatar avatar!"
+                error={isEmailError}
+                helperText={emailError}
+                inputRef={register({
+                  required: {
+                    value: true,
+                    message: "Email address is required"
+                  },
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Invalid email address"
+                  }
+                })}
                 onChange={e => onChange(e)}
               />
             </Grid>
@@ -126,6 +198,15 @@ function Register({ isAuthenticated, register }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                error={isPasswordError}
+                helperText={passwordError}
+                inputRef={register({
+                  required: { value: true, message: "Password is required" },
+                  minLength: {
+                    value: 6,
+                    message: "Password must be atleast 6 characters long"
+                  }
+                })}
                 onChange={e => onChange(e)}
               />
             </Grid>
@@ -134,12 +215,23 @@ function Register({ isAuthenticated, register }) {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                name="password2"
                 label="Confirm Password"
                 type="password"
-                id="password"
+                id="password2"
                 autoComplete="off"
-                onChange={e => onChange(e)}
+                error={isPassword2Error}
+                helperText={password2Error}
+                inputRef={register({
+                  required: {
+                    value: true,
+                    message: "Please confirm your password"
+                  },
+                  validate: {
+                    validate: password2 =>
+                      password2 === password || "Password must match"
+                  }
+                })}
               />
             </Grid>
           </Grid>
@@ -171,11 +263,11 @@ function Register({ isAuthenticated, register }) {
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool,
-  register: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { registerUser })(Register);
