@@ -14,14 +14,16 @@ const Userrecipes = ({ recipes: { loading, recipes }, getUserRecipes }) => {
   const userRecipes = recipes[0];
 
   return (
-    !loading && (
-      <Fragment>
-        {userRecipes.map(recipe => (
-          <Recipeitem key={recipe._id} recipe={recipe} />
-        ))}
-        <Link to="/Addrecipe">Click here to add a Recipe</Link>
-      </Fragment>
-    )
+    <Fragment>
+      <Link to="/Addrecipe">Click here to add a Recipe</Link>
+      {!loading && (
+        <Fragment>
+          {userRecipes.map(recipe => (
+            <Recipeitem key={recipe._id} recipe={recipe} />
+          ))}
+        </Fragment>
+      )}
+    </Fragment>
   );
 };
 
