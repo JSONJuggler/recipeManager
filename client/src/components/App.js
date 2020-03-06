@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Addrecipe from "./recipes/Addrecipe";
 import setAuthToken from "../utils/setAuthToken";
 // import Navbar from "./layout/Navbar";
-import Alert from "./layout/Alert";
+// import Alert from "./layout/Alert";
 import Browse from "./layout/Browse";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
