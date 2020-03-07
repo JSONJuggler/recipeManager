@@ -125,7 +125,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            Recipe Manager
           </Typography>
           {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
