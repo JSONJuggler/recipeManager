@@ -56,7 +56,7 @@ const Recipeitem = ({ auth: { user, loading }, recipe, deleteRecipe }) => {
             <Button size="small" color="primary">
               Edit
             </Button>
-            {!loading && user && user._id === recipe.userId && (
+            {/* {!loading && user && user._id === recipe.userId && (
               <Button
                 size="small"
                 color="primary"
@@ -64,7 +64,7 @@ const Recipeitem = ({ auth: { user, loading }, recipe, deleteRecipe }) => {
               >
                 Delete
               </Button>
-            )}
+            )} */}
           </CardActions>
         </Card>
       </Grid>
