@@ -152,7 +152,7 @@ function Register({ isAuthenticated, registerUser }) {
             Register
           </Typography>
           <Typography component="h1" variant="caption">
-            Register below to access you recipes!{" "}
+            Register below to get started!{" "}
           </Typography>
           <form
             className={classes.form}
