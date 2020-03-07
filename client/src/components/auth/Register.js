@@ -125,7 +125,7 @@ function Register({ isAuthenticated, registerUser }) {
   }, [errors.username, errors.email, errors.password, errors.password2]);
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

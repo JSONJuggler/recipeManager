@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import { useTheme } from "@material-ui/core/styles";
 
+import Nav from "../layout/Nav";
 import { login } from "../../actions/auth";
 
 function Copyright() {
@@ -33,6 +34,9 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -101,99 +105,102 @@ function Login({ isAuthenticated, login }) {
   }, [errors.email, errors.password]);
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Log in
-        </Typography>
-        <Typography component="h1" variant="caption">
-          Log in below to access you recipes!{" "}
-        </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            helperText={emailError}
-            error={isEmailError}
-            inputRef={register({
-              required: { value: true, message: "Email address is required" },
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Invalid email address"
-              }
-            })}
-            onChange={e => onChange(e)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            helperText={passwordError}
-            error={isPasswordError}
-            inputRef={register({
-              required: { value: true, message: "Password is required" },
-              minLength: {
-                value: 6,
-                message: "Password must be atleast 6 characters long"
-              }
-            })}
-            onChange={e => onChange(e)}
-          />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            // onClick={e => onSubmit(e)}
+    <div className={classes.root}>
+      <Nav />
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Log in
+          </Typography>
+          <Typography component="h1" variant="caption">
+            Log in below to access you recipes!{" "}
+          </Typography>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Log In
-          </Button>
-          <Grid container justify="flex-end">
-            {/* <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid> */}
-            <Grid item>
-              <Link component={rrLink} variant="body2" to="/register">
-                {"Don't have an account? Register here!"}
-              </Link>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              helperText={emailError}
+              error={isEmailError}
+              inputRef={register({
+                required: { value: true, message: "Email address is required" },
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Invalid email address"
+                }
+              })}
+              onChange={e => onChange(e)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              helperText={passwordError}
+              error={isPasswordError}
+              inputRef={register({
+                required: { value: true, message: "Password is required" },
+                minLength: {
+                  value: 6,
+                  message: "Password must be atleast 6 characters long"
+                }
+              })}
+              onChange={e => onChange(e)}
+            />
+            {/* <FormControlLabel
+        control={<Checkbox value="remember" color="primary" />}
+        label="Remember me"
+      /> */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              // onClick={e => onSubmit(e)}
+            >
+              Log In
+            </Button>
+            <Grid container justify="flex-end">
+              {/* <Grid item xs>
+          <Link href="#" variant="body2">
+            Forgot password?
+          </Link>
+        </Grid> */}
+              <Grid item>
+                <Link component={rrLink} variant="body2" to="/register">
+                  {"Don't have an account? Register here!"}
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    </div>
   );
 }
 
