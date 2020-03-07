@@ -150,13 +150,16 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         {isAuthenticated ? (
           <Fragment>
             <List>
-              <ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
-              <ListItem button>
-                <ListItemIcon>
-                  <SearchIcon />
-                </ListItemIcon>
-                <ListItemText primary="Search" />
-              </ListItem>
+              <ListItemLink
+                to="/dashboard"
+                primary="Home"
+                icon={<HomeIcon />}
+              />
+              <ListItemLink
+                to="/browse"
+                primary="Browse"
+                icon={<SearchIcon />}
+              />
               <ListItem button>
                 <ListItemIcon>
                   <FavoriteIcon />
@@ -172,12 +175,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             </List>
             <Divider />
             <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <SettingsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Account Settings" />
-              </ListItem>
+              <ListItemLink
+                to="/dashboard"
+                primary="Account Settings"
+                icon={<SettingsIcon />}
+              />
               <ListItem button onClick={logout}>
                 <ListItemIcon>
                   <NoMeetingRoomIcon />
@@ -189,24 +191,21 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         ) : (
           <Fragment>
             <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <SearchIcon />
-                </ListItemIcon>
-                <ListItemText primary="Search" />
-              </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <MeetingRoomIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log in" />
-              </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <VpnKeyIcon />
-                </ListItemIcon>
-                <ListItemText primary="Register" />
-              </ListItem>
+              <ListItemLink
+                to="/browse"
+                primary="Browse"
+                icon={<SearchIcon />}
+              />
+              <ListItemLink
+                to="/login"
+                primary="Log In"
+                icon={<MeetingRoomIcon />}
+              />
+              <ListItemLink
+                to="/register"
+                primary="Register"
+                icon={<VpnKeyIcon />}
+              />
             </List>
           </Fragment>
         )}
