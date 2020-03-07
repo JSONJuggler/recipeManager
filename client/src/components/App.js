@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Addrecipe from "./recipes/Addrecipe";
 import setAuthToken from "../utils/setAuthToken";
@@ -38,5 +39,9 @@ function App({ loadUser }) {
     </Router>
   );
 }
+
+App.propTypes = {
+  loadUser: PropTypes.func.isRequired
+};
 
 export default connect(null, { loadUser })(App);
