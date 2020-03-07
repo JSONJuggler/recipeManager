@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -186,7 +186,6 @@ function Login({ isAuthenticated, login }) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              // onClick={e => onSubmit(e)}
             >
               Log In
             </Button>
