@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect, Link as rrLink } from "react-router-dom";
 
+import Nav from "../layout/Nav";
 import { register as registerUser } from "../../actions/auth";
 
 function Copyright() {
@@ -30,6 +31,13 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    height: "100vh"
+  },
+  centerFlexibleItem: {
+    alignSelf: "center"
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -129,133 +137,140 @@ function Register({ isAuthenticated, registerUser }) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Register
-        </Typography>
-        <Typography component="h1" variant="caption">
-          Register below to access you recipes!{" "}
-        </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="userName"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                error={isUsernameError}
-                helperText={usernameError}
-                inputRef={register({
-                  required: { value: true, message: "Username is required" }
-                })}
-                onChange={e => onChange(e)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                error={isEmailError}
-                helperText={emailError}
-                inputRef={register({
-                  required: {
-                    value: true,
-                    message: "Email address is required"
-                  },
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Invalid email address"
-                  }
-                })}
-                onChange={e => onChange(e)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                error={isPasswordError}
-                helperText={passwordError}
-                inputRef={register({
-                  required: { value: true, message: "Password is required" },
-                  minLength: {
-                    value: 6,
-                    message: "Password must be atleast 6 characters long"
-                  }
-                })}
-                onChange={e => onChange(e)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password2"
-                label="Confirm Password"
-                type="password"
-                id="password2"
-                autoComplete="off"
-                error={isPassword2Error}
-                helperText={password2Error}
-                inputRef={register({
-                  required: {
-                    value: true,
-                    message: "Please confirm your password"
-                  },
-                  validate: {
-                    validate: password2 =>
-                      password2 === password || "Password must match"
-                  }
-                })}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+    <div className={classes.root}>
+      <Nav />
+      <Container
+        className={classes.centerFlexibleItem}
+        component="main"
+        maxWidth="xs"
+      >
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Register
+          </Typography>
+          <Typography component="h1" variant="caption">
+            Register below to access you recipes!{" "}
+          </Typography>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link component={rrLink} variant="body2" to="/login">
-                Already have an account? Log in
-              </Link>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="userName"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  error={isUsernameError}
+                  helperText={usernameError}
+                  inputRef={register({
+                    required: { value: true, message: "Username is required" }
+                  })}
+                  onChange={e => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  error={isEmailError}
+                  helperText={emailError}
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: "Email address is required"
+                    },
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: "Invalid email address"
+                    }
+                  })}
+                  onChange={e => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  error={isPasswordError}
+                  helperText={passwordError}
+                  inputRef={register({
+                    required: { value: true, message: "Password is required" },
+                    minLength: {
+                      value: 6,
+                      message: "Password must be atleast 6 characters long"
+                    }
+                  })}
+                  onChange={e => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Confirm Password"
+                  type="password"
+                  id="password2"
+                  autoComplete="off"
+                  error={isPassword2Error}
+                  helperText={password2Error}
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: "Please confirm your password"
+                    },
+                    validate: {
+                      validate: password2 =>
+                        password2 === password || "Password must match"
+                    }
+                  })}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link component={rrLink} variant="body2" to="/login">
+                  Already have an account? Log in
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
+    </div>
   );
 }
 
