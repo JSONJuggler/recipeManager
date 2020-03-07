@@ -35,7 +35,11 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    height: "100vh"
+  },
+  centerFlexibleItem: {
+    alignSelf: "center"
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -110,7 +114,11 @@ function Login({ isAuthenticated, login }) {
   return (
     <div className={classes.root}>
       <Nav />
-      <Container component="main" maxWidth="xs">
+      <Container
+        className={classes.centerFlexibleItem}
+        component="main"
+        maxWidth="xs"
+      >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
