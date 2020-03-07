@@ -101,7 +101,7 @@ function Login({ isAuthenticated, login }) {
   }, [errors.email, errors.password]);
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
   return (
     <Container component="main" maxWidth="xs">
