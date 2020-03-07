@@ -29,10 +29,10 @@ function App({ loadUser }) {
         {/* <Alert /> */}
         <Route exact path="/" component={Login} />
         <Switch>
-          {/* <Route exact path="/browse" component={Browse} /> */}
+          <Route exact path="/browse" component={Browse} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
         </Switch>
         {/* <Navbar /> */}
