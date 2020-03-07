@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 
 import Nav from "../layout/Nav";
 import Userrecipes from "../recipes/Userrecipes";
@@ -17,9 +17,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      {/* <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{" "}
+      </Link>{" "} */}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -84,10 +84,12 @@ const Dashboard = ({ auth: { user, loading } }) => {
                 </Paper>
               </Grid>
               <Grid item xs={12} md={8} lg={9}>
-                <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
+                <Paper className={fixedHeightPaper}>
+                  <Link to="/Addrecipe">Click here to add a Recipe</Link>
+                </Paper>
               </Grid>
               <Grid item xs={12}>
-                <Paper className={classes.paper}>
+                <Paper className={fixedHeightPaper}>
                   <Userrecipes />
                 </Paper>
               </Grid>
