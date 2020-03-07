@@ -1,14 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
-import Recipes from "../recipes/Recipes";
 import Nav from "../layout/Nav";
+import Recipes from "../recipes/Recipes";
 
 function Copyright() {
   return (
@@ -32,21 +31,29 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     overflow: "auto"
   },
-  container: {
+  icon: {
+    marginRight: theme.spacing(2)
+  },
+  cardGrid: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4)
   },
-  paper: {
-    padding: theme.spacing(2),
+  card: {
+    height: "100%",
     display: "flex",
-    overflow: "auto",
     flexDirection: "column"
   },
-  centerFlexibleItem: {
-    alignSelf: "center"
+  cardMedia: {
+    paddingTop: "56.25%" // 16:9
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  paper: {
+    overflow: "auto"
   },
   fixedHeight: {
-    height: 260
+    height: "80vh"
   },
   appBarSpacer: theme.mixins.toolbar
 }));
@@ -56,22 +63,22 @@ const Browse = () => {
 
   return (
     <div className={classes.root}>
-      <Nav />
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
+      <Fragment>
+        <Nav />
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg">
+            <Container className={classes.cardGrid}>
+              <Grid container spacing={4}>
                 <Recipes />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
+              </Grid>
+              <Box pt={4}>
+                <Copyright />
+              </Box>
+            </Container>
+          </Container>
+        </main>
+      </Fragment>
     </div>
   );
 };

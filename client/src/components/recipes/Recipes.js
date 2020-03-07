@@ -5,11 +5,7 @@ import PropTypes from "prop-types";
 import Recipeitem from "./Recipeitem";
 import { getRecipes } from "../../actions/recipe";
 
-const Recipes = ({
-  auth: { isAuthenticated },
-  recipes: { loading, recipes },
-  getRecipes
-}) => {
+const Recipes = ({ recipes: { loading, recipes }, getRecipes }) => {
   useEffect(() => {
     getRecipes();
   }, [getRecipes]);
@@ -22,9 +18,6 @@ const Recipes = ({
         {allRecipes.map(recipe => (
           <Recipeitem key={recipe._id} recipe={recipe} />
         ))}
-        {!isAuthenticated && (
-          <small>Register to create your own recipes!</small>
-        )}
       </Fragment>
     )
   );
@@ -36,7 +29,6 @@ Recipes.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   recipes: state.recipe
 });
 
