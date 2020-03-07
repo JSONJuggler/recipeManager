@@ -27,12 +27,12 @@ function App({ loadUser }) {
     <Router>
       <Fragment>
         {/* <Alert /> */}
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Dashboard} />
         <Switch>
-          <Route exact path="/browse" component={Browse} />
+          {/* <Route exact path="/browse" component={Browse} /> */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          {/* <Route exact path="/dashboard" component={Dashboard} /> */}
           <PrivateRoute exact path="/Addrecipe" component={Addrecipe} />
         </Switch>
         {/* <Navbar /> */}
