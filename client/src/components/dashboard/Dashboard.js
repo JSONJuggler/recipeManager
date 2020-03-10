@@ -89,9 +89,16 @@ const Dashboard = ({ auth: { user, loading } }) => {
                 </Paper>
               </Grid>
               <Grid item xs={12}>
-                <Paper className={fixedHeightPaper}>
+                <Container maxWidth="lg">
+                  <Container className={classes.cardGrid}>
+                    <Grid container spacing={4}>
+                      <Userrecipes />
+                    </Grid>
+                  </Container>
+                </Container>
+                {/* <Paper>
                   <Userrecipes />
-                </Paper>
+                </Paper> */}
               </Grid>
             </Grid>
             <Box pt={4}>

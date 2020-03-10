@@ -24,14 +24,14 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    height: "100vh"
   },
   content: {
     flexGrow: 1,
-    height: "100vh",
     overflow: "auto"
   },
-  cardGrid: {
+  spacer: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4)
   },
@@ -47,15 +47,17 @@ const Browse = () => {
         <Nav />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg">
-            <Container className={classes.cardGrid}>
-              <Grid container spacing={4}>
-                <Recipes />
-              </Grid>
-              <Box pt={4}>
-                <Copyright />
-              </Box>
-            </Container>
+          {/* <Container maxWidth="lg"> */}
+          <Container className={classes.spacer}>
+            {/* <Grid container spacing={4}> */}
+
+            <Recipes />
+
+            {/* </Grid> */}
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+            {/* </Container> */}
           </Container>
         </main>
       </Fragment>

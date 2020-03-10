@@ -43,9 +43,9 @@ const Recipeitem = ({ auth: { user, loading }, recipe, deleteRecipe }) => {
               {recipe.name}
             </Typography>
             <Typography>
-              {recipe.link}
-              {recipe.season}
-              {recipe.type}
+              {/* {recipe.link}
+            {recipe.season}
+            {recipe.type} */}
               {recipe.description}
             </Typography>
           </CardContent>
