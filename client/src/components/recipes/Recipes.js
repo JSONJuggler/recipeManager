@@ -8,10 +8,10 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import CreateIcon from "@material-ui/icons/Create";
 
-import Recipeitem from "./Recipeitem";
-import { getRecipes } from "../../actions/recipe";
+import { getRecipes, deleteRecipe } from "../../actions/recipe";
 
 const useStyles = makeStyles(theme => ({
   listRoot: {
@@ -27,7 +27,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Recipes = ({ recipes: { loading, recipes }, getRecipes }) => {
+const Recipes = ({
+  recipes: { loading, recipes },
+  getRecipes,
+  deleteRecipe,
+  auth: { user }
+}) => {
   const classes = useStyles();
 
   const xs = useMediaQuery("(min-width:0px)");
@@ -61,21 +66,42 @@ const Recipes = ({ recipes: { loading, recipes }, getRecipes }) => {
       <Fragment>
         <div className={classes.listRoot}>
           <GridList
-            cellHeight={180}
+            cellHeight={240}
             className={classes.gridList}
             cols={getCol()}
           >
-            {/* <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-              <ListSubheader component="div">December</ListSubheader>
-            </GridListTile> */}
+            <GridListTile
+              key="Subheader"
+              cols={getCol()}
+              style={{ height: "auto" }}
+            >
+              <ListSubheader component="div">All Recipes</ListSubheader>
+            </GridListTile>
             {allRecipes.map(recipe => (
               <GridListTile key={recipe._id} cols={recipe.cols || 1}>
                 <img
                   src="https://source.unsplash.com/random"
                   alt="tile.title"
                 />
+                <GridListTileBar
+                  title={recipe.name}
+                  subtitle={recipe.description}
+                  actionIcon={
+                    !loading && user && user._id === recipe.userId ? (
+                      <IconButton aria-label={"Edit"} className={classes.icon}>
+                        <CreateIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        aria-label={"Favorite"}
+                        className={classes.icon}
+                      >
+                        <FavoriteIcon />
+                      </IconButton>
+                    )
+                  }
+                />
               </GridListTile>
-              // <Recipeitem browse={true} recipe={recipe} />
             ))}
           </GridList>
         </div>
@@ -86,11 +112,13 @@ const Recipes = ({ recipes: { loading, recipes }, getRecipes }) => {
 
 Recipes.propTypes = {
   recipes: PropTypes.object.isRequired,
-  getRecipes: PropTypes.func.isRequired
+  getRecipes: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  recipes: state.recipe
+  recipes: state.recipe,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { getRecipes })(Recipes);
+export default connect(mapStateToProps, { getRecipes, deleteRecipe })(Recipes);
