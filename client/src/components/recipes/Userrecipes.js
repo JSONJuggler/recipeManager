@@ -5,12 +5,10 @@ import PropTypes from "prop-types";
 import Recipeitem from "./Recipeitem";
 import { getUserRecipes } from "../../actions/recipe";
 
-const Userrecipes = ({ recipes: { loading, recipes }, getUserRecipes }) => {
+const Userrecipes = ({ recipes: { loading, userRecipes }, getUserRecipes }) => {
   useEffect(() => {
     getUserRecipes();
   }, [getUserRecipes]);
-
-  const userRecipes = recipes[0];
 
   return (
     <Fragment>

@@ -5,11 +5,15 @@ import {
   DELETE_RECIPE,
   RECIPE_FAIL,
   GET_RECIPES,
-  GET_USERRECIPES
+  GET_USERRECIPES,
+  CLEAR_RECIPES
 } from "./types";
 import { setAlert } from "./alert";
 
 export const getUserRecipes = () => async dispatch => {
+  dispatch({
+    type: CLEAR_RECIPES
+  });
   const res = await axios.get("/api/recipes/me");
   dispatch({
     type: GET_USERRECIPES,

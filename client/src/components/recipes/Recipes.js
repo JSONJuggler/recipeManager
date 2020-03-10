@@ -59,8 +59,6 @@ const Recipes = ({
     getRecipes();
   }, [getRecipes]);
 
-  const allRecipes = recipes[0];
-
   return (
     !loading && (
       <Fragment>
@@ -77,7 +75,7 @@ const Recipes = ({
             >
               <ListSubheader component="div">All Recipes</ListSubheader>
             </GridListTile>
-            {allRecipes.map(recipe => (
+            {recipes.map(recipe => (
               <GridListTile key={recipe._id} cols={recipe.cols || 1}>
                 <img
                   src="https://source.unsplash.com/random"
