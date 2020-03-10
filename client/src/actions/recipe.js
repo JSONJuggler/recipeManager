@@ -11,23 +11,52 @@ import {
 import { setAlert } from "./alert";
 
 export const getUserRecipes = () => async dispatch => {
-  dispatch({
-    type: CLEAR_RECIPES
-  });
-  const res = await axios.get("/api/recipes/me");
-  dispatch({
-    type: GET_USERRECIPES,
-    payload: res.data
-  });
+  try {
+    dispatch({
+      type: CLEAR_RECIPES
+    });
+    const res = await axios.get("/api/recipes/me");
+    dispatch({
+      type: GET_USERRECIPES,
+      payload: res.data
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+    }
+
+    // dispatch({
+    //   type: RECIPE_FAIL
+    //   // option to star duplicate resturants
+    //   // payload: res.data
+    // });
+  }
 };
 
 export const getRecipes = () => async dispatch => {
-  const res = await axios.get("/api/recipes");
-  dispatch({
-    type: GET_RECIPES,
-    payload: res.data
-  });
+  try {
+    const res = await axios.get("/api/recipes");
+    dispatch({
+      type: GET_RECIPES,
+      payload: res.data
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+    }
+
+    // dispatch({
+    //   type: RECIPE_FAIL
+    //   // option to star duplicate resturants
+    //   // payload: res.data
+    // });
+  }
 };
+
 export const addRecipe = ({
   name,
   season,
