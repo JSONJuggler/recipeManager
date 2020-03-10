@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PropTypes from "prop-types";
 
 const ListItemLink = props => {
-  const { icon, primary, to } = props;
+  const { icon, primary, to, onClick } = props;
 
   const renderLink = useMemo(
     () =>
@@ -18,7 +18,7 @@ const ListItemLink = props => {
 
   return (
     <li>
-      <ListItem button component={renderLink}>
+      <ListItem button onClick component={renderLink} onClick={onClick}>
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         <ListItemText primary={primary} />
       </ListItem>

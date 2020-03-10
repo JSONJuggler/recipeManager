@@ -186,12 +186,12 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 primary="Account Settings"
                 icon={<SettingsIcon />}
               />
-              <ListItem button onClick={logout}>
-                <ListItemIcon>
-                  <NoMeetingRoomIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log out" />
-              </ListItem>
+              <ListItemLink
+                onClick={logout}
+                to="/login"
+                primary="Log out"
+                icon={<NoMeetingRoomIcon />}
+              />
             </List>
           </Fragment>
         ) : (
