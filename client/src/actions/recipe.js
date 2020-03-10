@@ -101,11 +101,11 @@ export const addRecipe = ({
 
 export const deleteRecipe = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/recipes/${id}`);
+    await axios.delete(`/api/recipes/${id}`);
 
     dispatch({
       type: DELETE_RECIPE,
-      payload: res.data
+      payload: id
     });
     dispatch(setAlert("Recipe succesfully deleted!", "success"));
   } catch (err) {

@@ -119,7 +119,7 @@ router.delete("/:rec_id", auth, async (req, res) => {
       { new: true }
     ).select("-password");
     // await user.save();
-    res.json(user.recipes);
+    res.status(200).send();
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

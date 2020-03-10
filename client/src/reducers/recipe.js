@@ -21,12 +21,14 @@ export default function(state = initialState, action) {
     case GET_USERRECIPES:
       return {
         ...state,
+        recipe: null,
         userRecipes: payload,
         loading: false
       };
     case GET_RECIPES:
       return {
         ...state,
+        recipe: null,
         recipes: payload,
         loading: false
       };
@@ -37,12 +39,22 @@ export default function(state = initialState, action) {
         recipes: [...state.recipes, payload],
         userRecipes: [...state.userRecipes, payload]
       };
-    case DELETE_RECIPE:
-      return { ...state, recipe: null, recipes: [payload], loading: false };
     case RECIPE_FAIL:
       return {
         ...state,
         // recipe: payload.duplicate,
+        loading: false
+      };
+    case DELETE_RECIPE:
+      return {
+        ...state,
+        recipe: null,
+        userRecipes: state.userRecipes.filter(recipe => {
+          return recipe._id !== payload;
+        }),
+        recipes: state.recipes.filter(recipe => {
+          return recipe._id !== payload;
+        }),
         loading: false
       };
     case CLEAR_RECIPES:
