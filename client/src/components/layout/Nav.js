@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,7 +25,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { Link as rrLink } from "react-router-dom";
 
 import ListItemLink from "../routing/ListItemLink";
 import { logout } from "../../actions/auth";
@@ -128,9 +129,14 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             Recipe Manager
           </Typography>
           {!isAuthenticated ? (
-            <Typography component="h1" variant="caption">
-              Register to create your own recipes!
-            </Typography>
+            <Link
+              component={rrLink}
+              variant="body2"
+              color="inherit"
+              to="/register"
+            >
+              {"Register to create your own recipes!"}
+            </Link>
           ) : (
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -206,11 +212,6 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 to="/login"
                 primary="Log In"
                 icon={<MeetingRoomIcon />}
-              />
-              <ListItemLink
-                to="/register"
-                primary="Register"
-                icon={<VpnKeyIcon />}
               />
             </List>
           </Fragment>
