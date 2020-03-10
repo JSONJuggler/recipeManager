@@ -15,7 +15,7 @@ const Userrecipes = ({ recipes: { loading, userRecipes }, getUserRecipes }) => {
       {!loading && (
         <Fragment>
           {userRecipes.map(recipe => (
-            <Recipeitem recipe={recipe} />
+            <Recipeitem key={recipe._id} recipe={recipe} />
           ))}
         </Fragment>
       )}
