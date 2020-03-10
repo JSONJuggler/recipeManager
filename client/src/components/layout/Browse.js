@@ -31,29 +31,9 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     overflow: "auto"
   },
-  icon: {
-    marginRight: theme.spacing(2)
-  },
   cardGrid: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4)
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column"
-  },
-  cardMedia: {
-    paddingTop: "56.25%" // 16:9
-  },
-  cardContent: {
-    flexGrow: 1
-  },
-  paper: {
-    overflow: "auto"
-  },
-  fixedHeight: {
-    height: "80vh"
   },
   appBarSpacer: theme.mixins.toolbar
 }));
