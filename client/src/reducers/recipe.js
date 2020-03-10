@@ -33,7 +33,9 @@ export default function(state = initialState, action) {
     case ADD_RECIPE:
       return {
         ...state,
-        recipe: payload
+        recipe: payload,
+        recipes: [...state.recipes, payload],
+        userRecipes: [...state.userRecipes, payload]
       };
     case DELETE_RECIPE:
       return { ...state, recipe: null, recipes: [payload], loading: false };

@@ -12,9 +12,6 @@ import { setAlert } from "./alert";
 
 export const getUserRecipes = () => async dispatch => {
   try {
-    dispatch({
-      type: CLEAR_RECIPES
-    });
     const res = await axios.get("/api/recipes/me");
     dispatch({
       type: GET_USERRECIPES,
@@ -26,6 +23,10 @@ export const getUserRecipes = () => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
     }
+
+    dispatch({
+      type: CLEAR_RECIPES
+    });
 
     // dispatch({
     //   type: RECIPE_FAIL
@@ -48,6 +49,9 @@ export const getRecipes = () => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
     }
+    dispatch({
+      type: CLEAR_RECIPES
+    });
 
     // dispatch({
     //   type: RECIPE_FAIL
