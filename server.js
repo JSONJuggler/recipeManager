@@ -23,3 +23,14 @@ app.use("/api/users", require("./routes/api/users"));
 // Define Routes. ""
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/recipes", require("./routes/api/recipes"));
+
+//Serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, "client", "build")));
+
+  // Serve index.html on all routes except the api routes above
+  app.get("*", function (req, res) {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
