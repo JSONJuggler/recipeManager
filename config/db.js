@@ -4,6 +4,7 @@ const db = process.env.MONGOURI;
 
 const connectDB = async () => {
   try {
+    console.log(db);
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -12,6 +13,7 @@ const connectDB = async () => {
     });
     console.log("MongoDB Connected...");
   } catch (err) {
+    console.log("failing");
     console.log(err.message);
     process.exit(1);
   }
