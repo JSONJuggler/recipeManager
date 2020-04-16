@@ -12,6 +12,7 @@ connectDB();
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 app.use(express.json({ extended: false }));
+console.log(process.env.NODE_ENV);
 
 // app.get("/", (req, res) => res.send("API Running"));
 
@@ -28,6 +29,7 @@ app.use("/api/recipes", require("./routes/api/recipes"));
 //Serve static assets in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
+  console.log("in prod");
   app.use(express.static(path.join(__dirname, "client", "build")));
 
   // Serve index.html on all routes except the api routes above
