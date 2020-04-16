@@ -6,8 +6,7 @@ const connectDB = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-console.log("in root folder...");
-console.log(process.env);
+
 connectDB();
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
