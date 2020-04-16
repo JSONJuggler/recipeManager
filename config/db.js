@@ -4,7 +4,8 @@ const db = process.env.MONGOURI;
 
 const connectDB = async () => {
   try {
-    console.log(db);
+    console.log("in config folder...");
+    console.log(process.env);
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
