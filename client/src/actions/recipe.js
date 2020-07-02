@@ -6,26 +6,26 @@ import {
   RECIPE_FAIL,
   GET_RECIPES,
   GET_USERRECIPES,
-  CLEAR_RECIPES
+  CLEAR_RECIPES,
 } from "./types";
 import { setAlert } from "./alert";
 
-export const getUserRecipes = () => async dispatch => {
+export const getUserRecipes = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/recipes/me");
+    const res = await axios.get("/recipemanager/api/recipes/me");
     dispatch({
       type: GET_USERRECIPES,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
     }
 
     dispatch({
-      type: CLEAR_RECIPES
+      type: CLEAR_RECIPES,
     });
 
     // dispatch({
@@ -36,21 +36,21 @@ export const getUserRecipes = () => async dispatch => {
   }
 };
 
-export const getRecipes = () => async dispatch => {
+export const getRecipes = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/recipes");
+    const res = await axios.get("/recipemanager/api/recipes");
     dispatch({
       type: GET_RECIPES,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
     }
     dispatch({
-      type: CLEAR_RECIPES
+      type: CLEAR_RECIPES,
     });
 
     // dispatch({
@@ -67,56 +67,56 @@ export const addRecipe = ({
   type,
   link,
   description,
-  userId
-}) => async dispatch => {
+  userId,
+}) => async (dispatch) => {
   try {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
     const formData = { name, season, type, link, description, userId };
     const body = JSON.stringify(formData);
 
-    const res = await axios.put("/api/recipes", body, config);
+    const res = await axios.put("/recipemanager/api/recipes", body, config);
     dispatch({
       type: ADD_RECIPE,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(setAlert("Recipe succesfully added!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "fail")));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
     }
 
     dispatch({
-      type: RECIPE_FAIL
+      type: RECIPE_FAIL,
       // option to star duplicate resturants
       // payload: res.data
     });
   }
 };
 
-export const deleteRecipe = id => async dispatch => {
+export const deleteRecipe = (id) => async (dispatch) => {
   try {
-    await axios.delete(`/api/recipes/${id}`);
+    await axios.delete(`/recipemanager/api/recipes/${id}`);
 
     dispatch({
       type: DELETE_RECIPE,
-      payload: id
+      payload: id,
     });
     dispatch(setAlert("Recipe succesfully deleted!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
 
     dispatch({
-      type: RECIPE_FAIL
+      type: RECIPE_FAIL,
     });
   }
 };

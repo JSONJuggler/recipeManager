@@ -24,7 +24,7 @@ function App({ loadUser }) {
   }
 
   return (
-    <Router>
+    <Router basename={"/recipemanager"}>
       <Fragment>
         {/* <Alert /> */}
         <Route exact path="/" component={Login} />
@@ -41,7 +41,7 @@ function App({ loadUser }) {
 }
 
 App.propTypes = {
-  loadUser: PropTypes.func.isRequired
+  loadUser: PropTypes.func.isRequired,
 };
 
 export default connect(null, { loadUser })(App);
