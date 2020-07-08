@@ -1,0 +1,15 @@
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL;";
+export const LOGOUT = "LOGOUT";
+export const LOAD_USER = "LOAD_USER";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const ADD_RECIPE = "ADD_RECIPE";
+export const DELETE_RECIPE = "DELETE_RECIPE";
+export const RECIPE_FAIL = "RECIPE_FAIL";
+export const GET_RECIPES = "GET_RECIPES";
+export const GET_USERRECIPES = "GET_USERRECIPES";
+export const CLEAR_RECIPES = "CLEAR_RECIPES";

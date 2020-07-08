@@ -4,27 +4,45 @@
   "description": "Recipe Manager",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
-    "br": "/Applications/Brave\\ Browser.app/Contents/MacOS/Brave\\ Browser --remote-debugging-port=9222 --user-data-dir=/tmp/brave-debug",
-    "debug": "concurrently \"npm run br\" \"npm run client\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Deleon Reescano",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "config": "^3.2.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-validator": "^6.4.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.1",
-    "request": "^2.88.2"
+    "@material-ui/core": "^4.9.10",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.50",
+    "axios": "^0.19.2",
+    "cross-env": "^7.0.2",
+    "datauri": "^3.0.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "moment": "^2.24.0",
+    "next": "^9.3.4",
+    "next-connect": "^0.6.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^5.5.3",
+    "react-markdown": "^4.3.1",
+    "react-moment": "^0.9.7",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "rollbar": "^2.15.2",
+    "uuid": "^7.0.3",
+    "validator": "^13.0.0"
   },
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "devDependencies": {
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
