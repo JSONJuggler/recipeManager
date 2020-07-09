@@ -111,7 +111,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       <AppBar position="absolute" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <Typography component="h1" variant="h6" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               Recipe Manager
             </Typography>
           </div>
@@ -121,31 +121,41 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 <Grid item>
                   <IconButton color="inherit">
                     <SearchIcon />
-                    <Typography>Browse</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Browse
+                    </Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
                     <FavoriteIcon />
-                    <Typography>Favorites</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Favorites
+                    </Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
                     <PeopleIcon />
-                    <Typography>Users</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Users
+                    </Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
                     <SettingsIcon />
-                    <Typography>Settings</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Settings
+                    </Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
                     <NoMeetingRoomIcon />
-                    <Typography>Logout</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Logout
+                    </Typography>
                   </IconButton>
                 </Grid>
               </Grid>
@@ -156,13 +166,17 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 <Grid item>
                   <IconButton color="inherit">
                     <SearchIcon />
-                    <Typography>Browse</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Browse
+                    </Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
                     <MeetingRoomIcon />
-                    <Typography>Login</Typography>
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Login
+                    </Typography>
                   </IconButton>
                 </Grid>
               </Grid>
@@ -195,7 +209,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             <MenuIcon />
           </IconButton>
           <div>
-            <Typography component="h1" variant="h6" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               Recipe Manager
             </Typography>
           </div>
