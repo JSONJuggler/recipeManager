@@ -11,6 +11,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import ListItem from "@material-ui/core/ListItem";
@@ -111,9 +112,13 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       <AppBar position="absolute" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <Typography variant="h6" color="inherit" noWrap>
-              Recipe Manager
-            </Typography>
+            <Tooltip title="Home">
+              <IconButton color="inherit">
+                <Typography variant="h6" color="inherit" noWrap>
+                  Recipe Manager
+                </Typography>
+              </IconButton>
+            </Tooltip>
           </div>
           {isAuthenticated ? (
             <Fragment>
@@ -209,9 +214,22 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             <MenuIcon />
           </IconButton>
           <div>
-            <Typography variant="h6" color="inherit" noWrap>
-              Recipe Manager
-            </Typography>
+            {!open && (
+              <Tooltip title="Home">
+                <IconButton color="inherit">
+                  <Typography variant="h6" color="inherit" noWrap>
+                    Recipe Manager
+                  </Typography>
+                </IconButton>
+              </Tooltip>
+            )}
+            {open && (
+              <Tooltip title="Home">
+                <IconButton color="inherit">
+                  <HomeIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
           {isAuthenticated && (
             <IconButton color="inherit">
