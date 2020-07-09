@@ -115,7 +115,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
               Recipe Manager
             </Typography>
           </div>
-          {!isAuthenticated ? (
+          {isAuthenticated ? (
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
                 <Grid item>
