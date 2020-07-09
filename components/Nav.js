@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -25,47 +26,49 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import { Link as rrLink } from "react-router-dom";
-
-import ListItemLink from "../routing/ListItemLink";
-import { logout } from "../../actions/auth";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
+    paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
-  appBar: {
+  appBarDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  appBarMobile: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginRight: 36
+    marginRight: 36,
   },
   menuButtonHidden: {
-    display: "none"
-  },
-  title: {
-    flexGrow: 1
+    display: "none",
   },
   drawerPaper: {
     position: "relative",
@@ -73,20 +76,23 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
   drawerPaperClose: {
     overflowX: "hidden",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9)
-    }
-  }
+    [theme.breakpoints.up("md")]: {
+      width: theme.spacing(9),
+    },
+  },
 }));
 
 const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
@@ -102,9 +108,78 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
   return (
     <Fragment>
+      <AppBar position="absolute" className={classes.appBarDesktop}>
+        <Toolbar className={classes.toolbar}>
+          <div>
+            <Typography component="h1" variant="h6" color="inherit" noWrap>
+              Recipe Manager
+            </Typography>
+          </div>
+          {!isAuthenticated ? (
+            <Fragment>
+              <Grid container className={classes.icons} justify="flex-end">
+                <Grid item>
+                  <IconButton color="inherit">
+                    <SearchIcon />
+                    <Typography>Browse</Typography>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton color="inherit">
+                    <FavoriteIcon />
+                    <Typography>Favorites</Typography>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton color="inherit">
+                    <PeopleIcon />
+                    <Typography>Users</Typography>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton color="inherit">
+                    <SettingsIcon />
+                    <Typography>Settings</Typography>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton color="inherit">
+                    <NoMeetingRoomIcon />
+                    <Typography>Logout</Typography>
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Grid container className={classes.icons} justify="flex-end">
+                <Grid item>
+                  <IconButton color="inherit">
+                    <SearchIcon />
+                    <Typography>Browse</Typography>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton color="inherit">
+                    <MeetingRoomIcon />
+                    <Typography>Login</Typography>
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Fragment>
+          )}
+          {isAuthenticated && (
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          )}
+        </Toolbar>
+      </AppBar>
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        className={clsx(classes.appBarMobile, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -119,25 +194,12 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Recipe Manager
-          </Typography>
-          {!isAuthenticated ? (
-            <Link
-              component={rrLink}
-              variant="body2"
-              color="inherit"
-              to="/register"
-            >
-              {"Register to create your own recipes!"}
-            </Link>
-          ) : (
+          <div>
+            <Typography component="h1" variant="h6" color="inherit" noWrap>
+              Recipe Manager
+            </Typography>
+          </div>
+          {isAuthenticated && (
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -149,7 +211,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       <Drawer
         variant="permanent"
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
         open={open}
       >
@@ -162,16 +224,18 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         {isAuthenticated ? (
           <Fragment>
             <List>
-              <ListItemLink
-                to="/dashboard"
-                primary="Home"
-                icon={<HomeIcon />}
-              />
-              <ListItemLink
-                to="/browse"
-                primary="Browse"
-                icon={<SearchIcon />}
-              />
+              <ListItem button>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <SearchIcon />
+                </ListItemIcon>
+                <ListItemText primary="Browse" />
+              </ListItem>
               <ListItem button>
                 <ListItemIcon>
                   <FavoriteIcon />
@@ -187,32 +251,35 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             </List>
             <Divider />
             <List>
-              <ListItemLink
-                to="/dashboard"
-                primary="Account Settings"
-                icon={<SettingsIcon />}
-              />
-              <ListItemLink
-                onClick={logout}
-                to="/login"
-                primary="Log out"
-                icon={<NoMeetingRoomIcon />}
-              />
+              <ListItem button>
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Settings" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <NoMeetingRoomIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItem>
             </List>
           </Fragment>
         ) : (
           <Fragment>
             <List>
-              <ListItemLink
-                to="/browse"
-                primary="Browse"
-                icon={<SearchIcon />}
-              />
-              <ListItemLink
-                to="/login"
-                primary="Log In"
-                icon={<MeetingRoomIcon />}
-              />
+              <ListItem button>
+                <ListItemIcon>
+                  <SearchIcon />
+                </ListItemIcon>
+                <ListItemText primary="Browse" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <MeetingRoomIcon />
+                </ListItemIcon>
+                <ListItemText primary="Login" />
+              </ListItem>
             </List>
           </Fragment>
         )}
@@ -223,11 +290,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
 Nav.propTypes = {
   auth: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout })(Nav);
+export default connect(mapStateToProps, {})(Nav);

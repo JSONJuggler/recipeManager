@@ -6,10 +6,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { withRedux } from "lib/redux";
 import Rollbar from "rollbar";
 
-import Navbar from "components/Navbar";
-import LanguageSelect from "components/LanguageSelect";
-import Trending from "components/Trending";
-import LoadingOverlay from "components/LoadingOverlay";
+import Nav from "components/Nav";
+import Footer from "components/Footer";
 import theme from "themes/theme";
 
 function getRollbar() {
@@ -38,13 +36,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
     display: "flex",
-    flexDirection: "column",
   },
   wrapper: {
+    width: "100%",
     display: "flex",
     flexDirection: "column",
-    position: "relative",
-    flexGrow: 1,
   },
 }));
 
@@ -80,12 +76,10 @@ function MyApp({ Component, pageProps, store }) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Navbar />
-          <Trending />
-          <LanguageSelect />
+          <Nav />
           <div className={classes.wrapper}>
-            <LoadingOverlay />
             <Component rollbar={rollbar} {...pageProps} />
+            <Footer />
           </div>
         </ThemeProvider>
       </div>

@@ -15,14 +15,6 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import isAlpha from "validator/lib/isAlpha";
 
-import {
-  updateInput,
-  addHit,
-  getData,
-  selectLang,
-  clearData,
-} from "src/actions/translations";
-
 const useStyles = makeStyles((theme) => ({
   hidden: {
     visibility: "hidden",
@@ -119,22 +111,7 @@ const getLocale = (data) => {
   }
 };
 
-const Navbar = ({
-  translations: {
-    userInput,
-    from,
-    fromCode,
-    toCode,
-    chartData,
-    preTrans,
-    postTrans,
-  },
-  selectLang,
-  updateInput,
-  addHit,
-  getData,
-  clearData,
-}) => {
+const Navbar = ({}) => {
   const classes = useStyles();
 
   const router = useRouter();
@@ -149,7 +126,7 @@ const Navbar = ({
 
   const handleRouteChangeStart = (url) => {
     console.log("starting nav");
-    clearData();
+    //clearData();
     setRouting((prev) => ({ ...prev, starting: true, complete: false, url }));
   };
 
@@ -168,32 +145,7 @@ const Navbar = ({
   }, []);
 
   useEffect(() => {
-    if (router.pathname === "/") {
-      updateInput("");
-      selectLang({
-        from: "en",
-        to: "",
-      });
-    }
-    if (router.pathname !== "/") {
-      updateInput("");
-      selectLang({
-        from: router.asPath.split("/")[2],
-        to: router.asPath.split("/")[3],
-      });
-      if (
-        userInput ||
-        (router.pathname !== "/" && router.pathname !== "/404")
-      ) {
-        if (!router.isFallback) {
-          addHit({
-            preTrans: router.asPath.split("/")[4],
-            fromCode: router.asPath.split("/")[2],
-            toCode: router.asPath.split("/")[3],
-          });
-        }
-      }
-    }
+    //updateInput("");
   }, [routing]);
 
   const [helperText, setHelperText] = useState({
@@ -203,45 +155,8 @@ const Navbar = ({
 
   const handleSub = (e) => {
     e.preventDefault();
-    let href = `/${fromCode}/${toCode}?translation=${userInput.toLowerCase()}`;
-    let as = `${
-      process.env.BASE_PATH
-    }/${fromCode}/${toCode}/${userInput.toLowerCase()}`;
-    if (!userInput) {
-      setHelperText((prev) => ({
-        inputError: "Please enter a word to translate",
-        isInputError: true,
-      }));
-      return;
-    }
-    if (!fromCode) {
-      setHelperText((prev) => ({
-        inputError: "Please select a language to translate from",
-        isInputError: true,
-      }));
-      return;
-    }
-    if (!toCode) {
-      setHelperText((prev) => ({
-        inputError: "Please select a language to translate to",
-        isInputError: true,
-      }));
-      return;
-    }
-    if (locale) {
-      if (!isAlpha(userInput, locale)) {
-        setHelperText((prev) => ({
-          inputError:
-            "Looks like this is not a translatable " +
-            from +
-            " word. Please only include " +
-            from +
-            " letters only, no punctuations or numbers",
-          isInputError: true,
-        }));
-        return;
-      }
-    }
+    let href = "";
+    let as = "";
     router.push(href, as);
   };
 
@@ -252,29 +167,8 @@ const Navbar = ({
   };
 
   const onChange = (e) => {
-    updateInput(e.target.value);
+    //updateInput(e.target.value);
   };
-
-  useEffect(() => {
-    setLocale((prev) => getLocale(fromCode));
-    if (userInput) {
-      if (!locale) {
-        setHelperText((prev) => ({
-          inputError:
-            from +
-            " validation not supported, please double check your input before attempting translation",
-        }));
-      } else {
-        setHelperText((prev) => ({ inputError: "", isInputError: false }));
-      }
-    }
-    if (fromCode && toCode && userInput) {
-      setHelperText((prev) => ({ inputError: "", isInputError: false }));
-    }
-    if (!userInput) {
-      setHelperText((prev) => ({ inputError: "", isInputError: false }));
-    }
-  }, [userInput, fromCode, toCode, locale]);
 
   return (
     <Fragment>
@@ -316,7 +210,6 @@ const Navbar = ({
                       fullWidth
                       id="translate"
                       size="small"
-                      value={userInput}
                       placeholder="Translate something..."
                       helperText={helperText.inputError}
                       error={helperText.isInputError}
@@ -361,10 +254,4 @@ const mapStateToProps = (state) => ({
   translations: state.translations,
 });
 
-export default connect(mapStateToProps, {
-  updateInput,
-  addHit,
-  getData,
-  selectLang,
-  clearData,
-})(Navbar);
+export default connect(mapStateToProps, {})(Navbar);
