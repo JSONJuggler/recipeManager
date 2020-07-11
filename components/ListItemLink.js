@@ -8,19 +8,13 @@ import PropTypes from "prop-types";
 const ListItemLink = (props) => {
   const { icon, linkname, href } = props;
 
-  const CustomChildren = forwardRef(({ href }, ref) => {
-    return (
-      <ListItem button component="a" href={href} ref={ref}>
-        {icon && <ListItemIcon>{icon}</ListItemIcon>}
-        <ListItemText primary={linkname} />
-      </ListItem>
-    );
-  });
-
   return (
     <li>
       <Link href={href} as={process.env.BASE_PATH + href} passHref>
-        <CustomChildren />
+        <ListItem button component="a" href={href}>
+          {icon && <ListItemIcon>{icon}</ListItemIcon>}
+          <ListItemText primary={linkname} />
+        </ListItem>
       </Link>
     </li>
   );
