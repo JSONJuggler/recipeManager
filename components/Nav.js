@@ -29,6 +29,7 @@ import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 
 import ListItemLink from "components/ListItemLink";
+import CustomLink from "components/CustomLink";
 
 const drawerWidth = 240;
 
@@ -96,6 +97,12 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
+  link: {
+    display: "flex",
+    alignItems: "center",
+    color: "black",
+    height: "100%",
+  },
 }));
 
 const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
@@ -126,12 +133,17 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
                 <Grid item>
-                  <IconButton color="inherit">
-                    <SearchIcon />
-                    <Typography variant="subtitle1" color="inherit" noWrap>
-                      Browse
-                    </Typography>
-                  </IconButton>
+                  <CustomLink
+                    title="Browse"
+                    href={process.env.BASE_PATH + "/browse"}
+                  >
+                    <Grid item className={classes.link}>
+                      <SearchIcon />
+                      <Typography variant="subtitle1" color="inherit" noWrap>
+                        Browse
+                      </Typography>
+                    </Grid>
+                  </CustomLink>
                 </Grid>
                 <Grid item>
                   <IconButton color="inherit">
@@ -170,14 +182,17 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           ) : (
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
-                <Grid item>
-                  <IconButton color="inherit">
+                <CustomLink
+                  title="Browse"
+                  href={process.env.BASE_PATH + "/browse"}
+                >
+                  <Grid item className={classes.link}>
                     <SearchIcon />
                     <Typography variant="subtitle1" color="inherit" noWrap>
                       Browse
                     </Typography>
-                  </IconButton>
-                </Grid>
+                  </Grid>
+                </CustomLink>
                 <Grid item>
                   <IconButton color="inherit">
                     <MeetingRoomIcon />
