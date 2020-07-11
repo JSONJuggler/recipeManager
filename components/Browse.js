@@ -1,12 +1,24 @@
 import React, { Fragment } from "react";
+import clsx from "clsx";
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Collapse from "@material-ui/core/Collapse";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import CardHeader from "@material-ui/core/CardHeader";
+import Button from "@material-ui/core/Button";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ShareIcon from "@material-ui/icons/Share";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CreateIcon from "@material-ui/icons/Create";
@@ -32,16 +44,45 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "space-around",
     // overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
+    //backgroundColor: theme.palette.background.paper,
   },
   gridList: { width: "100%", maxHeight: "75vh" },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
   },
+  cardRoot: {
+    minWidth: 345,
+    maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  gridItem: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 const Browse = ({ recipes }) => {
   const classes = useStyles();
+
+  console.log(recipes);
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const xs = useMediaQuery("(min-width:0px)");
   const sm = useMediaQuery("(min-width:600px)");
@@ -70,44 +111,83 @@ const Browse = ({ recipes }) => {
           <div className={classes.appBarSpacer} />
           <Container className={classes.spacer}>
             <div className={classes.listRoot}>
-              <GridList
-                cellHeight={240}
-                className={classes.gridList}
-                cols={getCol()}
-              >
-                <GridListTile
-                  key="Subheader"
-                  cols={getCol()}
-                  style={{ height: "auto" }}
-                >
-                  <ListSubheader component="div">Recipes</ListSubheader>
-                </GridListTile>
+              <Grid container>
                 {recipes &&
                   recipes.map((recipeData) => (
-                    <GridListTile
+                    <Grid
+                      className={classes.gridItem}
+                      item
                       key={recipeData._id}
-                      cols={recipeData.cols || 1}
+                      xs={12}
+                      sm={6}
+                      md={4}
                     >
-                      <img
-                        src="https://source.unsplash.com/random"
-                        alt="tile.title"
-                      />
-                      <GridListTileBar
-                        title={recipeData.name}
-                        subtitle={recipeData.description}
-                        actionIcon={
-                          <IconButton
-                            aria-label={"Favorite"}
-                            className={classes.icon}
+                      <Card className={classes.cardRoot}>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              aria-label="recipe"
+                              className={classes.avatar}
+                            >
+                              {recipeData.user.avatar.url}
+                            </Avatar>
+                          }
+                          title={recipeData.name}
+                          subheader={recipeData.created}
+                        />
+                        {recipeData.cover && (
+                          <CardMedia
+                            className={classes.media}
+                            image={recipeData.cover.url}
+                            title={recipeData.name}
+                          />
+                        )}
+                        {!recipeData.cover && (
+                          <CardMedia
+                            className={classes.media}
+                            image="https://source.unsplash.com/random"
+                            title={recipeData.name}
+                          />
+                        )}
+                        <CardContent>
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            component="p"
                           >
+                            {recipeData.description}
+                          </Typography>
+                        </CardContent>
+                        <CardActions disableSpacing>
+                          <IconButton aria-label="add to favorites">
                             <FavoriteIcon />
                           </IconButton>
-                        }
-                      />
-                    </GridListTile>
+                          <IconButton aria-label="share">
+                            <ShareIcon />
+                          </IconButton>
+                          <IconButton
+                            className={clsx(classes.expand, {
+                              [classes.expandOpen]: expanded,
+                            })}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                          >
+                            <ExpandMoreIcon />
+                          </IconButton>
+                        </CardActions>
+                        <Collapse in={expanded} timeout="auto" unmountOnExit>
+                          <CardContent>
+                            <Typography paragraph>Directions:</Typography>
+                            <Typography paragraph>
+                              {recipeData.directions}
+                            </Typography>
+                          </CardContent>
+                        </Collapse>
+                      </Card>
+                    </Grid>
                   ))}
-                {!recipes && <Typography>No Recipes Found!</Typography>}
-              </GridList>
+              </Grid>
             </div>
           </Container>
         </main>
