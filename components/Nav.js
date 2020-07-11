@@ -121,13 +121,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       <AppBar position="absolute" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <Tooltip title="Home">
-              <IconButton color="inherit">
-                <Typography variant="h6" color="inherit" noWrap>
-                  Recipe Manager
-                </Typography>
-              </IconButton>
-            </Tooltip>
+            <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+              <Typography variant="h6" color="inherit" noWrap>
+                Recipe Manager
+              </Typography>
+            </CustomLink>
           </div>
           {isAuthenticated ? (
             <Fragment>
@@ -230,20 +228,16 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </IconButton>
           <div>
             {!open && (
-              <Tooltip title="Home">
-                <IconButton color="inherit">
-                  <Typography variant="h6" color="inherit" noWrap>
-                    Recipe Manager
-                  </Typography>
-                </IconButton>
-              </Tooltip>
+              <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+                <Typography variant="h6" color="inherit" noWrap>
+                  Recipe Manager
+                </Typography>
+              </CustomLink>
             )}
             {open && (
-              <Tooltip title="Home">
-                <IconButton color="inherit">
-                  <HomeIcon />
-                </IconButton>
-              </Tooltip>
+              <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+                <HomeIcon />
+              </CustomLink>
             )}
           </div>
           {isAuthenticated && (
