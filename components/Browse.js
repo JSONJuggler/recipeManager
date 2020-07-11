@@ -77,31 +77,10 @@ const useStyles = makeStyles((theme) => ({
 const Browse = ({ recipes }) => {
   const classes = useStyles();
 
-  console.log(recipes);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
-
-  const xs = useMediaQuery("(min-width:0px)");
-  const sm = useMediaQuery("(min-width:600px)");
-  const md = useMediaQuery("(min-width:960px)");
-  const lg = useMediaQuery("(min-width:1280px)");
-  const xl = useMediaQuery("(min-width:1920px)");
-
-  const getCol = () => {
-    if (xl) {
-      return 5;
-    } else if (lg) {
-      return 4;
-    } else if (md) {
-      return 3;
-    } else if (sm) {
-      return 2;
-    } else if (xs) {
-      return 1;
-    }
   };
 
   return (
