@@ -1,35 +1,35 @@
-import React, { useMemo, forwardRef } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useMemo, forwardRef } from "react";
+import Link from "next/link";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PropTypes from "prop-types";
 
-const ListItemLink = props => {
-  const { icon, primary, to, onClick } = props;
+const ListItemLink = (props) => {
+  const { icon, linkname, href } = props;
 
-  const renderLink = useMemo(
-    () =>
-      forwardRef((itemProps, ref) => (
-        <RouterLink to={to} ref={ref} {...itemProps} />
-      )),
-    [to]
-  );
+  const CustomChildren = forwardRef(({ href }, ref) => {
+    return (
+      <ListItem button component="a" href={href} ref={ref}>
+        {icon && <ListItemIcon>{icon}</ListItemIcon>}
+        <ListItemText primary={linkname} />
+      </ListItem>
+    );
+  });
 
   return (
     <li>
-      <ListItem button component={renderLink} onClick={onClick}>
-        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
-        <ListItemText primary={primary} />
-      </ListItem>
+      <Link href={href} as={process.env.BASE_PATH + href} passHref>
+        <CustomChildren />
+      </Link>
     </li>
   );
 };
 
 ListItemLink.propTypes = {
   icon: PropTypes.element,
-  primary: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired
+  linkname: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default ListItemLink;

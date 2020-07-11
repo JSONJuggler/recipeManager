@@ -28,6 +28,8 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 
+import ListItemLink from "components/ListItemLink";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -262,12 +264,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 </ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <SearchIcon />
-                </ListItemIcon>
-                <ListItemText primary="Browse" />
-              </ListItem>
+              <ListItemLink
+                href="/browse"
+                linkname="Browse"
+                icon={<SearchIcon />}
+              />
               <ListItem button>
                 <ListItemIcon>
                   <FavoriteIcon />
@@ -300,12 +301,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         ) : (
           <Fragment>
             <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <SearchIcon />
-                </ListItemIcon>
-                <ListItemText primary="Browse" />
-              </ListItem>
+              <ListItemLink
+                href="/browse"
+                linkname="Browse"
+                icon={<SearchIcon />}
+              />
               <ListItem button>
                 <ListItemIcon>
                   <MeetingRoomIcon />
@@ -321,8 +321,8 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 };
 
 Nav.propTypes = {
-  auth: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
+  //auth: PropTypes.object.isRequired,
+  //logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
