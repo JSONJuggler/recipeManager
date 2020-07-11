@@ -132,19 +132,17 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           {isAuthenticated ? (
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
-                <Grid item>
-                  <CustomLink
-                    title="Browse"
-                    href={process.env.BASE_PATH + "/browse"}
-                  >
-                    <Grid item className={classes.link}>
-                      <SearchIcon />
-                      <Typography variant="subtitle1" color="inherit" noWrap>
-                        Browse
-                      </Typography>
-                    </Grid>
-                  </CustomLink>
-                </Grid>
+                <CustomLink
+                  title="Browse"
+                  href={process.env.BASE_PATH + "/browse"}
+                >
+                  <Grid item className={classes.link}>
+                    <SearchIcon />
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Browse
+                    </Typography>
+                  </Grid>
+                </CustomLink>
                 <Grid item>
                   <IconButton color="inherit">
                     <FavoriteIcon />
