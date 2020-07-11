@@ -17,7 +17,6 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    height: "100vh",
   },
   content: {
     flexGrow: 1,
