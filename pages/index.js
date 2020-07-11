@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Index = ({ data }) => {
+const Index = () => {
   const classes = useStyles();
 
   return (
