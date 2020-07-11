@@ -5,62 +5,54 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Redirect, Link as rrLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import { useTheme } from "@material-ui/core/styles";
 
-import Nav from "../layout/Nav";
-import { login } from "../../actions/auth";
+import Link from "next/link";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      {/* <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "} */}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    height: "100vh"
+    height: "100%",
   },
   centerFlexibleItem: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    padding: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
+  link: {
+    color: "black",
+    textDecoration: "none",
+    "&:hover": {
+      background: "rgba(0, 0, 0, 0.1)",
+      borderRadius: theme.spacing(1),
+    },
+  },
 }));
 
-function Login({ isAuthenticated, login }) {
+function Login({ isAuthenticated }) {
   // const theme = useTheme();
 
   const { register, handleSubmit, errors } = useForm();
@@ -77,18 +69,17 @@ function Login({ isAuthenticated, login }) {
 
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const { email, password } = formData;
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     window.scrollTo(0, 0);
-    login({ email, password });
   };
 
   useEffect(() => {
@@ -108,26 +99,18 @@ function Login({ isAuthenticated, login }) {
     }
   }, [errors.email, errors.password]);
 
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
   return (
     <div className={classes.root}>
-      <Nav />
       <Container
         className={classes.centerFlexibleItem}
         component="main"
         maxWidth="xs"
       >
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Log in
-          </Typography>
-          <Typography component="h1" variant="caption">
-            Log in below to access you recipes!{" "}
+        <Paper className={classes.paper}>
+          <LockOutlinedIcon />
+          <Typography variant="h5">Log in</Typography>
+          <Typography variant="subtitle2">
+            Log in below to access you recipes!
           </Typography>
           <form
             className={classes.form}
@@ -136,6 +119,7 @@ function Login({ isAuthenticated, login }) {
           >
             <TextField
               variant="outlined"
+              color="secondary"
               margin="normal"
               required
               fullWidth
@@ -150,13 +134,14 @@ function Login({ isAuthenticated, login }) {
                 required: { value: true, message: "Email address is required" },
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: "Invalid email address"
-                }
+                  message: "Invalid email address",
+                },
               })}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             />
             <TextField
               variant="outlined"
+              color="secondary"
               margin="normal"
               required
               fullWidth
@@ -171,10 +156,10 @@ function Login({ isAuthenticated, login }) {
                 required: { value: true, message: "Password is required" },
                 minLength: {
                   value: 6,
-                  message: "Password must be atleast 6 characters long"
-                }
+                  message: "Password must be atleast 6 characters long",
+                },
               })}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             />
             {/* <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
@@ -196,16 +181,17 @@ function Login({ isAuthenticated, login }) {
           </Link>
         </Grid> */}
               <Grid item>
-                <Link component={rrLink} variant="body2" to="/register">
-                  {"Don't have an account? Register here!"}
+                <Link href="/register" as={process.env.BASE_PATH + "/register"}>
+                  <a className={classes.link}>
+                    <Typography variant="caption">
+                      Don't have an account? Register here!
+                    </Typography>
+                  </a>
                 </Link>
               </Grid>
             </Grid>
           </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
+        </Paper>
       </Container>
     </div>
   );
@@ -213,11 +199,11 @@ function Login({ isAuthenticated, login }) {
 
 Login.propTypes = {
   isAuthenticated: PropTypes.bool,
-  login: PropTypes.func.isRequired
+  //login: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, {})(Login);

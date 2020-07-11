@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Avatar from "@material-ui/core/Avatar";
+import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -12,52 +12,45 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect, Link as rrLink } from "react-router-dom";
 
-import Nav from "../layout/Nav";
-import { register as registerUser } from "../../actions/auth";
+import Link from "next/link";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      {/* <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "} */}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    height: "100vh"
+    height: "100%",
   },
   centerFlexibleItem: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    padding: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
+  link: {
+    color: "black",
+    textDecoration: "none",
+    "&:hover": {
+      background: "rgba(0, 0, 0, 0.1)",
+      borderRadius: theme.spacing(1),
+    },
+  },
 }));
 
-function Register({ isAuthenticated, registerUser }) {
+function Register({ isAuthenticated }) {
   const { register, handleSubmit, errors } = useForm();
 
   const [usernameError, setUsernameError] = useState("");
@@ -84,18 +77,17 @@ function Register({ isAuthenticated, registerUser }) {
     username: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
   });
 
   const { username, email, password } = formData;
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     window.scrollTo(0, 0);
-    registerUser({ username, email, password });
   };
 
   useEffect(() => {
@@ -138,16 +130,13 @@ function Register({ isAuthenticated, registerUser }) {
 
   return (
     <div className={classes.root}>
-      <Nav />
       <Container
         className={classes.centerFlexibleItem}
         component="main"
         maxWidth="xs"
       >
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+        <Paper className={classes.paper}>
+          <LockOutlinedIcon />
           <Typography component="h1" variant="h5">
             Register
           </Typography>
@@ -163,6 +152,7 @@ function Register({ isAuthenticated, registerUser }) {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  color="secondary"
                   required
                   fullWidth
                   id="userName"
@@ -172,14 +162,15 @@ function Register({ isAuthenticated, registerUser }) {
                   error={isUsernameError}
                   helperText={usernameError}
                   inputRef={register({
-                    required: { value: true, message: "Username is required" }
+                    required: { value: true, message: "Username is required" },
                   })}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  color="secondary"
                   required
                   fullWidth
                   id="email"
@@ -191,19 +182,20 @@ function Register({ isAuthenticated, registerUser }) {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: "Email address is required"
+                      message: "Email address is required",
                     },
                     pattern: {
                       value: /\S+@\S+\.\S+/,
-                      message: "Invalid email address"
-                    }
+                      message: "Invalid email address",
+                    },
                   })}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  color="secondary"
                   required
                   fullWidth
                   name="password"
@@ -217,15 +209,16 @@ function Register({ isAuthenticated, registerUser }) {
                     required: { value: true, message: "Password is required" },
                     minLength: {
                       value: 6,
-                      message: "Password must be atleast 6 characters long"
-                    }
+                      message: "Password must be atleast 6 characters long",
+                    },
                   })}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  color="secondary"
                   required
                   fullWidth
                   name="password2"
@@ -238,12 +231,12 @@ function Register({ isAuthenticated, registerUser }) {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: "Please confirm your password"
+                      message: "Please confirm your password",
                     },
                     validate: {
-                      validate: password2 =>
-                        password2 === password || "Password must match"
-                    }
+                      validate: (password2) =>
+                        password2 === password || "Password must match",
+                    },
                   })}
                 />
               </Grid>
@@ -259,16 +252,17 @@ function Register({ isAuthenticated, registerUser }) {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link component={rrLink} variant="body2" to="/login">
-                  Already have an account? Log in
+                <Link href="/login" as={process.env.BASE_PATH + "/login"}>
+                  <a className={classes.link}>
+                    <Typography variant="caption">
+                      Already have an account? Log in
+                    </Typography>
+                  </a>
                 </Link>
               </Grid>
             </Grid>
           </form>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
+        </Paper>
       </Container>
     </div>
   );
@@ -276,11 +270,11 @@ function Register({ isAuthenticated, registerUser }) {
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool,
-  registerUser: PropTypes.func.isRequired
+  //registerUser: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, {})(Register);

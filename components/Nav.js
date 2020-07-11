@@ -189,14 +189,17 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                     </Typography>
                   </Grid>
                 </CustomLink>
-                <Grid item>
-                  <IconButton color="inherit">
+                <CustomLink
+                  title="Login"
+                  href={process.env.BASE_PATH + "/login"}
+                >
+                  <Grid item className={classes.link}>
                     <MeetingRoomIcon />
                     <Typography variant="subtitle1" color="inherit" noWrap>
                       Login
                     </Typography>
-                  </IconButton>
-                </Grid>
+                  </Grid>
+                </CustomLink>
               </Grid>
             </Fragment>
           )}
@@ -313,12 +316,11 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                 linkname="Browse"
                 icon={<SearchIcon />}
               />
-              <ListItem button>
-                <ListItemIcon>
-                  <MeetingRoomIcon />
-                </ListItemIcon>
-                <ListItemText primary="Login" />
-              </ListItem>
+              <ListItemLink
+                href="/login"
+                linkname="Login"
+                icon={<MeetingRoomIcon />}
+              />
             </List>
           </Fragment>
         )}
