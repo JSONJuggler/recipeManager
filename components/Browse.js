@@ -120,7 +120,7 @@ const Browse = ({ recipes }) => {
                       key={recipeData._id}
                       xs={12}
                       sm={6}
-                      md={4}
+                      lg={4}
                     >
                       <Card className={classes.cardRoot}>
                         <CardHeader
