@@ -102,6 +102,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     color: "black",
     height: "100%",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
   },
 }));
 

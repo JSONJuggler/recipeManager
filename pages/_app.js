@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  appBarSpacer: theme.mixins.toolbar,
 }));
 
 function MyApp({ Component, pageProps, store }) {
@@ -78,6 +79,7 @@ function MyApp({ Component, pageProps, store }) {
           <CssBaseline />
           <Nav />
           <div className={classes.wrapper}>
+            <div className={classes.appBarSpacer} />
             <Component rollbar={rollbar} {...pageProps} />
             <Footer />
           </div>

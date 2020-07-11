@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  appBarSpacer: theme.mixins.toolbar,
   listRoot: {
     display: "flex",
     flexWrap: "wrap",
@@ -87,7 +86,6 @@ const Browse = ({ recipes }) => {
     <div className={classes.root}>
       <Fragment>
         <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
           <Container className={classes.spacer}>
             <div className={classes.listRoot}>
               <Grid container>
