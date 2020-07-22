@@ -113,10 +113,14 @@ function Login({ isAuthenticated }) {
             Log in below to access you recipes!
           </Typography>
           <form
-            className={classes.form}
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
+            action="http://localhost:3000/api/auth/callback/Credentials"
+            method="POST"
           >
+            <input
+              type="hidden"
+              name="csrfToken"
+              value="d62513dc03e260eba46d6b6780d9a58a2d7b6215b07aaf64f08896507144462e"
+            />
             <TextField
               variant="outlined"
               color="secondary"
