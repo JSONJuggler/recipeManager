@@ -53,6 +53,10 @@ const Index = ({ session }) => {
 };
 
 export async function getServerSideProps(context) {
+  const res = await axios.get(process.env.SITE + "/api/getToken", {
+    withCredentials: true,
+  });
+  console.log(res.data);
   return {
     props: {
       session: await getSession(context),

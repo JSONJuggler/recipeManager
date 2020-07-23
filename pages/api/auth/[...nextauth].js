@@ -4,7 +4,13 @@ import axios from "axios";
 
 const options = {
   site: process.env.SITE,
-
+  secret: process.env.SECRET,
+  session: {
+    jwt: true,
+  },
+  jwt: {
+    secret: process.env.SECRET,
+  },
   pages: {
     signin: "/login",
     // signout: '/api/auth/signout', // Displays form with sign out button
@@ -33,6 +39,7 @@ const options = {
           user = {
             name: res.data.user.username,
             email: res.data.user.email,
+            bio: res.data.user.bio,
           };
           //console.log(user);
         } catch (err) {
