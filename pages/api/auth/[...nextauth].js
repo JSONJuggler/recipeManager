@@ -12,7 +12,7 @@ const options = {
     secret: process.env.SECRET,
   },
   pages: {
-    signin: "/login",
+    signin: "/",
     // signout: '/api/auth/signout', // Displays form with sign out button
     // error: '/api/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/api/auth/verify-request', // Used for check email page

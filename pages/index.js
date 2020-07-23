@@ -7,8 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { getSession } from "next-auth/client";
+import { getSession, csrfToken } from "next-auth/client";
 
+import Login from "components/Login";
 import Dashboard from "components/Dashboard";
 import Footer from "components/Footer";
 
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Index = ({ session }) => {
+const Index = ({ session, csrfToken }) => {
   const classes = useStyles();
   axios({
     method: "get",
@@ -50,7 +51,8 @@ const Index = ({ session }) => {
   return (
     <div className={classes.root}>
       <Container className={classes.content} maxWidth="lg">
-        <Dashboard session={session} />
+        {!session && <Login csrfToken={csrfToken} />}
+        {session && <Dashboard />}
       </Container>
     </div>
   );
@@ -60,6 +62,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       session: await getSession(context),
+      csrfToken: await csrfToken(context),
     },
   };
 }
