@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { getSession } from "next-auth/client";
 
 import Dashboard from "components/Dashboard";
 import Footer from "components/Footer";
@@ -39,18 +40,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Index = () => {
+const Index = ({ session }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Container className={classes.content} maxWidth="lg">
-        <Dashboard />
+        <Dashboard session={session} />
       </Container>
     </div>
   );
 };
 
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
+}
 // Index.propTypes = {
 //   rollbar: PropTypes.object.isRequired
 // };

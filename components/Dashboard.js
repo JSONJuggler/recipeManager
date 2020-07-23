@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = ({ auth: { user, loading } }) => {
+const Dashboard = ({ session, auth: { user, loading } }) => {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -40,33 +40,41 @@ const Dashboard = ({ auth: { user, loading } }) => {
     <div className={classes.root}>
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Typography align="center" variant="body1">
-                  user
-                </Typography>
-                <img className={classes.centerFlexibleItem} src="" alt="" />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Typography align="center" variant="body1">
-                  Click here to create a recipe
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Container maxWidth="lg">
-                <Container className={classes.cardGrid}>
-                  <Grid container spacing={4}></Grid>
+          {!session && (
+            <div>
+              <div> Not signed in</div>
+              <a href="/api/auth/signin">Sign in</a>
+            </div>
+          )}
+          {session && (
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Typography align="center" variant="body1">
+                    user
+                  </Typography>
+                  <img className={classes.centerFlexibleItem} src="" alt="" />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper className={fixedHeightPaper}>
+                  <Typography align="center" variant="body1">
+                    Click here to create a recipe
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Container maxWidth="lg">
+                  <Container className={classes.cardGrid}>
+                    <Grid container spacing={4}></Grid>
+                  </Container>
                 </Container>
-              </Container>
-              {/* <Paper>
+                {/* <Paper>
                   <Userrecipes />
                 </Paper> */}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Container>
       </main>
     </div>
