@@ -37,9 +37,13 @@ const options = {
           });
           //console.log(res.data);
           user = {
+            strapiToken: "Bearer " + res.data.jwt,
+            id: res.data.user.id,
             name: res.data.user.username,
             email: res.data.user.email,
-            bio: res.data.user.bio,
+            confirmed: res.data.user.confirmed,
+            blocked: res.data.user.blocked,
+            recipes: res.data.user.recipes,
           };
           //console.log(user);
         } catch (err) {
