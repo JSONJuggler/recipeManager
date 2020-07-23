@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = ({ session }) => {
   const classes = useStyles();
+  axios({
+    method: "get",
+    url: process.env.SITE + "/api/getToken",
+  });
 
   return (
     <div className={classes.root}>
@@ -53,10 +57,6 @@ const Index = ({ session }) => {
 };
 
 export async function getServerSideProps(context) {
-  const res = await axios.get(process.env.SITE + "/api/getToken", {
-    withCredentials: true,
-  });
-  console.log(res.data);
   return {
     props: {
       session: await getSession(context),
