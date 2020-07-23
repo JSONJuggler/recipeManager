@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { csrfToken } from "next-auth/client";
+import { withRouter } from "next/router";
 
 import Login from "components/Login";
 import Footer from "components/Footer";
@@ -39,18 +41,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginUser = () => {
+const LoginUser = ({ csrfToken }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Container className={classes.content} maxWidth="lg">
-        <Login />
+        <Login csrfToken={csrfToken} />
       </Container>
     </div>
   );
 };
 
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      csrfToken: await csrfToken(context),
+    },
+  };
+}
 // Index.propTypes = {
 //   rollbar: PropTypes.object.isRequired
 // };

@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+//import { csrfToken, signin } from 'next-auth/client'
 // import { useTheme } from "@material-ui/core/styles";
 
 import Link from "next/link";
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login({ isAuthenticated }) {
+function Login({ csrfToken, isAuthenticated }) {
   // const theme = useTheme();
 
   const { register, handleSubmit, errors } = useForm();
@@ -116,11 +117,7 @@ function Login({ isAuthenticated }) {
             action="http://localhost:3000/api/auth/callback/Credentials"
             method="POST"
           >
-            <input
-              type="hidden"
-              name="csrfToken"
-              value="d62513dc03e260eba46d6b6780d9a58a2d7b6215b07aaf64f08896507144462e"
-            />
+            <input type="hidden" name="csrfToken" value={csrfToken} />
             <TextField
               variant="outlined"
               color="secondary"

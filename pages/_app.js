@@ -5,6 +5,7 @@ import { ThemeProvider, makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withRedux } from "lib/redux";
 import Rollbar from "rollbar";
+import { Provider } from "next-auth/client";
 
 import Nav from "components/Nav";
 import Footer from "components/Footer";
@@ -58,6 +59,8 @@ function MyApp({ Component, pageProps, store }) {
 
   const [rollbar] = React.useState(getRollbar());
 
+  const { session } = pageProps;
+
   return (
     <React.Fragment>
       <div className={classes.root}>
@@ -80,7 +83,9 @@ function MyApp({ Component, pageProps, store }) {
           <Nav />
           <div className={classes.wrapper}>
             <div className={classes.appBarSpacer} />
-            <Component rollbar={rollbar} {...pageProps} />
+            <Provider options={{ site: process.env.SITE }} session={session}>
+              <Component rollbar={rollbar} {...pageProps} />
+            </Provider>
             <Footer />
           </div>
         </ThemeProvider>
