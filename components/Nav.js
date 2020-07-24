@@ -246,11 +246,13 @@ const Nav = ({ session }) => {
             )}
           </div>
           {session && (
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Grid container className={classes.icons} justify="flex-end">
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Grid>
           )}
         </Toolbar>
       </AppBar>
