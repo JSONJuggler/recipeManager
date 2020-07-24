@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
+const Nav = ({ session }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -129,7 +129,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
               </Typography>
             </CustomLink>
           </div>
-          {isAuthenticated ? (
+          {session ? (
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
                 <CustomLink
@@ -205,7 +205,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
               </Grid>
             </Fragment>
           )}
-          {isAuthenticated && (
+          {session && (
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -245,7 +245,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
               </CustomLink>
             )}
           </div>
-          {isAuthenticated && (
+          {session && (
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -267,7 +267,7 @@ const Nav = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </IconButton>
         </div>
         <Divider />
-        {isAuthenticated ? (
+        {session ? (
           <Fragment>
             <List>
               <ListItem button>

@@ -80,14 +80,14 @@ function MyApp({ Component, pageProps, store }) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Nav />
-          <div className={classes.wrapper}>
-            <div className={classes.appBarSpacer} />
-            <Provider options={{ site: process.env.SITE }} session={session}>
+          <Provider options={{ site: process.env.SITE }} session={session}>
+            <Nav session={session} />
+            <div className={classes.wrapper}>
+              <div className={classes.appBarSpacer} />
               <Component rollbar={rollbar} {...pageProps} />
-            </Provider>
-            <Footer />
-          </div>
+              <Footer />
+            </div>
+          </Provider>
         </ThemeProvider>
       </div>
     </React.Fragment>
