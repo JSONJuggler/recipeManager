@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const options = {
   site: process.env.SITE,
@@ -10,6 +11,33 @@ const options = {
   },
   jwt: {
     secret: process.env.SECRET,
+  },
+  callbacks: {
+    /**
+     * @param  {object} token    Decrypted JSON Web Token
+     * @param  {object} profile  Profile - only available on sign in
+     * @return {object}          JSON Web Token that will be saved
+     */
+    jwt: async (token, profile) => {
+      const payload = {
+        id: token.user.id,
+      };
+
+      const freshToken = jwt.sign(payload, process.env.SECRET, {
+        expiresIn: 7200,
+      });
+      token.user.strapiToken = freshToken;
+      return Promise.resolve(token);
+    },
+    /**
+     * @param  {object} session  Session object
+     * @param  {object} token    JSON Web Token (if enabled)
+     * @return {object}          Session that will be returned to the client
+     */
+    //session: async (session, token) => {
+    //console.log("session");
+    //return Promise.resolve(session);
+    //},
   },
   pages: {
     signin: "/",
@@ -35,9 +63,9 @@ const options = {
             identifier: credentials.email,
             password: credentials.password,
           });
-          //console.log(res.data);
+
           user = {
-            strapiToken: "Bearer " + res.data.jwt,
+            strapiToken: res.data.jwt,
             id: res.data.user.id,
             name: res.data.user.username,
             email: res.data.user.email,
