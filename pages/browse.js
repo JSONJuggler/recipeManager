@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { getSession } from "next-auth/client";
 
 import Browse from "components/Browse";
 import Footer from "components/Footer";
@@ -51,7 +52,7 @@ const BrowseRecipes = ({ recipes }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const res = await axios.get(
     process.env.NEXT_PUBLIC_STRAPI_API_URL + "/recipes"
   );
@@ -59,7 +60,7 @@ export async function getServerSideProps() {
   const recipes = res.data;
 
   return {
-    props: { recipes },
+    props: { recipes, session: await getSession(context) },
   };
 }
 
