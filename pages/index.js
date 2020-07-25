@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = ({ session, csrfToken }) => {
   const classes = useStyles();
-  axios({
-    method: "get",
-    url: process.env.SITE + "/api/getToken",
-  });
+  //axios({
+  //method: "get",
+  //url: process.env.SITE + "/api/getToken",
+  //});
 
   return (
     <div className={classes.root}>

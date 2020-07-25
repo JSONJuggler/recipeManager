@@ -59,10 +59,13 @@ const options = {
         let user;
 
         try {
-          const res = await axios.post("http://localhost:1337/auth/local", {
-            identifier: credentials.email,
-            password: credentials.password,
-          });
+          const res = await axios.post(
+            process.env.NEXT_PUBLIC_STRAPI_API_URL + "/auth/local",
+            {
+              identifier: credentials.email,
+              password: credentials.password,
+            }
+          );
 
           user = {
             strapiToken: res.data.jwt,

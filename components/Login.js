@@ -115,7 +115,7 @@ function Login({ csrfToken, isAuthenticated }) {
             Log in below to access you recipes!
           </Typography>
           <form
-            action="http://localhost:3000/api/auth/callback/Credentials"
+            action={process.env.SITE + "/api/auth/callback/Credentials"}
             method="POST"
           >
             <input type="hidden" name="csrfToken" value={csrfToken} />
