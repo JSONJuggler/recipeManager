@@ -92,7 +92,7 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
 
   useEffect(() => {
     getUserRecipes();
-  }, [session, userRecipes]);
+  }, [session]);
 
   return (
     <div className={classes.root}>
