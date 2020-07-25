@@ -76,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   drawerPaper: {
-    position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -121,7 +120,7 @@ const Nav = ({ session }) => {
 
   return (
     <Fragment>
-      <AppBar position="absolute" className={classes.appBarDesktop}>
+      <AppBar position="fixed" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
             <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
@@ -213,7 +212,7 @@ const Nav = ({ session }) => {
         </Toolbar>
       </AppBar>
       <AppBar
-        position="absolute"
+        position="fixed"
         className={clsx(classes.appBarMobile, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>

@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
+    paddingLeft: theme.spacing(8),
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: theme.spacing(0),
+    },
   },
   appBarSpacer: theme.mixins.toolbar,
 }));
