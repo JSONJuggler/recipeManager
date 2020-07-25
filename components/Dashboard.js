@@ -74,6 +74,8 @@ const useStyles = makeStyles((theme) => ({
   gridItem: {
     display: "flex",
     justifyContent: "center",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
