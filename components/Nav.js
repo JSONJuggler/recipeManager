@@ -27,6 +27,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
+import { signout } from "next-auth/client";
 
 import ListItemLink from "components/ListItemLink";
 import CustomLink from "components/CustomLink";
@@ -168,7 +169,7 @@ const Nav = ({ session }) => {
                   </IconButton>
                 </Grid>
                 <Grid item>
-                  <IconButton color="inherit">
+                  <IconButton onClick={signout} color="inherit">
                     <NoMeetingRoomIcon />
                     <Typography variant="subtitle1" color="inherit" noWrap>
                       Logout
@@ -191,10 +192,7 @@ const Nav = ({ session }) => {
                     </Typography>
                   </Grid>
                 </CustomLink>
-                <CustomLink
-                  title="Login"
-                  href={process.env.BASE_PATH + "/login"}
-                >
+                <CustomLink title="Login" href={process.env.BASE_PATH + "/"}>
                   <Grid item className={classes.link}>
                     <MeetingRoomIcon />
                     <Typography variant="subtitle1" color="inherit" noWrap>
@@ -272,12 +270,7 @@ const Nav = ({ session }) => {
         {session ? (
           <Fragment>
             <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
+              <ListItemLink href="/" linkname="Home" icon={<HomeIcon />} />
               <ListItemLink
                 href="/browse"
                 linkname="Browse"
@@ -304,7 +297,7 @@ const Nav = ({ session }) => {
                 </ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={signout}>
                 <ListItemIcon>
                   <NoMeetingRoomIcon />
                 </ListItemIcon>
@@ -321,7 +314,7 @@ const Nav = ({ session }) => {
                 icon={<SearchIcon />}
               />
               <ListItemLink
-                href="/login"
+                href="/"
                 linkname="Login"
                 icon={<MeetingRoomIcon />}
               />
