@@ -52,7 +52,7 @@ const Index = ({ session, csrfToken }) => {
     <div className={classes.root}>
       <Container className={classes.content} maxWidth="lg">
         {!session && <Login csrfToken={csrfToken} />}
-        {session && <Dashboard />}
+        {session && <Dashboard session={session} />}
       </Container>
     </div>
   );
