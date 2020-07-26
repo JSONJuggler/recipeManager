@@ -4,7 +4,8 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 
 const options = {
-  site: process.env.SITE,
+  site: process.env.SITE + process.env.BASE_PATH,
+  //basePath: process.env.BASE_PATH + "/api/auth",
   secret: process.env.SECRET,
   session: {
     jwt: true,
@@ -40,7 +41,7 @@ const options = {
     //},
   },
   pages: {
-    signin: "/",
+    signin: process.env.BASE_PATH + "/",
     // signout: '/api/auth/signout', // Displays form with sign out button
     // error: '/api/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/api/auth/verify-request', // Used for check email page
@@ -59,6 +60,7 @@ const options = {
         let user;
 
         try {
+          //console.log("trying");
           const res = await axios.post(
             process.env.NEXT_PUBLIC_STRAPI_API_URL + "/auth/local",
             {
@@ -66,6 +68,7 @@ const options = {
               password: credentials.password,
             }
           );
+          //console.log("axios response", res.data);
 
           user = {
             strapiToken: res.data.jwt,
@@ -78,14 +81,17 @@ const options = {
           };
           //console.log(user);
         } catch (err) {
+          console.log("failed");
           console.log(err.response.data);
         }
-
+        //console.log("user", user);
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
+          console.log("login success");
           return Promise.resolve(user);
         } else {
           // If you return null or false then the credentials will be rejected
+          console.log("login fail");
           return Promise.resolve(null);
         }
       },

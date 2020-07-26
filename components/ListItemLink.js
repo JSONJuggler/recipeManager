@@ -6,11 +6,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PropTypes from "prop-types";
 
 const ListItemLink = (props) => {
-  const { icon, linkname, href } = props;
+  const { icon, linkname, href, as } = props;
 
   return (
     <li>
-      <Link href={href} as={process.env.BASE_PATH + href} passHref>
+      <Link href={href} as={as} passHref>
         <ListItem button component="a" href={href}>
           {icon && <ListItemIcon>{icon}</ListItemIcon>}
           <ListItemText primary={linkname} />

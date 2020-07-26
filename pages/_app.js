@@ -84,7 +84,13 @@ function MyApp({ Component, pageProps, store }) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Provider options={{ site: process.env.SITE }} session={session}>
+          <Provider
+            options={{
+              site: process.env.SITE + process.env.BASE_PATH,
+              //baseUrl: process.env.BASE_PATH + "/api/auth",
+            }}
+            session={session}
+          >
             <Nav session={session} />
             <div className={classes.wrapper}>
               <div className={classes.appBarSpacer} />

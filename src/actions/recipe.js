@@ -12,7 +12,9 @@ import {
 
 export const getUserRecipes = () => async (dispatch) => {
   try {
-    const res = await axios.get(process.env.SITE + "/api/getToken");
+    const res = await axios.get(
+      process.env.SITE + process.env.BASE_PATH + "/api/getToken"
+    );
     console.log(res.data.user.recipes);
     dispatch({
       type: GET_USERRECIPES,

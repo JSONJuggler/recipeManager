@@ -123,7 +123,11 @@ const Nav = ({ session }) => {
       <AppBar position="fixed" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+            <CustomLink
+              title="Home"
+              href={"/"}
+              as={process.env.BASE_PATH + "/"}
+            >
               <Typography variant="h6" color="inherit" noWrap>
                 Recipe Manager
               </Typography>
@@ -134,7 +138,8 @@ const Nav = ({ session }) => {
               <Grid container className={classes.icons} justify="flex-end">
                 <CustomLink
                   title="Browse"
-                  href={process.env.BASE_PATH + "/browse"}
+                  href={"/browse"}
+                  as={process.env.BASE_PATH + "/browse"}
                 >
                   <Grid item className={classes.link}>
                     <SearchIcon />
@@ -182,7 +187,8 @@ const Nav = ({ session }) => {
               <Grid container className={classes.icons} justify="flex-end">
                 <CustomLink
                   title="Browse"
-                  href={process.env.BASE_PATH + "/browse"}
+                  href={"/browse"}
+                  as={process.env.BASE_PATH + "/browse"}
                 >
                   <Grid item className={classes.link}>
                     <SearchIcon />
@@ -191,7 +197,11 @@ const Nav = ({ session }) => {
                     </Typography>
                   </Grid>
                 </CustomLink>
-                <CustomLink title="Login" href={process.env.BASE_PATH + "/"}>
+                <CustomLink
+                  title="Login"
+                  href={"/"}
+                  as={process.env.BASE_PATH + "/"}
+                >
                   <Grid item className={classes.link}>
                     <MeetingRoomIcon />
                     <Typography variant="subtitle1" color="inherit" noWrap>
@@ -230,14 +240,22 @@ const Nav = ({ session }) => {
           </IconButton>
           <div>
             {!open && (
-              <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+              <CustomLink
+                title="Home"
+                href={"/"}
+                as={process.env.BASE_PATH + "/"}
+              >
                 <Typography variant="h6" color="inherit" noWrap>
                   Recipe Manager
                 </Typography>
               </CustomLink>
             )}
             {open && (
-              <CustomLink title="Home" href={process.env.BASE_PATH + "/"}>
+              <CustomLink
+                title="Home"
+                href={"/"}
+                as={process.env.BASE_PATH + "/"}
+              >
                 <HomeIcon />
               </CustomLink>
             )}
@@ -269,9 +287,15 @@ const Nav = ({ session }) => {
         {session ? (
           <Fragment>
             <List>
-              <ListItemLink href="/" linkname="Home" icon={<HomeIcon />} />
+              <ListItemLink
+                href="/"
+                as={process.env.BASE_PATH + "/"}
+                linkname="Home"
+                icon={<HomeIcon />}
+              />
               <ListItemLink
                 href="/browse"
+                as={process.env.BASE_PATH + "/browse"}
                 linkname="Browse"
                 icon={<SearchIcon />}
               />
@@ -309,11 +333,13 @@ const Nav = ({ session }) => {
             <List>
               <ListItemLink
                 href="/browse"
+                as={process.env.BASE_PATH + "/browse"}
                 linkname="Browse"
                 icon={<SearchIcon />}
               />
               <ListItemLink
                 href="/"
+                as={process.env.BASE_PATH + "/"}
                 linkname="Login"
                 icon={<MeetingRoomIcon />}
               />
