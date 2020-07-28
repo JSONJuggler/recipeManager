@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps, store }) {
     <React.Fragment>
       <div className={classes.root}>
         <Head>
-          <title>Beau | translator</title>
+          <title>Beau | recipe manager</title>
           <meta name="author" content="Beau Reescano" />
           <meta
             name="viewport"
@@ -78,7 +78,7 @@ function MyApp({ Component, pageProps, store }) {
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta
             name="description"
-            content="Teacher friendly translator. English, Spanish, and other languages are currently supported"
+            content="Explore and discover all kinds of recipes or create an account and create your own recipes!"
           />
         </Head>
         <ThemeProvider theme={theme}>
