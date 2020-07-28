@@ -252,7 +252,7 @@ function Register({ isAuthenticated }) {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/login" as={process.env.BASE_PATH + "/login"}>
+                <Link href="/login">
                   <a className={classes.link}>
                     <Typography variant="caption">
                       Already have an account? Log in

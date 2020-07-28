@@ -187,7 +187,7 @@ function Login({ csrfToken, isAuthenticated }) {
           </Link>
         </Grid> */}
               <Grid item>
-                <Link href="/register" as={process.env.BASE_PATH + "/register"}>
+                <Link href="/register">
                   <a className={classes.link}>
                     <Typography variant="caption">
                       Don't have an account? Register here!

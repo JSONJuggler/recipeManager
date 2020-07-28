@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 module.exports = {
-  assetPrefix: process.env.BASE_PATH,
   basePath: process.env.BASE_PATH,
   env: {
     PROD_BASE_URL: process.env.PROD_BASE_URL,
