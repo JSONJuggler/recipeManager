@@ -4,7 +4,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 
 const options = {
-  site: process.env.SITE + process.env.BASE_PATH,
+  //site: process.env.SITE + process.env.BASE_PATH,
   //basePath: process.env.BASE_PATH + "/api/auth",
   secret: process.env.SECRET,
   session: {
@@ -41,7 +41,7 @@ const options = {
     //},
   },
   pages: {
-    signin: process.env.BASE_PATH + "/",
+    signIn: process.env.BASE_PATH + "/",
     // signout: '/api/auth/signout', // Displays form with sign out button
     // error: '/api/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/api/auth/verify-request', // Used for check email page
@@ -51,7 +51,6 @@ const options = {
     Providers.Credentials({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
-      id: "Credentials",
       authorize: async (credentials) => {
         // Add logic here to look up the user from the credentials supplied
 
