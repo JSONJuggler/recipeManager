@@ -51,7 +51,6 @@ const options = {
     Providers.Credentials({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
-      id: "Credentials",
       authorize: async (credentials) => {
         // Add logic here to look up the user from the credentials supplied
 
