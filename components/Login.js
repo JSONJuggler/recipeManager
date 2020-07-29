@@ -118,7 +118,7 @@ function Login({ csrfToken, isAuthenticated }) {
             action={
               process.env.SITE +
               process.env.BASE_PATH +
-              "/api/auth/callback/Credentials"
+              "/api/auth/callback/credentials"
             }
             method="POST"
           >
