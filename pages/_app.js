@@ -85,12 +85,10 @@ function MyApp({ Component, pageProps, store }) {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Provider
-            options={
-              {
-                //site: process.env.SITE + process.env.BASE_PATH,
-                //baseUrl: process.env.BASE_PATH + "/api/auth",
-              }
-            }
+            options={{
+              site: process.env.SITE + process.env.BASE_PATH,
+              //baseUrl: process.env.BASE_PATH + "/api/auth",
+            }}
             session={session}
           >
             <Nav session={session} />

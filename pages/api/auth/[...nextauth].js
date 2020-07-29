@@ -4,7 +4,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 
 const options = {
-  //site: process.env.SITE + process.env.BASE_PATH,
+  site: process.env.SITE + process.env.BASE_PATH,
   //basePath: process.env.BASE_PATH + "/api/auth",
   secret: process.env.SECRET,
   session: {
