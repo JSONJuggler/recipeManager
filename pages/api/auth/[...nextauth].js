@@ -3,6 +3,7 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
+// IT WORKS
 const options = {
   site: process.env.SITE + process.env.BASE_PATH,
   //basePath: process.env.BASE_PATH + "/api/auth",
