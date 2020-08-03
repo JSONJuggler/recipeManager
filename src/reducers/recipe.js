@@ -4,7 +4,7 @@ import {
   RECIPE_FAIL,
   GET_RECIPES,
   GET_USERRECIPES,
-  CLEAR_RECIPES
+  CLEAR_RECIPES,
 } from "../actions/types";
 
 const initialState = {
@@ -12,10 +12,10 @@ const initialState = {
   userRecipes: [],
   recipes: [],
   loading: true,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function recipe(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_USERRECIPES:
@@ -23,39 +23,39 @@ export default function(state = initialState, action) {
         ...state,
         recipe: null,
         userRecipes: payload,
-        loading: false
+        loading: false,
       };
     case GET_RECIPES:
       return {
         ...state,
         recipe: null,
         recipes: payload,
-        loading: false
+        loading: false,
       };
     case ADD_RECIPE:
       return {
         ...state,
         recipe: payload,
         recipes: [...state.recipes, payload],
-        userRecipes: [...state.userRecipes, payload]
+        userRecipes: [...state.userRecipes, payload],
       };
     case RECIPE_FAIL:
       return {
         ...state,
         // recipe: payload.duplicate,
-        loading: false
+        loading: false,
       };
     case DELETE_RECIPE:
       return {
         ...state,
         recipe: null,
-        userRecipes: state.userRecipes.filter(recipe => {
+        userRecipes: state.userRecipes.filter((recipe) => {
           return recipe._id !== payload;
         }),
-        recipes: state.recipes.filter(recipe => {
+        recipes: state.recipes.filter((recipe) => {
           return recipe._id !== payload;
         }),
-        loading: false
+        loading: false,
       };
     case CLEAR_RECIPES:
       return {
@@ -63,7 +63,7 @@ export default function(state = initialState, action) {
         recipe: null,
         userRecipes: [],
         recipes: [],
-        loading: false
+        loading: false,
       };
     default:
       return state;
