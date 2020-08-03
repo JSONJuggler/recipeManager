@@ -7,15 +7,23 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Chip from "@material-ui/core/Chip";
 
 import {
   openAddRecipe,
   closeAddRecipe,
   updateAddRecipeInfo,
   clearAddRecipeInfo,
+  getAttributes,
 } from "../src/actions/recipe";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,19 +52,59 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 300,
+  },
+  chips: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  chip: {
+    margin: 2,
+  },
 }));
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const AddRecipeBackdrop = ({
   recipe: {
     addRecipeData: { name, attributes, description, directions },
+    tags,
     backdropOpen,
   },
   openAddRecipe,
   closeAddRecipe,
   updateAddRecipeInfo,
   clearAddRecipeInfo,
+  getAttributes,
 }) => {
   const classes = useStyles();
+
+  const theme = useTheme();
+
+  useEffect(() => {
+    getAttributes();
+  }, [getAttributes]);
 
   const handleSubmit = () => {
     clearAddRecipeInfo();
@@ -67,6 +115,13 @@ const AddRecipeBackdrop = ({
     updateAddRecipeInfo({
       ...{ name, attributes, description, directions },
       [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleTagChange = (e) => {
+    updateAddRecipeInfo({
+      ...{ name, attributes, description, directions },
+      attributes: e.target.value,
     });
   };
 
@@ -95,9 +150,6 @@ const AddRecipeBackdrop = ({
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={classes.paper}>
             <form onSubmit={(e) => add(e)}>
-              <Typography align="center" variant="body2">
-                Tag your recipe!
-              </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -114,6 +166,49 @@ const AddRecipeBackdrop = ({
                     helperText="Give your recipe a unique name!"
                     onChange={handleChange}
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel color="secondary" id="attributes-label">
+                      Attributes
+                    </InputLabel>
+                    <Select
+                      labelId="attributes-label"
+                      id="attributes"
+                      multiple
+                      required
+                      value={attributes}
+                      onChange={handleTagChange}
+                      input={<Input id="select-multiple-attributes" />}
+                      aria-describedby="attributes-helper-text"
+                      renderValue={(selected) => (
+                        <div className={classes.chips}>
+                          {selected.map((value) => (
+                            <Chip
+                              key={value}
+                              label={value}
+                              className={classes.chip}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      MenuProps={MenuProps}
+                    >
+                      {tags.map((attribute) => (
+                        <MenuItem
+                          key={attribute.id}
+                          name={attribute.name}
+                          value={attribute.name}
+                          style={getStyles(name, attributes, theme)}
+                        >
+                          {attribute.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <FormHelperText id="attributes-helper-text">
+                      Add tags for your recipe!
+                    </FormHelperText>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -190,6 +285,7 @@ AddRecipeBackdrop.propTypes = {
   closeAddRecipe: PropTypes.func.isRequired,
   updateAddRecipeInfo: PropTypes.func.isRequired,
   clearAddRecipeInfo: PropTypes.func.isRequired,
+  getAttributes: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -201,4 +297,5 @@ export default connect(mapStateToProps, {
   closeAddRecipe,
   updateAddRecipeInfo,
   clearAddRecipeInfo,
+  getAttributes,
 })(AddRecipeBackdrop);
