@@ -5,6 +5,10 @@ import {
   GET_RECIPES,
   GET_USERRECIPES,
   CLEAR_RECIPES,
+  OPEN_ADDRECIPE,
+  CLOSE_ADDRECIPE,
+  UPDATE_ADDRECIPE,
+  CLEAR_ADDRECIPE,
 } from "../actions/types";
 
 const initialState = {
@@ -13,6 +17,13 @@ const initialState = {
   recipes: [],
   loading: true,
   error: {},
+  addRecipeData: {
+    name: "",
+    attributes: [],
+    description: "",
+    directions: "",
+  },
+  backdropOpen: false,
 };
 
 export default function recipe(state = initialState, action) {
@@ -56,6 +67,34 @@ export default function recipe(state = initialState, action) {
           return recipe._id !== payload;
         }),
         loading: false,
+      };
+    case OPEN_ADDRECIPE:
+      return {
+        ...state,
+        backdropOpen: payload.backdropOpen,
+        loading: false,
+      };
+    case CLOSE_ADDRECIPE:
+      return {
+        ...state,
+        backdropOpen: payload.backdropOpen,
+        loading: false,
+      };
+    case UPDATE_ADDRECIPE:
+      const { name, attributes, description, directions } = payload;
+      return {
+        ...state,
+        addRecipeData: { name, attributes, description, directions },
+      };
+    case CLEAR_ADDRECIPE:
+      return {
+        ...state,
+        addRecipeData: {
+          name: "",
+          attributes: [],
+          description: "",
+          directions: "",
+        },
       };
     case CLEAR_RECIPES:
       return {

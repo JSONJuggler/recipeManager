@@ -7,6 +7,10 @@ import {
   GET_RECIPES,
   GET_USERRECIPES,
   CLEAR_RECIPES,
+  OPEN_ADDRECIPE,
+  CLOSE_ADDRECIPE,
+  UPDATE_ADDRECIPE,
+  CLEAR_ADDRECIPE,
 } from "./types";
 //import { setAlert } from "./alert";
 
@@ -39,6 +43,50 @@ export const getUserRecipes = () => async (dispatch) => {
   }
 };
 
+export const openAddRecipe = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: OPEN_ADDRECIPE,
+      payload: { backdropOpen: true },
+    });
+  } catch (err) {
+    //handle error here
+  }
+};
+
+export const closeAddRecipe = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLOSE_ADDRECIPE,
+      payload: { backdropOpen: false },
+    });
+  } catch (err) {
+    //handle error here
+  }
+};
+
+export const clearAddRecipeInfo = () => (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAR_ADDRECIPE,
+    });
+  } catch (err) {
+    //handle error here
+  }
+};
+
+export const updateAddRecipeInfo = (recipeData) => (dispatch) => {
+  try {
+    //console.log(recipeData);
+    dispatch({
+      type: UPDATE_ADDRECIPE,
+      payload: recipeData,
+    });
+  } catch (err) {
+    //handle error here
+    console.log(err);
+  }
+};
 //export const getRecipes = () => async (dispatch) => {
 //try {
 //const res = await axios.get("/recipemanager/api/recipes");
