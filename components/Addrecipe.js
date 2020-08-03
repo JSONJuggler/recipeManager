@@ -147,101 +147,99 @@ const AddRecipeBackdrop = ({
   return (
     <Backdrop className={classes.backdrop} open={backdropOpen}>
       <Container maxWidth="sm">
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={classes.paper}>
-            <form onSubmit={(e) => add(e)}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    type="text"
-                    placeholder="Name..."
-                    name="name"
-                    value={name}
-                    variant="outlined"
-                    color="secondary"
+        <Paper className={classes.paper}>
+          <form onSubmit={(e) => add(e)}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  placeholder="Name..."
+                  name="name"
+                  value={name}
+                  variant="outlined"
+                  color="secondary"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Name"
+                  helperText="Give your recipe a unique name!"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl className={classes.formControl}>
+                  <InputLabel color="secondary" id="attributes-label">
+                    Attributes
+                  </InputLabel>
+                  <Select
+                    labelId="attributes-label"
+                    id="attributes"
+                    multiple
                     required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    helperText="Give your recipe a unique name!"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel color="secondary" id="attributes-label">
-                      Attributes
-                    </InputLabel>
-                    <Select
-                      labelId="attributes-label"
-                      id="attributes"
-                      multiple
-                      required
-                      value={attributes}
-                      onChange={handleTagChange}
-                      input={<Input id="select-multiple-attributes" />}
-                      aria-describedby="attributes-helper-text"
-                      renderValue={(selected) => (
-                        <div className={classes.chips}>
-                          {selected.map((value) => (
-                            <Chip
-                              key={value}
-                              label={value}
-                              className={classes.chip}
-                            />
-                          ))}
-                        </div>
-                      )}
-                      MenuProps={MenuProps}
-                    >
-                      {tags.map((attribute) => (
-                        <MenuItem
-                          key={attribute.id}
-                          name={attribute.name}
-                          value={attribute.name}
-                          style={getStyles(name, attributes, theme)}
-                        >
-                          {attribute.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    <FormHelperText id="attributes-helper-text">
-                      Add tags for your recipe!
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    type="text"
-                    placeholder="Description..."
-                    name="description"
-                    value={description}
-                    variant="outlined"
-                    color="secondary"
-                    required
-                    fullWidth
-                    id="description"
-                    label="Description"
-                    helperText="Briefly describe your recipe!"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    type="text"
-                    placeholder="Step 1..."
-                    name="directions"
-                    value={directions}
-                    variant="outlined"
-                    color="secondary"
-                    required
-                    fullWidth
-                    id="directions"
-                    label="Directions "
-                    helperText="Provide the steps or directions to create your recipe!"
-                    onChange={handleChange}
-                  />
-                </Grid>
+                    value={attributes}
+                    onChange={handleTagChange}
+                    input={<Input id="select-multiple-attributes" />}
+                    aria-describedby="attributes-helper-text"
+                    renderValue={(selected) => (
+                      <div className={classes.chips}>
+                        {selected.map((value) => (
+                          <Chip
+                            key={value}
+                            label={value}
+                            className={classes.chip}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    MenuProps={MenuProps}
+                  >
+                    {tags.map((attribute) => (
+                      <MenuItem
+                        key={attribute.id}
+                        name={attribute.name}
+                        value={attribute.name}
+                        style={getStyles(name, attributes, theme)}
+                      >
+                        {attribute.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText id="attributes-helper-text">
+                    Add tags for your recipe!
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  placeholder="Description..."
+                  name="description"
+                  value={description}
+                  variant="outlined"
+                  color="secondary"
+                  required
+                  fullWidth
+                  id="description"
+                  label="Description"
+                  helperText="Briefly describe your recipe!"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  placeholder="Step 1..."
+                  name="directions"
+                  value={directions}
+                  variant="outlined"
+                  color="secondary"
+                  required
+                  fullWidth
+                  id="directions"
+                  label="Directions "
+                  helperText="Provide the steps or directions to create your recipe!"
+                  onChange={handleChange}
+                />
               </Grid>
               <Grid item className={classes.gridItem} xs={6}>
                 <Button
@@ -271,9 +269,9 @@ const AddRecipeBackdrop = ({
                   Cancel
                 </Button>
               </Grid>
-            </form>
-          </Paper>
-        </Grid>
+            </Grid>
+          </form>
+        </Paper>
       </Container>
     </Backdrop>
   );
