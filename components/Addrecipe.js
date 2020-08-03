@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
+    [theme.breakpoints.down("xs")]: {
+      paddingTop: theme.spacing(8),
+    },
   },
   gridItem: {
     padding: theme.spacing(2),
@@ -220,7 +223,7 @@ const AddRecipeBackdrop = ({
                   required
                   fullWidth
                   multiline
-                  rows={3}
+                  rows={2}
                   rowsMax={3}
                   id="description"
                   label="Description"
@@ -239,8 +242,8 @@ const AddRecipeBackdrop = ({
                   required
                   fullWidth
                   multiline
-                  rows={4}
-                  rowsMax={6}
+                  rows={2}
+                  rowsMax={5}
                   id="directions"
                   label="Directions "
                   helperText="Provide comma seperated directions used to recreate your recipe!"
