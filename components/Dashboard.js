@@ -110,13 +110,6 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
                 <img className={classes.centerFlexibleItem} src="" alt="" />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Typography align="center" variant="body1">
-                  Click here to create a recipe
-                </Typography>
-              </Paper>
-            </Grid>
             <Grid item xs={12}>
               <div className={classes.listRoot}>
                 <Grid container>

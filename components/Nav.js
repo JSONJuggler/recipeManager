@@ -18,6 +18,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import HomeIcon from "@material-ui/icons/Home";
@@ -31,6 +32,8 @@ import { signout } from "next-auth/client";
 
 import ListItemLink from "components/ListItemLink";
 import CustomLink from "components/CustomLink";
+import AddRecipeBackdrop from "components/Addrecipe";
+import { openAddRecipe, closeAddRecipe } from "../src/actions/recipe";
 
 const drawerWidth = 240;
 
@@ -107,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ session }) => {
+const Nav = ({ session, openAddRecipe }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -120,6 +123,7 @@ const Nav = ({ session }) => {
 
   return (
     <Fragment>
+      <AddRecipeBackdrop />
       <AppBar position="fixed" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <div>
@@ -132,6 +136,14 @@ const Nav = ({ session }) => {
           {session ? (
             <Fragment>
               <Grid container className={classes.icons} justify="flex-end">
+                <Grid item>
+                  <IconButton onClick={openAddRecipe} color="inherit">
+                    <AddCircleIcon />
+                    <Typography variant="subtitle1" color="inherit" noWrap>
+                      Add Recipe
+                    </Typography>
+                  </IconButton>
+                </Grid>
                 <CustomLink title="Browse" href={"/browse"}>
                   <Grid item className={classes.link}>
                     <SearchIcon />
@@ -281,6 +293,12 @@ const Nav = ({ session }) => {
                 </ListItemIcon>
                 <ListItemText primary="Users" />
               </ListItem>
+              <ListItem button onClick={openAddRecipe}>
+                <ListItemIcon>
+                  <AddCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Add Recipe" />
+              </ListItem>
             </List>
             <Divider />
             <List>
@@ -320,12 +338,13 @@ const Nav = ({ session }) => {
 };
 
 Nav.propTypes = {
-  //auth: PropTypes.object.isRequired,
-  //logout: PropTypes.func.isRequired,
+  //recipe: PropTypes.object.isRequired,
+  openAddRecipe: PropTypes.func.isRequired,
+  //closeAddRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  //recipe: state.recipe,
 });
 
-export default connect(mapStateToProps, {})(Nav);
+export default connect(mapStateToProps, { openAddRecipe, closeAddRecipe })(Nav);

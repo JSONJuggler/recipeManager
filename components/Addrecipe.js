@@ -1,222 +1,204 @@
-import React, { Fragment, useState } from "react";
+import { useState, useRef, Fragment, useEffect } from "react";
+import Backdrop from "@material-ui/core/Backdrop";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
 
-import { addRecipe } from "../../actions/recipe";
+import {
+  openAddRecipe,
+  closeAddRecipe,
+  updateAddRecipeInfo,
+  clearAddRecipeInfo,
+} from "../src/actions/recipe";
 
-const textArea = {
-  width: "70%",
-  height: "70px",
-  boxSizing: "border-box",
-  border: "2px solid #ccc"
-};
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+  gridItem: {
+    padding: theme.spacing(2),
+  },
+  textField: {
+    background: "white",
+  },
+  underline: {
+    textDecoration: "underline",
+    color: "white",
+  },
+  hidden: {
+    visibility: "visible",
+    position: "absolute",
+    top: theme.spacing(-100),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
+}));
 
-const Addrecipe = ({ addRecipe, auth: { user, loading }, newRecipe }) => {
-  const [dirtyType, setType] = useState([]);
-  const [dirtySeason, setSeason] = useState([]);
+const AddRecipeBackdrop = ({
+  recipe: {
+    addRecipeData: { name, attributes, description, directions },
+    backdropOpen,
+  },
+  openAddRecipe,
+  closeAddRecipe,
+  updateAddRecipeInfo,
+  clearAddRecipeInfo,
+}) => {
+  const classes = useStyles();
 
-  const [recipe, setRecipe] = useState({
-    name: "",
-    link: "",
-    description: ""
+  const handleSubmit = () => {
+    clearAddRecipeInfo();
+    handleClose();
+  };
+
+  const handleChange = (e) => {
+    updateAddRecipeInfo({
+      ...{ name, attributes, description, directions },
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleClose = () => {
+    closeAddRecipe();
+  };
+
+  const handleKeydown = (e) => {
+    if (e.code === "Escape") {
+      if (backdropOpen) {
+        handleClose();
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeydown);
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
   });
 
-  const { name, link, description } = recipe;
-  const { _id } = user;
-  const userId = _id;
-
-  const [typeCheckBox, setTypeCheckBox] = useState([false, false]);
-  const [seasonCheckBox, setSeasonCheckBox] = useState([false, false]);
-
-  const handleTypeCheck = e => {
-    setTypeCheckBox(
-      ((typeCheckBox[e.target.name] = !typeCheckBox[e.target.name]),
-      typeCheckBox)
-    );
-    setType(
-      ((dirtyType[e.target.name] =
-        typeCheckBox[e.target.name] === true ? e.target.value : ""),
-      dirtyType)
-    );
-  };
-
-  const handleOtherType = e => {
-    setType(
-      ((dirtyType[e.target.name] = "Other: " + e.target.value), dirtyType)
-    );
-  };
-
-  const handleSeasonCheck = e => {
-    setSeasonCheckBox(
-      ((seasonCheckBox[e.target.name] = !seasonCheckBox[e.target.name]),
-      seasonCheckBox)
-    );
-    setSeason(
-      ((dirtySeason[e.target.name] =
-        seasonCheckBox[e.target.name] === true ? e.target.value : ""),
-      dirtySeason)
-    );
-  };
-
-  const handleOtherSeason = e => {
-    setSeason(
-      ((dirtySeason[e.target.name] = "Other: " + e.target.value), dirtySeason)
-    );
-  };
-
-  const onChange = e => {
-    setRecipe({ ...recipe, [e.target.name]: e.target.value });
-  };
-
-  const add = e => {
-    e.preventDefault();
-    const type = dirtyType.filter(dirtyType => dirtyType !== "");
-    const season = dirtySeason.filter(dirtySeason => dirtySeason !== "");
-    addRecipe({ name, season, type, link, description, userId });
-  };
-
-  if (newRecipe) {
-    return <Redirect to="/dashboard" />;
-  }
-
   return (
-    <Fragment>
-      {user && !loading && (
-        <Fragment>
-          <form onSubmit={e => add(e)}>
-            <small>Please select a Type!</small>
-            <div>
-              <small>Paleo:</small>
-              <input
-                type="checkbox"
-                name="0"
-                value="Paleo"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Vegetarian:</small>
-              <input
-                type="checkbox"
-                name="1"
-                value="Vegetarian"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Vegan:</small>
-              <input
-                type="checkbox"
-                name="2"
-                value="Vegan"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Gluten-Free:</small>
-              <input
-                type="checkbox"
-                name="3"
-                value="Gluten-Free"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Soup</small>
-              <input
-                type="checkbox"
-                name="4"
-                value="Soup"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Pasta</small>
-              <input
-                type="checkbox"
-                name="5"
-                value="Pasta"
-                onChange={e => handleTypeCheck(e)}
-              />
-              <small>Other:</small>
-              <input type="text" name="6" onChange={e => handleOtherType(e)} />
-            </div>
-            <small>Please select a Season!</small>
-            <div>
-              <small>Winter:</small>
-              <input
-                type="checkbox"
-                name="0"
-                value="Winter"
-                onChange={e => handleSeasonCheck(e)}
-              />
-              <small>Summer:</small>
-              <input
-                type="checkbox"
-                name="1"
-                value="Summer"
-                onChange={e => handleSeasonCheck(e)}
-              />
-              <small>Spring:</small>
-              <input
-                type="checkbox"
-                name="2"
-                value="Spring"
-                onChange={e => handleSeasonCheck(e)}
-              />
-              <small>Fall:</small>
-              <input
-                type="checkbox"
-                name="3"
-                value="Fall"
-                onChange={e => handleSeasonCheck(e)}
-              />
-              <small>Other:</small>
-              <input
-                type="text"
-                name="4"
-                onChange={e => handleOtherSeason(e)}
-              />
-            </div>
-            <small>Enter a name for your recipe!</small>
-            <div>
-              <input
-                type="text"
-                placeholder="Name..."
-                name="name"
-                value={name}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <small>Enter a link for your recipe!</small>
-            <div>
-              <input
-                type="text"
-                placeholder="Link..."
-                name="link"
-                value={link}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <small>Enter a description or list of steps for your recipe!</small>
-            <div>
-              <textarea
-                style={textArea}
-                placeholder="Description..."
-                name="description"
-                value={description}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <input type="submit" value="Add!" />
-            <Link to="/Dashboard">Back!</Link>
-          </form>
-        </Fragment>
-      )}
-    </Fragment>
+    <Backdrop className={classes.backdrop} open={backdropOpen}>
+      <Container maxWidth="sm">
+        <Grid item xs={12} md={8} lg={9}>
+          <Paper className={classes.paper}>
+            <form onSubmit={(e) => add(e)}>
+              <Typography align="center" variant="body2">
+                Tag your recipe!
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    placeholder="Name..."
+                    name="name"
+                    value={name}
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    helperText="Give your recipe a unique name!"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    placeholder="Description..."
+                    name="description"
+                    value={description}
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    fullWidth
+                    id="description"
+                    label="Description"
+                    helperText="Briefly describe your recipe!"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    placeholder="Step 1..."
+                    name="directions"
+                    value={directions}
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    fullWidth
+                    id="directions"
+                    label="Directions "
+                    helperText="Provide the steps or directions to create your recipe!"
+                    onChange={handleChange}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item className={classes.gridItem} xs={6}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={handleSubmit}
+                  disabled={
+                    !name ||
+                    attributes.length === 0 ||
+                    !directions ||
+                    !description
+                  }
+                >
+                  Add
+                </Button>
+              </Grid>
+              <Grid item className={classes.gridItem} xs={6}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  color="secondary"
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </form>
+          </Paper>
+        </Grid>
+      </Container>
+    </Backdrop>
   );
 };
 
-Addrecipe.propTypes = {
-  addRecipe: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  newRecipe: PropTypes.object
+AddRecipeBackdrop.propTypes = {
+  recipe: PropTypes.object.isRequired,
+  openAddRecipe: PropTypes.func.isRequired,
+  closeAddRecipe: PropTypes.func.isRequired,
+  updateAddRecipeInfo: PropTypes.func.isRequired,
+  clearAddRecipeInfo: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  newRecipe: state.recipe.recipe
+const mapStateToProps = (state) => ({
+  recipe: state.recipe,
 });
 
-export default connect(mapStateToProps, { addRecipe })(Addrecipe);
+export default connect(mapStateToProps, {
+  openAddRecipe,
+  closeAddRecipe,
+  updateAddRecipeInfo,
+  clearAddRecipeInfo,
+})(AddRecipeBackdrop);
