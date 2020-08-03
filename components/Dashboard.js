@@ -102,7 +102,10 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Typography align="center" variant="body1">
-                  user
+                  Welcome back <b>{session.user.name}</b>!
+                </Typography>
+                <Typography align="center" variant="body1">
+                  Your email: {session.user.email}
                 </Typography>
                 <img className={classes.centerFlexibleItem} src="" alt="" />
               </Paper>
