@@ -11,8 +11,26 @@ import {
   CLOSE_ADDRECIPE,
   UPDATE_ADDRECIPE,
   CLEAR_ADDRECIPE,
+  GET_ATTRIBUTES,
 } from "./types";
 //import { setAlert } from "./alert";
+
+export const getAttributes = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + "/attributes"
+    );
+    dispatch({
+      type: GET_ATTRIBUTES,
+      payload: res.data,
+    });
+  } catch (err) {
+    //const errors = err.response.data.errors;
+    //if (errors) {
+    //errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
+    //}
+  }
+};
 
 export const getUserRecipes = () => async (dispatch) => {
   try {

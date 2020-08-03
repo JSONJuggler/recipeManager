@@ -9,6 +9,7 @@ import {
   CLOSE_ADDRECIPE,
   UPDATE_ADDRECIPE,
   CLEAR_ADDRECIPE,
+  GET_ATTRIBUTES,
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   recipes: [],
   loading: true,
   error: {},
+  tags: [],
   addRecipeData: {
     name: "",
     attributes: [],
@@ -85,6 +87,11 @@ export default function recipe(state = initialState, action) {
       return {
         ...state,
         addRecipeData: { name, attributes, description, directions },
+      };
+    case GET_ATTRIBUTES:
+      return {
+        ...state,
+        tags: payload,
       };
     case CLEAR_ADDRECIPE:
       return {
