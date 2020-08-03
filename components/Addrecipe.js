@@ -219,6 +219,9 @@ const AddRecipeBackdrop = ({
                   color="secondary"
                   required
                   fullWidth
+                  multiline
+                  rows={2}
+                  rowsMax={2}
                   id="description"
                   label="Description"
                   helperText="Briefly describe your recipe!"
@@ -235,6 +238,9 @@ const AddRecipeBackdrop = ({
                   color="secondary"
                   required
                   fullWidth
+                  multiline
+                  rows={4}
+                  rowsMax={4}
                   id="directions"
                   label="Directions "
                   helperText="Provide the steps or directions to create your recipe!"
