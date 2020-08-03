@@ -108,7 +108,8 @@ const Browse = ({ recipes }) => {
                               aria-label="recipe"
                               className={classes.avatar}
                             >
-                              {recipeData.user.avatar.url}
+                              {recipeData.user.avatar &&
+                                recipeData.user.avatar.url}
                             </Avatar>
                           }
                           title={recipeData.name}
