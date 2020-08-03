@@ -12,6 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 
 import Link from "next/link";
 
@@ -50,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Register({ isAuthenticated }) {
+function Register({ csrfToken, isAuthenticated }) {
   const { register, handleSubmit, errors } = useForm();
 
   const [usernameError, setUsernameError] = useState("");
@@ -73,6 +76,41 @@ function Register({ isAuthenticated }) {
 
   const classes = useStyles();
 
+  const router = useRouter();
+
+  const [session, loading] = useSession();
+
+  const [routing, setRouting] = useState({
+    url: "",
+    starting: true,
+    complete: false,
+  });
+
+  const handleRouteChangeStart = (url) => {
+    console.log("starting nav");
+    setRouting((prev) => ({ ...prev, starting: true, complete: false, url }));
+  };
+
+  const handleRouteChangeComplete = (url) => {
+    console.log("ending nav");
+    setRouting((prev) => ({ ...prev, starting: false, complete: true }));
+  };
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, []);
+
+  //useEffect(() => {
+  //if (router.pathname === "/register" && session) {
+  //router.push("/");
+  //}
+  //}, [session]);
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -86,8 +124,32 @@ function Register({ isAuthenticated }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     window.scrollTo(0, 0);
+    const res = await axios.post(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + "/users",
+      {
+        username,
+        email,
+        password,
+      }
+    );
+
+    if (res) {
+      const credentialsRes = await axios.post(
+        process.env.SITE +
+          process.env.BASE_PATH +
+          "/api/auth/callback/credentials",
+        {
+          csrfToken,
+          email,
+          password,
+        }
+      );
+      if ((credentialsRes.status = "200")) {
+        router.push("/");
+      }
+    }
   };
 
   useEffect(() => {
