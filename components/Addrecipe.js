@@ -220,8 +220,8 @@ const AddRecipeBackdrop = ({
                   required
                   fullWidth
                   multiline
-                  rows={2}
-                  rowsMax={2}
+                  rows={3}
+                  rowsMax={3}
                   id="description"
                   label="Description"
                   helperText="Briefly describe your recipe!"
@@ -240,10 +240,10 @@ const AddRecipeBackdrop = ({
                   fullWidth
                   multiline
                   rows={4}
-                  rowsMax={4}
+                  rowsMax={6}
                   id="directions"
                   label="Directions "
-                  helperText="Provide the steps or directions to create your recipe!"
+                  helperText="Provide comma seperated directions used to recreate your recipe!"
                   onChange={handleChange}
                 />
               </Grid>
