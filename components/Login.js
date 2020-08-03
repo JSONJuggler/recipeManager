@@ -14,6 +14,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useSession } from "next-auth/client";
 
 //import { csrfToken, signin } from 'next-auth/client'
 // import { useTheme } from "@material-ui/core/styles";
@@ -43,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  guestLogin: {
+    margin: theme.spacing(2, 0, 0),
   },
   link: {
     color: "black",
@@ -82,6 +87,23 @@ function Login({ csrfToken, isAuthenticated }) {
 
   const onSubmit = async (e) => {
     window.scrollTo(0, 0);
+  };
+
+  const guestLogin = async (e) => {
+    console.log("logging in guest");
+    const res = await axios.post(
+      process.env.SITE +
+        process.env.BASE_PATH +
+        "/api/auth/callback/credentials",
+      {
+        csrfToken,
+        email: "visitor@visitor.com",
+        password: "visitor",
+      }
+    );
+    if (res) {
+      location.reload();
+    }
   };
 
   useEffect(() => {
@@ -194,6 +216,20 @@ function Login({ csrfToken, isAuthenticated }) {
                     </Typography>
                   </a>
                 </Link>
+              </Grid>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.guestLogin}
+                    onClick={(e) => {
+                      guestLogin();
+                    }}
+                  >
+                    Guest Log In
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
           </form>
