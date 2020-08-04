@@ -124,10 +124,7 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
                         lg={4}
                       >
                         <Card className={classes.cardRoot}>
-                          <CardHeader
-                            title={recipeData.name}
-                            subheader={recipeData.created}
-                          />
+                          <CardHeader title={recipeData.name} />
                           {recipeData.cover && (
                             <CardMedia
                               className={classes.media}

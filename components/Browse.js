@@ -113,7 +113,6 @@ const Browse = ({ recipes }) => {
                             </Avatar>
                           }
                           title={recipeData.name}
-                          subheader={recipeData.created}
                         />
                         {recipeData.cover && (
                           <CardMedia
