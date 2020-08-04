@@ -24,6 +24,7 @@ import {
   updateAddRecipeInfo,
   clearAddRecipeInfo,
   getAttributes,
+  addRecipe,
 } from "../src/actions/recipe";
 
 const useStyles = makeStyles((theme) => ({
@@ -100,6 +101,7 @@ const AddRecipeBackdrop = ({
   updateAddRecipeInfo,
   clearAddRecipeInfo,
   getAttributes,
+  addRecipe,
 }) => {
   const classes = useStyles();
 
@@ -110,6 +112,12 @@ const AddRecipeBackdrop = ({
   }, [getAttributes]);
 
   const handleSubmit = () => {
+    addRecipe({
+      name,
+      attributes,
+      description,
+      directions,
+    });
     clearAddRecipeInfo();
     handleClose();
   };
@@ -293,6 +301,7 @@ AddRecipeBackdrop.propTypes = {
   updateAddRecipeInfo: PropTypes.func.isRequired,
   clearAddRecipeInfo: PropTypes.func.isRequired,
   getAttributes: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -305,4 +314,5 @@ export default connect(mapStateToProps, {
   updateAddRecipeInfo,
   clearAddRecipeInfo,
   getAttributes,
+  addRecipe,
 })(AddRecipeBackdrop);

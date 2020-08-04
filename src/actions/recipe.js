@@ -15,6 +15,59 @@ import {
 } from "./types";
 //import { setAlert } from "./alert";
 
+export const addRecipe = (recipeData) => async (dispatch) => {
+  try {
+    const res = await axios.get(process.env.BASE_PATH + "/api/getToken");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${res.data.user.strapiToken}`,
+      },
+    };
+    //const config = {
+    //headers: {
+    //"Content-Type": "application/json",
+    //Authorization:
+    //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjc5NmEyYTlmNDdjMDAxNzRjMGRhYiIsImlhdCI6MTU5NjUwMTQ0OCwiZXhwIjoxNTk5MDkzNDQ4fQ.hZuCPkkCrHFh2v_Gr17L02tZlqM-Xmc5WmROpb9x6Sg",
+    //},
+    //};
+
+    const formData = {
+      ...recipeData,
+      user: res.data.user.name,
+      slug: recipeData.name,
+      status: "published",
+    };
+    console.log(formData);
+
+    const body = JSON.stringify(formData);
+
+    const resTwo = await axios.post(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + "/recipes",
+      body,
+      config
+    );
+    //dispatch({
+    //type: ADD_RECIPE,
+    //payload: res.data,
+    //});
+    //dispatch(setAlert("Recipe succesfully added!", "success"));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
+    }
+
+    dispatch({
+      type: RECIPE_FAIL,
+      // option to star duplicate resturants
+      // payload: res.data
+    });
+  }
+};
+
 export const getAttributes = () => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -127,44 +180,6 @@ export const updateAddRecipeInfo = (recipeData) => (dispatch) => {
 ////   // option to star duplicate resturants
 ////   // payload: res.data
 //// });
-//}
-//};
-
-//export const addRecipe = ({
-//name,
-//season,
-//type,
-//link,
-//description,
-//userId,
-//}) => async (dispatch) => {
-//try {
-//const config = {
-//headers: {
-//"Content-Type": "application/json",
-//},
-//};
-//const formData = { name, season, type, link, description, userId };
-//const body = JSON.stringify(formData);
-
-//const res = await axios.put("/recipemanager/api/recipes", body, config);
-//dispatch({
-//type: ADD_RECIPE,
-//payload: res.data,
-//});
-//dispatch(setAlert("Recipe succesfully added!", "success"));
-//} catch (err) {
-//const errors = err.response.data.errors;
-
-//if (errors) {
-//errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
-//}
-
-//dispatch({
-//type: RECIPE_FAIL,
-//// option to star duplicate resturants
-//// payload: res.data
-//});
 //}
 //};
 
