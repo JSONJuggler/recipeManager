@@ -76,7 +76,6 @@ const options = {
             email: res.data.user.email,
             confirmed: res.data.user.confirmed,
             blocked: res.data.user.blocked,
-            recipes: res.data.user.recipes,
           };
           //console.log(user);
         } catch (err) {

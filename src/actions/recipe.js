@@ -32,7 +32,6 @@ export const addRecipe = (recipeData) => async (dispatch) => {
       slug: recipeData.name,
       status: "published",
     };
-    console.log(formData);
 
     const body = JSON.stringify(formData);
 
@@ -80,13 +79,18 @@ export const getAttributes = () => async (dispatch) => {
 
 export const getUserRecipes = () => async (dispatch) => {
   try {
-    const res = await axios.get(
+    const tokenRes = await axios.get(
       process.env.SITE + process.env.BASE_PATH + "/api/getToken"
     );
-    console.log(res.data.user.recipes);
+
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL +
+        `/recipes?user.username=${tokenRes.data.user.name}`
+    );
+
     dispatch({
       type: GET_USERRECIPES,
-      payload: res.data.user.recipes,
+      payload: res.data,
     });
   } catch (err) {
     const errors = err.response.data.errors;
@@ -134,6 +138,7 @@ export const clearAddRecipeInfo = () => (dispatch) => {
     dispatch({
       type: CLEAR_ADDRECIPE,
     });
+    dispatch(getUserRecipes());
   } catch (err) {
     //handle error here
   }
