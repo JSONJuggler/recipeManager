@@ -115,7 +115,7 @@ const AddRecipeBackdrop = ({
     addRecipe({
       name,
       attribute: attribute.map((entry) => ({
-        name: entry,
+        _id: entry._id,
       })),
       description,
       directions,
@@ -197,8 +197,8 @@ const AddRecipeBackdrop = ({
                       <div className={classes.chips}>
                         {selected.map((value) => (
                           <Chip
-                            key={value}
-                            label={value}
+                            key={value.name}
+                            label={value.name}
                             className={classes.chip}
                           />
                         ))}
@@ -210,7 +210,7 @@ const AddRecipeBackdrop = ({
                       <MenuItem
                         key={entry.id}
                         name={entry.name}
-                        value={entry.name}
+                        value={entry}
                         style={getStyles(name, attribute, theme)}
                       >
                         {entry.name}
