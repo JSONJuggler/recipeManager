@@ -70,10 +70,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getStyles(name, personName, theme) {
+function getStyles(name, attribute, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      attribute.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -92,7 +92,7 @@ const MenuProps = {
 
 const AddRecipeBackdrop = ({
   recipe: {
-    addRecipeData: { name, attributes, description, directions },
+    addRecipeData: { name, attribute, description, directions },
     tags,
     backdropOpen,
   },
@@ -114,7 +114,9 @@ const AddRecipeBackdrop = ({
   const handleSubmit = () => {
     addRecipe({
       name,
-      attributes,
+      attribute: attribute.map((entry) => ({
+        name: entry,
+      })),
       description,
       directions,
     });
@@ -124,15 +126,15 @@ const AddRecipeBackdrop = ({
 
   const handleChange = (e) => {
     updateAddRecipeInfo({
-      ...{ name, attributes, description, directions },
+      ...{ name, attribute, description, directions },
       [e.target.id]: e.target.value,
     });
   };
 
   const handleTagChange = (e) => {
     updateAddRecipeInfo({
-      ...{ name, attributes, description, directions },
-      attributes: e.target.value,
+      ...{ name, attribute, description, directions },
+      attribute: e.target.value,
     });
   };
 
@@ -187,7 +189,7 @@ const AddRecipeBackdrop = ({
                     id="attributes"
                     multiple
                     required
-                    value={attributes}
+                    value={attribute}
                     onChange={handleTagChange}
                     input={<Input id="select-multiple-attributes" />}
                     aria-describedby="attributes-helper-text"
@@ -204,14 +206,14 @@ const AddRecipeBackdrop = ({
                     )}
                     MenuProps={MenuProps}
                   >
-                    {tags.map((attribute) => (
+                    {tags.map((entry) => (
                       <MenuItem
-                        key={attribute.id}
-                        name={attribute.name}
-                        value={attribute.name}
-                        style={getStyles(name, attributes, theme)}
+                        key={entry.id}
+                        name={entry.name}
+                        value={entry.name}
+                        style={getStyles(name, attribute, theme)}
                       >
-                        {attribute.name}
+                        {entry.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -268,7 +270,7 @@ const AddRecipeBackdrop = ({
                   onClick={handleSubmit}
                   disabled={
                     !name ||
-                    attributes.length === 0 ||
+                    attribute.length === 0 ||
                     !directions ||
                     !description
                   }

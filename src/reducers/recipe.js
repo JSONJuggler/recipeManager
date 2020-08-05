@@ -23,7 +23,7 @@ const initialState = {
   tags: [],
   addRecipeData: {
     name: "",
-    attributes: [],
+    attribute: [],
     description: "",
     directions: "",
   },
@@ -90,10 +90,10 @@ export default function recipe(state = initialState, action) {
         loading: false,
       };
     case UPDATE_ADDRECIPE:
-      const { name, attributes, description, directions } = payload;
+      const { name, attribute, description, directions } = payload;
       return {
         ...state,
-        addRecipeData: { name, attributes, description, directions },
+        addRecipeData: { name, attribute, description, directions },
       };
     case GET_ATTRIBUTES:
       return {
@@ -105,7 +105,7 @@ export default function recipe(state = initialState, action) {
         ...state,
         addRecipeData: {
           name: "",
-          attributes: [],
+          attribute: [],
           description: "",
           directions: "",
         },
