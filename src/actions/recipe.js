@@ -25,13 +25,6 @@ export const addRecipe = (recipeData) => async (dispatch) => {
         Authorization: `Bearer ${res.data.user.strapiToken}`,
       },
     };
-    //const config = {
-    //headers: {
-    //"Content-Type": "application/json",
-    //Authorization:
-    //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjc5NmEyYTlmNDdjMDAxNzRjMGRhYiIsImlhdCI6MTU5NjUwMTQ0OCwiZXhwIjoxNTk5MDkzNDQ4fQ.hZuCPkkCrHFh2v_Gr17L02tZlqM-Xmc5WmROpb9x6Sg",
-    //},
-    //};
 
     const formData = {
       ...recipeData,
