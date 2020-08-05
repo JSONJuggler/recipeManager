@@ -54,8 +54,9 @@ const useStyles = makeStyles((theme) => ({
     color: "rgba(255, 255, 255, 0.54)",
   },
   cardRoot: {
-    minWidth: 345,
-    maxWidth: 345,
+    //minWidth: 345,
+    //maxWidth: 345,
+    width: "100%",
   },
   media: {
     height: 0,
@@ -74,8 +75,10 @@ const useStyles = makeStyles((theme) => ({
   gridItem: {
     display: "flex",
     justifyContent: "center",
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
   },
 }));
 
