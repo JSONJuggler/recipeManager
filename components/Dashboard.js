@@ -102,7 +102,7 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
                 <Typography align="center" variant="body1">
                   Welcome back <b>{session.user.name}</b>!
