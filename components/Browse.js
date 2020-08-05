@@ -132,12 +132,15 @@ const Browse = ({ recipes }) => {
                           />
                         )}
                         <CardContent>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
+                          <Typography variant="body2" paragraph>
                             {recipeData.description}
+                          </Typography>
+                          <Typography variant="caption" color="textSecondary">
+                            {recipeData.attribute.map((entry) => (
+                              <Fragment key={entry.id}>
+                                <em>{entry.name}</em>{" "}
+                              </Fragment>
+                            ))}
                           </Typography>
                         </CardContent>
                         <CardActions disableSpacing>
@@ -147,25 +150,7 @@ const Browse = ({ recipes }) => {
                           <IconButton aria-label="share">
                             <ShareIcon />
                           </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: expanded,
-                            })}
-                            onClick={handleExpandClick}
-                            aria-expanded={expanded}
-                            aria-label="show more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
                         </CardActions>
-                        <Collapse in={expanded} timeout="auto" unmountOnExit>
-                          <CardContent>
-                            <Typography paragraph>Directions:</Typography>
-                            <Typography paragraph>
-                              {recipeData.directions}
-                            </Typography>
-                          </CardContent>
-                        </Collapse>
                       </Card>
                     </Grid>
                   ))}
