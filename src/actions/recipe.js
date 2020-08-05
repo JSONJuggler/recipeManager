@@ -28,7 +28,7 @@ export const addRecipe = (recipeData) => async (dispatch) => {
 
     const formData = {
       ...recipeData,
-      user: res.data.user.name,
+      user: res.data.user.id,
       slug: recipeData.name,
       status: "published",
     };
