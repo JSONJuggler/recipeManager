@@ -70,10 +70,11 @@ export const addRecipe = (recipeData) => async (dispatch) => {
       body,
       config
     );
-    //dispatch({
-    //type: ADD_RECIPE,
-    //payload: res.data,
-    //});
+
+    dispatch({
+      type: ADD_RECIPE,
+      payload: resTwo.data,
+    });
     //dispatch(setAlert("Recipe succesfully added!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;

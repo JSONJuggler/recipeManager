@@ -58,8 +58,6 @@ export default function recipe(state = initialState, action) {
       return {
         ...state,
         recipe: payload,
-        recipes: [...state.recipes, payload],
-        userRecipes: [...state.userRecipes, payload],
       };
     case RECIPE_FAIL:
       return {
