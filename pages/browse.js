@@ -11,6 +11,7 @@ import { getSession } from "next-auth/client";
 
 import Browse from "components/Browse";
 import Footer from "components/Footer";
+import { getBrowseRecipes } from "src/actions/recipe";
 
 import axios from "axios";
 
@@ -40,36 +41,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BrowseRecipes = ({ recipes }) => {
+const BrowseRecipes = ({ getBrowseRecipes, recipe: { browseRecipes } }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    getBrowseRecipes();
+  }, [getBrowseRecipes]);
 
   return (
     <div className={classes.root}>
       <Container className={classes.content} maxWidth="lg">
-        <Browse recipes={recipes} />
+        <Browse recipes={browseRecipes} />
       </Container>
     </div>
   );
 };
 
 export async function getServerSideProps(context) {
-  const res = await axios.get(
-    process.env.NEXT_PUBLIC_STRAPI_API_URL + "/recipes"
-  );
-
-  const recipes = res.data;
-
   return {
-    props: { recipes, session: await getSession(context) },
+    props: { session: await getSession(context) },
   };
 }
 
-// Index.propTypes = {
+// BrowseRecipes.propTypes = {
 //   rollbar: PropTypes.object.isRequired
 // };
 
 const mapStateToProps = (state) => ({
-  translations: state.translations,
+  recipe: state.recipe,
 });
 
-export default connect(mapStateToProps)(BrowseRecipes);
+export default connect(mapStateToProps, { getBrowseRecipes })(BrowseRecipes);

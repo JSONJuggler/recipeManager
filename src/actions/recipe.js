@@ -12,8 +12,38 @@ import {
   UPDATE_ADDRECIPE,
   CLEAR_ADDRECIPE,
   GET_ATTRIBUTES,
+  GET_BROWSERECIPES,
 } from "./types";
 //import { setAlert } from "./alert";
+
+export const getBrowseRecipes = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + "/recipes"
+    );
+
+    dispatch({
+      type: GET_BROWSERECIPES,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "fail")));
+    }
+
+    dispatch({
+      type: CLEAR_RECIPES,
+    });
+
+    // dispatch({
+    //   type: RECIPE_FAIL
+    //   // option to star duplicate resturants
+    //   // payload: res.data
+    // });
+  }
+};
 
 export const addRecipe = (recipeData) => async (dispatch) => {
   try {
@@ -139,6 +169,7 @@ export const clearAddRecipeInfo = () => (dispatch) => {
       type: CLEAR_ADDRECIPE,
     });
     dispatch(getUserRecipes());
+    dispatch(getBrowseRecipes());
   } catch (err) {
     //handle error here
   }

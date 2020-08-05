@@ -10,6 +10,7 @@ import {
   UPDATE_ADDRECIPE,
   CLEAR_ADDRECIPE,
   GET_ATTRIBUTES,
+  GET_BROWSERECIPES,
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   recipes: [],
   loading: true,
   error: {},
+  browseRecipes: [],
   tags: [],
   addRecipeData: {
     name: "",
@@ -31,6 +33,13 @@ const initialState = {
 export default function recipe(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case GET_BROWSERECIPES:
+      return {
+        ...state,
+        recipe: null,
+        browseRecipes: payload,
+        loading: false,
+      };
     case GET_USERRECIPES:
       return {
         ...state,
