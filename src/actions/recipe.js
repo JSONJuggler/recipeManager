@@ -75,6 +75,8 @@ export const addRecipe = (recipeData) => async (dispatch) => {
       type: ADD_RECIPE,
       payload: resTwo.data,
     });
+    dispatch(getUserRecipes());
+    dispatch(getBrowseRecipes());
     //dispatch(setAlert("Recipe succesfully added!", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
@@ -169,8 +171,6 @@ export const clearAddRecipeInfo = () => (dispatch) => {
     dispatch({
       type: CLEAR_ADDRECIPE,
     });
-    dispatch(getUserRecipes());
-    dispatch(getBrowseRecipes());
   } catch (err) {
     //handle error here
   }
