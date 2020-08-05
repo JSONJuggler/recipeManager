@@ -254,7 +254,7 @@ const AddRecipeBackdrop = ({
                   rowsMax={5}
                   id="directions"
                   label="Directions "
-                  helperText="Provide comma seperated directions used to recreate your recipe!"
+                  helperText="Provide directions here! Use semicolons (;) to separate each step"
                   onChange={handleChange}
                 />
               </Grid>
