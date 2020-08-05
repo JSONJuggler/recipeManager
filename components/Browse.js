@@ -92,7 +92,7 @@ const Browse = ({ recipes }) => {
         <main className={classes.content}>
           <Container className={classes.spacer}>
             <div className={classes.listRoot}>
-              <Grid container>
+              <Grid container alignItems="center">
                 {recipes &&
                   recipes.map((recipeData) => (
                     <Grid

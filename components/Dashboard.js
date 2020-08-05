@@ -115,7 +115,7 @@ const Dashboard = ({ session, getUserRecipes, recipe: { userRecipes } }) => {
             </Grid>
             <Grid item xs={12}>
               <div className={classes.listRoot}>
-                <Grid container>
+                <Grid container alignItems="center">
                   {userRecipes &&
                     userRecipes.map((recipeData) => (
                       <Grid
