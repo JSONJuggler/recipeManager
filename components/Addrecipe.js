@@ -57,9 +57,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
-    maxWidth: 300,
   },
   chips: {
     display: "flex",
@@ -180,7 +178,7 @@ const AddRecipeBackdrop = ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl className={classes.formControl}>
+                <FormControl fullWidth className={classes.formControl}>
                   <InputLabel color="secondary" id="attributes-label">
                     Attributes
                   </InputLabel>
